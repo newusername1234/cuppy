@@ -5,7 +5,8 @@ const server = http.createServer(app);
 const PORT = 3000;
 // routes
 const apiRouter = require('./routes/api');
-
+const userRouter = require('./routes/user');
+const newRouter = require('./routes/new');
 const es6Renderer = require('express-es6-template-engine');
 app.engine('html', es6Renderer);
 app.set('views', 'templates');
@@ -32,42 +33,13 @@ const helmet = require('helmet');
 // ////////////////////////////////////////////////////////////////////
 // routes
 app.use('/api', apiRouter);
+app.use('/new', newRouter);
+app.use('/user', userRouter);
 
 app.get('/', (req, res) => {
     res.render('home');
 });
 
-
-app.get('/new/greencoffee', (req, res) => {
-    res.render('greencoffee');
-});
-
-app.post('/new/greencoffee', parseForm, (req, res) => {
-    
-});
-
-app.get('/new/roaster', (req, res) => {
-    res.render('roaster');
-});
-// cup input route, modify later as needed
-app.get('/new/cup', (req, res)=> {
-    res.render('newCup', {
-        locals: {},
-        partials: {}
-    })
-});
-
-
-app.post('/new/cup', parseForm, (req, res)=> {
-    console.log(`*** POST from ${req.url}`)
-    console.log(req.body);
-    res.redirect('newcup');
-
-});
-
-app.post('/new/roaster', parseForm, (req, res) => {
-
-});
 
 server.listen(PORT, () => {
     console.log(`server listening at ${PORT}`);
