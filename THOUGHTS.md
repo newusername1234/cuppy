@@ -93,3 +93,17 @@
 
 
 ## 
+
+what does it need to do?
+-api
+
+-add new cup
+-add new retailcoffee
+-add new roaster
+-add new green coffee
+-add new shop
+-view your likes (all em)
+-view coffees you've had
+-view greencoffees 
+- { view whatever table }
+-
