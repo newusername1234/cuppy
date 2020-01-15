@@ -4,7 +4,7 @@ const app = express();
 const server = http.createServer(app);
 const PORT = 3000;
 // routes
-const apiRouter = require('./api');
+const apiRouter = require('./routes/api');
 
 const es6Renderer = require('express-es6-template-engine');
 app.engine('html', es6Renderer);
