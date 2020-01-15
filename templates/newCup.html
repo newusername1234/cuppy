@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>newCup</title>
+</head>
+<body>
+
+<form method="POST">
+    <label for="cost">Cost: </label>
+    <input name="cost" type="text">
+    <br>
+    <label for="brewMethod">Brew Method: </label>
+    <input name="brewMethod" type="text">
+    <br>
+    <label for="coffeeSize">Coffee Size: </label>
+    <input name="coffeeSize" type="text">
+    <br>
+    <label for="condiments">Condiments: </label>
+    <input name="condiments" type="text">
+    <br>
+    <label for="name">Name of drink: </label>
+    <input name="name" type="text">
+    <br>
+<!-- DID LIKE -->
+    <label for="flavor">Flavor: </label>
+    <input name="flavor" type="text">
+    <br>
+    <label for="aroma">Aroma: </label>
+    <input name="aroma" type="text">
+    <br>
+    <label for="acidity">Acidity: </label>
+    <input name="acidity" type="text">
+    <br>
+    <label for="sweetness">Sweetness: </label>
+    <input name="sweetness" type="text">
+    <br>
+    <label for="mouthfeel">Mouth feel: </label>
+    <input name="mouthfeel" type="text">
+    <br>
+    <!-- MAKE COL WIDE -->
+    <!-- <textarea name="message" rows="10" cols="30"></textarea> -->
+    <label for="comments">Comments: </label>
+    <input name="comments" type="text">
+    <br>
+    <label for="score">Score: </label>
+    <input name="score" type="number" min="1" max="10" placeholder="1-10">
+    <br>
+    <!-- dropdown, pick cafe, send as name or id. that's for future pat to figure out. -->
+    <label for="shopID">Shop you got it from: </label>
+    <select name="shopID">
+        <option value="starbucks">Starbucks</option>
+        <option value="dunkin">Dunkin'</option>
+        <option value="folgers">Folgers</option>
+        <option value="catshit" selected>Cat Shit</option>
+    </select>
+    <br>
+    <!-- dropdown, pick retail coffee -->
+    <label for="retailCoffeeID">Retail Coffee: </label>
+    <select name="retailCoffeeID">
+        <option value="starbucks">Starbucks</option>
+        <option value="dunkin">Dunkin'</option>
+        <option value="folgers">Folgers</option>
+        <option value="catshit" selected>Cat Shit</option>
+    </select>
+
+
+</form> 
+
+</body>
+</html>

@@ -32,8 +32,17 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+// cup input route, modify later as needed
+app.get('/newcup', (req, res)=> {
+    res.render('newCup', {
+        locals: {},
+        partials: {}
+    })
+});
 
+app.post('/newcup', (req, res)=> {
 
+});
 
 
 server.listen(PORT, () => {
