@@ -3,12 +3,12 @@
 create table cups (
     id serial primary key,
     userID integer references users(id),
+    name text,
     dateOrdered date, 
     cost text,
     brewMethod text,
     coffeeSize text,
-    condiments text,
-    name text, 
+    condiments text, 
     didLike text, 
     flavor text, 
     aroma text, 
@@ -48,7 +48,7 @@ create table roasters (
     website text
 );
 
-create table greencoffee (
+create table greenCoffee (
     id serial primary key,
     countryOfOrigin text,
     regionOfOrigin text,
