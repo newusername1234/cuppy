@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const server = http.createServer(app);
 const PORT = 3000;
+// routes
+const apiRouter = require('./routes/api');
 
 const es6Renderer = require('express-es6-template-engine');
 app.engine('html', es6Renderer);
@@ -28,7 +30,8 @@ const parseForm = bodyParser.urlencoded({
 const helmet = require('helmet');
 
 // ////////////////////////////////////////////////////////////////////
-
+// routes
+app.use('/api', apiRouter);
 
 app.get('/', (req, res) => {
     res.render('home');
@@ -45,7 +48,7 @@ app.post('/new/greencoffee', parseForm, (req, res) => {
 
 app.get('/new/roaster', (req, res) => {
     res.render('roaster');
-
+});
 // cup input route, modify later as needed
 app.get('/new/cup', (req, res)=> {
     res.render('newCup', {
@@ -53,6 +56,7 @@ app.get('/new/cup', (req, res)=> {
         partials: {}
     })
 });
+
 
 app.post('/new/cup', parseForm, (req, res)=> {
     console.log(`*** POST from ${req.url}`)
@@ -66,5 +70,5 @@ app.post('/new/roaster', parseForm, (req, res) => {
 });
 
 server.listen(PORT, () => {
-    console.log(`server listening at ${PORT}`)
+    console.log(`server listening at ${PORT}`);
 })
