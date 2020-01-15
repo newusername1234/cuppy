@@ -9,6 +9,7 @@
 - Controllers
 - DB tables
 - server
+- views
 
 ### Models
 - {Each table of the data base}
@@ -22,6 +23,7 @@
     - id
     - tasting notes
         - flavor
+        - aroma
         - acidity
         - sweetness
         - mouth feel
@@ -29,8 +31,8 @@
         - brew method
         - size
         - condiments
-    - Shop brewed at
-    - retail coffee brewed 
+    - (has a) Shop brewed at
+    - (has a) retail coffee brewed 
     - cost
 
 ## Shops
@@ -46,8 +48,8 @@
 
 ## Retail coffee (roasted coffee in a bag you can buy in a store)
     - id
-    - roaster
-    - green coffee
+    - (has a) roaster
+    - (has a) green coffee
     - roast date
     - roast profile (light, dark, etc)
     - 
