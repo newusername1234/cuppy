@@ -61,13 +61,12 @@ create table greencoffee (
 
 create table users (
     id serial primary key,
-    username text,
+    username text unique not null,
     firstName text, 
     lastName text, 
     email text, 
     phoneNumber varchar(20),
-    hash text,
-    userPermissions text
+    hash text
 );
 
 create table roasters_shops (
