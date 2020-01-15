@@ -21,6 +21,9 @@
 ### DB Tables
 ## Cups
     - id
+    - name
+    - date
+    - didlike
     - tasting notes
         - flavor
         - aroma
@@ -34,6 +37,8 @@
     - (has a) Shop brewed at
     - (has a) retail coffee brewed 
     - cost
+    - (has a) user
+    - 
 
 ## Shops
     - id
@@ -86,8 +91,5 @@
     - cups reviewed ids
     - 
 
-## Reviews
-    - cup id
-    - user_id
 
 ## 
