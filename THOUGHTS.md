@@ -72,7 +72,7 @@
     - 
 
 ## User
-    - idasd
+    - id
     - unique username
     - name
     - email
