@@ -14,7 +14,9 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 app.use(session({
     store: new FileStore({}),
-
+    // these two lines kill those annoying logs in the console
+    resave: false,
+    saveUninitialized: false,
     secret: 'asdfasdsffase422345asdf3'
 }));
 
@@ -40,8 +42,10 @@ app.get('/newcup', (req, res)=> {
     })
 });
 
-app.post('/newcup', (req, res)=> {
-
+app.post('/newcup', parseForm, (req, res)=> {
+    console.log(`*** POST from ${req.url}`)
+    console.log(req.body);
+    res.redirect('newcup');
 });
 
 
