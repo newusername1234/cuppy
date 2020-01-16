@@ -4,7 +4,8 @@ create table cups (
     id serial primary key,
     userID integer references users(id),
     name text,
-    dateOrdered date, 
+    dateOrdered date,
+    roastDate date,
     cost text,
     brewMethod text,
     coffeeSize text,
@@ -18,7 +19,7 @@ create table cups (
     comments text,
     score integer,
     shopID integer references shops(id),
-    retailCoffeeID integer references retailCoffee(id)
+    beanCoffeeID integer references beanCoffee(id)
 );
 
 create table shops (
@@ -31,10 +32,9 @@ create table shops (
     shopOwnerID integer references users(id)
 );
 
-create table retailCoffee (
+create table beanCoffee (
     id serial primary key,
     name text, 
-    roastDate date,
     roastProfile text,
     roasterID integer references roasters(id),
     greenCoffeeID integer references greencoffee(id)
@@ -78,5 +78,5 @@ create table usersLikes (
     userID integer references users(id),
     shopID integer references shops(id),
     roasterID integer references roasters(id),
-    retailCoffeeID integer references retailCoffee(id)
+    beanCoffeeID integer references beanCoffee(id)
 );

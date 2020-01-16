@@ -1,16 +1,16 @@
-insert into cups (userID, name, dateOrdered, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, retailCoffeeID)
+insert into cups (userID, name, dateOrdered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, beanCoffeeID)
 VALUES
-(2, 'chai', '2020-01-02', '4.5', '', '12oz', 'Almond Milk, Splenda', 'y', 'spicy', 'farts', 'lemon', 'honey', 'milky', 'its a chai, it was fine', 5, 1, NULL),
-(1, 'brewed coffee', '2019-12-15', '2.5', 'Chemex', '12oz', 'none', 'y', 'cocoa', 'cherry', 'blood orange', 'brown sugar', 'silky', 'a little underwhelming. too acidic', 3,1,1);
+(2, 'chai', '2020-01-02', '2020-01-07', '4.5', '', '12oz', 'Almond Milk, Splenda', 'y', 'spicy', 'farts', 'lemon', 'honey', 'milky', 'its a chai, it was fine', 5, 1, NULL),
+(1, 'brewed coffee', '2019-12-15', '2020-01-07', '2.5', 'Chemex', '12oz', 'none', 'y', 'cocoa', 'cherry', 'blood orange', 'brown sugar', 'silky', 'a little underwhelming. too acidic', 3,1,1);
 
 insert into shops (name, location, phoneNumber, hours, website, shopOwnerID)
 VALUES
 ('kula coffee', 'ATV', '404-543-5742', '6am - 7pm', 'kulacoffee.com', 1),
 ('taproom coffee', 'kirkwood', '678-111-2345','7am - 10pm', 'taproomcoffee.com', 1);
 
-insert into retailCoffee (name, roastDate, roastProfile, roasterID, greenCoffeeID)
+insert into beanCoffee (name, roastProfile, roasterID, greenCoffeeID)
 VALUES
-('Rwanda coko-gaju', '2020-01-07', 'light', 1, 1);
+('Rwanda coko-gaju', 'light', 1, 1);
 
 insert into roasters (name, location, phoneNumber, website)
 VALUES
@@ -30,7 +30,7 @@ insert into roasters_shops (roasterID, shopID)
 VALUES
 (1, 1);
 
-insert into usersLikes(userID, shopID, roasterID, retailCoffeeID)
+insert into usersLikes(userID, shopID, roasterID, beanCoffeeID)
 VALUES
 (1, NULL, NULL, 1),
 (1,1, NULL, NULL);
