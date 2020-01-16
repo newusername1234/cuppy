@@ -1,5 +1,3 @@
-
-
 create table cups (
     id serial primary key,
     userID integer references users(id),
