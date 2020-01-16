@@ -16,7 +16,7 @@ router.get('/testing', (req, res)=>{
 });
 
 router.get('/greencoffee', (req, res) => {
-    res.render('greencoffee');
+    res.render('new/greencoffee');
 });
 
 router.post('/greencoffee', parseForm, (req, res) => {
@@ -24,7 +24,7 @@ router.post('/greencoffee', parseForm, (req, res) => {
 });
 
 router.get('/roaster', (req, res) => {
-    res.render('roaster');
+    res.render('new/roaster');
 });
 
 router.post('/roaster', parseForm, (req, res) => {
@@ -33,7 +33,7 @@ router.post('/roaster', parseForm, (req, res) => {
 
 // cup input route, modify later as needed
 router.get('/cup', (req, res)=> {
-    res.render('newCup', {
+    res.render('new/newCup', {
         locals: {},
         partials: {}
     })
@@ -46,9 +46,9 @@ router.post('/cup', parseForm, (req, res)=> {
 
 });
 
-router.get('/retailcoffee', (req, res)=>{
-    console.log('get request from /retail coffee');
-    res.render('newRetailCoffee', {
+router.get('/beanCoffee', (req, res)=>{
+    console.log('get request from /bean coffee');
+    res.render('new/beanCoffee', {
         locals: {},
         partials: {}
     });
