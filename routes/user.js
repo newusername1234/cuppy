@@ -6,9 +6,12 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
+const user = require('../models/userquery');
+
+
 
 router.get('/login', (req, res) => {
-    res.render('/user/login');
+    res.render('user/login');
 });
 
 router.post('/login', parseForm, (req, res) => {
@@ -16,10 +19,13 @@ router.post('/login', parseForm, (req, res) => {
 });
 
 router.get('/signup', (req, res) => {
-    res.render('/user/signup');
+    res.render('user/signup');
 });
 
 router.post('/signup', parseForm, (req, res) => {
+    const { username, firstname, lastname, email, phonenumber, password } = req.body;
+    user.create(username, firstname, lastname, email, phonenumber, password);
+    
     res.send(`thanks for joining our coffee thing, ${req.body.username}`);
 });
 
