@@ -5,6 +5,8 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
+const newNew = require('../models/newquerry');
+
 // green coffee
 router.get('/greencoffee', (req, res) => {
     res.render('new/greencoffee');
@@ -41,7 +43,6 @@ router.post('/cup', parseForm, (req, res)=> {
 
 // bean coffee
 router.get('/beanCoffee', (req, res)=>{
-    console.log('get request from /bean coffee');
     res.render('new/beanCoffee', {
         locals: {},
         partials: {}
