@@ -5,6 +5,12 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
+const bodyParser = require('body-parser');
+const parseForm = bodyParser.urlencoded({
+    extended: true
+});
+
+
 router.get('/testing', (req, res)=>{
     res.send('yeet');
 });
