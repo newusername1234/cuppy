@@ -9,6 +9,12 @@
 <body>
 
 <form method="POST">
+    <label for="didLike">Did you like it? </label>
+    <select name="didLike">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
+    <br>
     <label for="cost">Cost: </label>
     <input name="cost" type="text">
     <br>
@@ -58,8 +64,8 @@
     </select>
     <br>
     <!-- dropdown, pick retail coffee -->
-    <label for="retailCoffeeID">Retail Coffee: </label>
-    <select name="retailCoffeeID">
+    <label for="beanCoffeeID">Retail Coffee: </label>
+    <select name="beanCoffeeID">
         <option value="starbucks">Starbucks</option>
         <option value="dunkin">Dunkin'</option>
         <option value="folgers">Folgers</option>
