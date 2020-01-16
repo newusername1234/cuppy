@@ -23,10 +23,7 @@ app.use(session({
     secret: 'asdfasdsffase422345asdf3'
 }));
 
-const bodyParser = require('body-parser');
-const parseForm = bodyParser.urlencoded({
-    extended: true
-});
+
 
 const helmet = require('helmet');
 
@@ -39,7 +36,6 @@ app.use('/user', userRouter);
 app.get('/', (req, res) => {
     res.render('home');
 });
-
 
 server.listen(PORT, () => {
     console.log(`server listening at ${PORT}`);

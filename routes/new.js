@@ -1,6 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
+const bodyParser = require('body-parser');
+const parseForm = bodyParser.urlencoded({
+    extended: true
+});
+
+
 router.get('/testing', (req, res)=>{
     res.send('yeet');
 });
