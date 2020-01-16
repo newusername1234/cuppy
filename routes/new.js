@@ -5,15 +5,6 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
-const bodyParser = require('body-parser');
-const parseForm = bodyParser.urlencoded({
-    extended: true
-});
-
-
-router.get('/testing', (req, res)=>{
-    res.send('yeet');
-});
 
 router.get('/greencoffee', (req, res) => {
     res.render('new/greencoffee');
@@ -53,5 +44,18 @@ router.get('/beanCoffee', (req, res)=>{
         partials: {}
     });
 });
+
+router.post('/beanCoffee', parseForm, (req, res)=>{
+    console.log(req.body);
+});
+
+router.get('/shop', (req, res)=>{
+    res.render('new/shop');
+});
+
+router.post('/shop', parseForm, (req, res)=>{
+    console.log(req.body);
+    res.redirect('/new/shop');
+})
 
 module.exports = router;
