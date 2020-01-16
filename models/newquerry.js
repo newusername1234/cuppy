@@ -1,15 +1,13 @@
 const db = require('./connection');
 
+// yeet is for distance (and testing)
 function yeet() {
     console.log('teey')
 }
 
+///// DATABASE ENTRIES FUNCTIONS /////
 
-
-// new cup querries for shop you got it from and retail coffee
-// createcup(database items except the ids)
-// destructure in the controller, run this function on the pieces
-
+// new cup
 async function createCup(userID, name, dateOrdered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, beanCoffeeID) {
     await db.any(`
     insert into cups 
@@ -19,10 +17,21 @@ async function createCup(userID, name, dateOrdered, roastDate, cost, brewMethod,
     `, [userID, name, dateOrdered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, beanCoffeeID]);
     
 }
+// new beanCoffee
+
+// new greenCoffee
+
+// new roaster
+
+// new shop
 
 
 
 module.exports = {
-    yeet,
-    createCup
+    createCup,
+    // createBeanCoffee,
+    // createGreenCoffee,
+    // createRoaster,
+    // createShop,
+    yeet
 }

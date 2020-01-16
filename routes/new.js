@@ -36,7 +36,7 @@ router.get('/cup', (req, res)=> {
 });
 
 router.post('/cup', parseForm, async (req, res)=> {
-    console.log(req.body);
+    // console.log(req.body);
     const { cost, didLike, brewMethod, coffeeSize, condiments, name, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, beanCoffeeID, roastDate } = req.body;
     const userID = 1; 
     const dateOrdered = '2019-12-15';
@@ -44,7 +44,7 @@ router.post('/cup', parseForm, async (req, res)=> {
     res.redirect('cup');
 
 });
-const dateOrdered = new Date().toString();
+
 
 
 // bean coffee
