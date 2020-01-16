@@ -6,8 +6,9 @@ const pgp = require('pg-promise')({
 
 const options = {
     host: 'localhost',
-    database: 'coffeebase'
+    database: 'cuppy'
 };
 
 const db = pgp(options);
+
 module.exports = db;

@@ -1,43 +1,3 @@
-create table cups (
-    id serial primary key,
-    userID integer references users(id),
-    name text,
-    dateOrdered date,
-    roastDate date,
-    cost text,
-    brewMethod text,
-    coffeeSize text,
-    condiments text, 
-    didLike text, 
-    flavor text, 
-    aroma text, 
-    acidity text, 
-    sweetness text, 
-    mouthfeel text, 
-    comments text,
-    score integer,
-    shopID integer references shops(id),
-    beanCoffeeID integer references beanCoffee(id)
-);
-
-create table shops (
-    id serial primary key,
-    name text,
-    location text, 
-    phoneNumber varchar(20),
-    hours text,
-    website text,
-    shopOwnerID integer references users(id)
-);
-
-create table beanCoffee (
-    id serial primary key,
-    name text, 
-    roastProfile text,
-    roasterID integer references roasters(id),
-    greenCoffeeID integer references greencoffee(id)
-);
-
 create table roasters (
     id serial primary key,
     name text,
@@ -65,6 +25,46 @@ create table users (
     email text, 
     phoneNumber varchar(20),
     hash text
+);
+
+create table shops (
+    id serial primary key,
+    name text,
+    location text, 
+    phoneNumber varchar(20),
+    hours text,
+    website text,
+    shopOwnerID integer references users(id)
+);
+
+create table beanCoffee (
+    id serial primary key,
+    name text, 
+    roastProfile text,
+    roasterID integer references roasters(id),
+    greenCoffeeID integer references greencoffee(id)
+);
+
+create table cups (
+    id serial primary key,
+    userID integer references users(id),
+    name text,
+    dateOrdered date,
+    roastDate date,
+    cost text,
+    brewMethod text,
+    coffeeSize text,
+    condiments text, 
+    didLike text, 
+    flavor text, 
+    aroma text, 
+    acidity text, 
+    sweetness text, 
+    mouthfeel text, 
+    comments text,
+    score integer,
+    shopID integer references shops(id),
+    beanCoffeeID integer references beanCoffee(id)
 );
 
 create table roasters_shops (
