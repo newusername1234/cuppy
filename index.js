@@ -7,6 +7,7 @@ const PORT = 3101;
 const apiRouter = require('./routes/api');
 const userRouter = require('./routes/user');
 const newRouter = require('./routes/new');
+
 const es6Renderer = require('express-es6-template-engine');
 app.engine('html', es6Renderer);
 app.set('views', 'templates');
@@ -23,8 +24,6 @@ app.use(session({
     secret: 'asdfasdsffase422345asdf3'
 }));
 
-
-
 const helmet = require('helmet');
 
 // ////////////////////////////////////////////////////////////////////
@@ -32,6 +31,8 @@ const helmet = require('helmet');
 app.use('/api', apiRouter);
 app.use('/new', newRouter);
 app.use('/user', userRouter);
+
+
 
 app.get('/', (req, res) => {
     res.render('home');

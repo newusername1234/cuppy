@@ -27,7 +27,7 @@ router.post('/roaster', parseForm, (req, res) => {
 
 // cup
 router.get('/cup', (req, res)=> {
-    res.render('new/Cup', {
+    res.render('new/cup', {
         locals: {},
         partials: {}
     })

@@ -14,20 +14,38 @@ router.get('/login', (req, res) => {
     res.render('user/login');
 });
 
-router.post('/login', parseForm, (req, res) => {
-    res.send(`welcome back, ${req.body.username}`);
+router.post('/login', parseForm, async (req, res) => {
+    const { username, password } = req.body;
+    const didLoginSuccessfully = await user.login(username, password);
+    if (didLoginSuccessfully) {
+        const theUser = await user.getByUsername(username);
+        console.log(theUser);
+        req.session.user = {
+            username,
+            id: theUser.id
+        };
+        req.session.save(() => {
+            res.redirect(`/user/${theUser.id}`);
+        });
+    } else {
+        res.send('incorrect login info. refresh the page');
+    }
 });
 
 router.get('/signup', (req, res) => {
     res.render('user/signup');
 });
 
-router.post('/signup', parseForm, (req, res) => {
+router.post('/signup', parseForm, async (req, res) => {
     const { username, firstname, lastname, email, phonenumber, password } = req.body;
     user.create(username, firstname, lastname, email, phonenumber, password);
     
-    res.send(`thanks for joining our coffee thing, ${req.body.username}`);
+    res.redirect('../new/cup');
 });
 
+router.get('/:userId', async (req, res) => {
+    const userCups = await user.getCups(req.params.userId);
+    res.send(userCups);
+});
 
 module.exports = router;
