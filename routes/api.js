@@ -1,18 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const api = require('../models/apiquery');
 
 router.get('/testing', (req, res)=>{
     res.send('yeet');
 });
 
 router.get('/', (req,res)=>{
-    res.render('api');
+    res.send('API pages')
 });
 
-
 //returns name and id for all shops
-router.get('/shops', (req,res)=>{
-    res.json("");
+router.get('/shops',async (req,res)=>{
+    const shops = await api.allShops;
+    res.json(shops);
 });
 
 //returns full info for given shop, and all roasters using/used

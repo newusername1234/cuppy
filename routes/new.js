@@ -5,42 +5,41 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
-
-router.get('/testing', (req, res)=>{
-    res.send('yeet');
-});
-
+// green coffee
 router.get('/greencoffee', (req, res) => {
     res.render('new/greencoffee');
 });
 
 router.post('/greencoffee', parseForm, (req, res) => {
-    
+    console.log(req.body);
+    res.redirect('/new/greencoffee');
 });
 
+// roaster
 router.get('/roaster', (req, res) => {
     res.render('new/roaster');
 });
 
 router.post('/roaster', parseForm, (req, res) => {
-
+    console.log(req.body);
+    res.redirect('/new/roaster');
 });
 
-// cup input route, modify later as needed
+// cup
 router.get('/cup', (req, res)=> {
-    res.render('new/newCup', {
+    res.render('new/Cup', {
         locals: {},
         partials: {}
     })
 });
 
 router.post('/cup', parseForm, (req, res)=> {
-    console.log(`*** POST from ${req.url}`)
     console.log(req.body);
     res.redirect('cup');
 
 });
 
+// bean coffee
 router.get('/beanCoffee', (req, res)=>{
     console.log('get request from /bean coffee');
     res.render('new/beanCoffee', {
@@ -48,5 +47,20 @@ router.get('/beanCoffee', (req, res)=>{
         partials: {}
     });
 });
+
+router.post('/beanCoffee', parseForm, (req, res)=>{
+    console.log(req.body);
+    res.redirect('/new/beancoffee');
+});
+
+// shop
+router.get('/shop', (req, res)=>{
+    res.render('new/shop');
+});
+
+router.post('/shop', parseForm, (req, res)=>{
+    console.log(req.body);
+    res.redirect('/new/shop');
+})
 
 module.exports = router;
