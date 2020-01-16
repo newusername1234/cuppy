@@ -5,8 +5,11 @@ async function allShops(){
     return shops;
 }
 
+
+//change query to hide ownerID
 async function oneShop(shopID){
-    const shop = await db.one(`SELECT * from shops where id=${shopID}`);
+    let shop = await db.one(`SELECT * from shops where id=${shopID}`);
+    delete shop.shopownerid;
     return shop;
 }
 
@@ -15,6 +18,7 @@ async function allBeans(){
     return beans;    
 }
 
+//change query to pull roaster and greencoffee instead of just the ID
 async function oneBean(beanID){
     const beans = await db.one(`SELECT * from beanCoffee where id=${beanID}`);
     return beans;
@@ -40,15 +44,7 @@ async function oneGreen(greenID){
     return green;
 }
 
-async function main(){
-    const temp = await oneGreen(1);
-    console.log(temp);
-}
-
-main();
-
-
-exports.require = {
+module.exports = {
     allShops,
     oneShop,
     allBeans,
