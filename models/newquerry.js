@@ -18,20 +18,51 @@ async function createCup(userID, name, dateOrdered, roastDate, cost, brewMethod,
     
 }
 // new beanCoffee
+async function createBeanCoffee(name, roastProfile, roasterid, greencoffeeid) {
+    await db.any(`
+    insert into beancoffee
+        (name, roastProfile, roasterid, greencoffeeid)
+    values
+        ($1, $2, $3, $4)
+    `, [name, roastProfile, roasterid, greencoffeeid])
+}
 
 // new greenCoffee
+async function createGreenCoffee(countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle) {
+    await db.any(`
+    insert into greencoffee
+        (countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle)
+    values 
+        ($1,  $2,  $3,  $4, $5, $6, $7)
+    `, [countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle])
+}
 
 // new roaster
+async function createRoaster(name, location, phoneNumber, website) {
+    await db.any(`
+    insert into roasters
+        (name, location, phoneNumber, website)
+    values 
+        ($1,  $2,  $3,  $4)
+    `, [name, location, phoneNumber, website]);
+}
 
 // new shop
-
+async function createShop(name, location, phoneNumber, hours, website) {
+    await db.any(`
+    insert into shops
+        (name, location, phoneNumber, hours, website)
+    values
+        ($1,  $2,  $3,  $4, $5)
+    `, [name, location, phoneNumber, hours, website]);
+}
 
 
 module.exports = {
     createCup,
-    // createBeanCoffee,
-    // createGreenCoffee,
-    // createRoaster,
-    // createShop,
+    createBeanCoffee,
+    createGreenCoffee,
+    createRoaster,
+    createShop,
     yeet
 }
