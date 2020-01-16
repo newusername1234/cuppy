@@ -9,7 +9,6 @@ async function oneShop(shopID){
     let shop = await db.one(`SELECT * from shops where id=${shopID}`);
     delete shop.shopownerid;
 
-
     let roasters = await db.any(`SELECT roasterID from roasters_shops WHERE shopID=${shopID}`);
     console.log(roasters);
     if (roasters !=[]){
@@ -17,9 +16,6 @@ async function oneShop(shopID){
         let newRoasters = await db.any(`select name from roasters where ${roasterString}`);
         shop.featuredRoasters = newRoasters.map(z => z.name);
     }
-
-
-    
     return shop;
 }
 
