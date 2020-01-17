@@ -37,12 +37,17 @@ async function getCups(userId) {
     let userCups = await db.any(`
     select id from cups where userid=$1
     `, [userId]);
+    console.log(userCups);
     userCups = userCups.map(x => x.id);
+    console.log(userCups);
     let newCups = [];
     for (let id of userCups) {
-        newCups += await oneCup(id);
+        let aCup = await oneCup(id);
+        delete aCup.id;
+        newCups.push(aCup);
+        console.log(newCups);
     };
-    console.log(oneCup(1));
+    // console.log(oneCup(1));
     return newCups;
 }
 
