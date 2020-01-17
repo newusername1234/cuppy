@@ -150,6 +150,13 @@ async function oneGreen(greenID){
     return {};
 }
 
+async function getApiKey(userID){
+    return {};
+}
+
+
+function keyVerifier(){}
+
 module.exports = {
     oneCup,
     allCups,
@@ -160,5 +167,6 @@ module.exports = {
     allRoasters,
     oneRoaster,
     allGreen,
-    oneGreen
+    oneGreen,
+    getApiKey
 }
