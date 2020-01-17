@@ -8,14 +8,23 @@ async function allShops(){
 async function oneShop(shopID){
     let shop = await db.one(`SELECT * from shops where id=${shopID}`);
     delete shop.shopownerid;
-
     let roasters = await db.any(`SELECT roasterID from roasters_shops WHERE shopID=${shopID}`);
-    console.log(roasters);
     if (roasters !=[]){
         let roasterString = roasters.map(y => `id=${y.roasterid}`).join(' OR ');
         let newRoasters = await db.any(`select name from roasters where ${roasterString}`);
         shop.featuredRoasters = newRoasters.map(z => z.name);
+    } else {
+        shop.featuredRoasters = ['No known roasters'];
     }
+    let cupScores = await db.any(`SELECT score from cups where shopID=${shopID}`);
+    let scoreAvg = 0;
+    let cupLen = cupScores.length;
+    if (cupLen == 1){
+        scoreAvg = cupScores[0].score;
+    } else if(cupLen > 1){
+        scoreAvg = cupScores.reduce((x, y) => x.score + y.score)/cupLen;
+    }
+    shop.averageScore = scoreAvg;
     return shop;
 }
 
@@ -37,6 +46,15 @@ async function oneBean(beanID){
     delete green.id;
     console.log(green);
     beans = Object.assign(beans, green);
+    let cupScores = await db.any(`SELECT score from cups where beanCoffeeID=${beanID}`);
+    let scoreAvg = 0;
+    let cupLen = cupScores.length;
+    if (cupLen == 1){
+        scoreAvg = cupScores[0].score;
+    } else if(cupLen > 1){
+        scoreAvg = cupScores.reduce((x, y) => x.score + y.score)/cupLen;
+    }
+    beans.averageScore = scoreAvg;
     return beans;
 }
 
@@ -53,6 +71,21 @@ async function oneRoaster(roasterID){
         let newShops = await db.any(`select name from shops where ${shopstring}`);
         roaster.atshops = newShops.map(z => z.name);
     }
+    let beans = await db.any(`SELECT id from beanCoffee where roasterID=${roasterID}`);
+    beans = beans.map(x=>x.id);
+    let cupScores = [];
+    for (let beanCoffeeID of beans){
+        let beanScores = await db.any(`SELECT score from cups where beanCoffeeID=${beanCoffeeID}`);
+        cupScores = cupScores.concat(beanScores.map(x => x.score));
+    }
+    let scoreAvg = 0;
+    let cupLen = cupScores.length;
+    if (cupLen == 1){
+        scoreAvg = cupScores[0];
+    } else if(cupLen > 1){
+        scoreAvg = cupScores.reduce((x, y) => x + y)/cupLen;
+    }
+    roaster.averageScore = scoreAvg;
     return roaster;
 }
 

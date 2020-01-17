@@ -107,3 +107,14 @@
 -view greencoffees 
 - { view whatever table }
 -
+
+shops.html
+
+roasters.html
+
+beans.html
+
+recentreviews.html
+
+## for Austin to do.
+- add placeholders to help users know how to fill out fields.
