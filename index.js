@@ -7,6 +7,7 @@ const PORT = 3000;
 const apiRouter = require('./routes/api');
 const userRouter = require('./routes/user');
 const newRouter = require('./routes/new');
+const updateRouter = require('./routes/update');
 
 const path = require('path');
 
@@ -43,6 +44,7 @@ const helmet = require('helmet');
 app.use('/api', apiRouter);
 app.use('/new', newRouter);
 app.use('/user', userRouter);
+app.use('/update', updateRouter);
 
 
 
