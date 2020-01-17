@@ -47,7 +47,11 @@ app.use('/user', userRouter);
 
 
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', {
+        partials: {
+            nav: '/partials/nav'
+        }
+    });
 });
 
 server.listen(PORT, () => {
