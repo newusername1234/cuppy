@@ -1,5 +1,6 @@
 const db = require('./connection');
 const bcrypt = require('bcryptjs');
+const { oneCup } = require('./apiquery');
 
 function createHash(password) {
     const salt = bcrypt.genSaltSync(10);
@@ -33,11 +34,16 @@ async function getByUsername(username) {
 }
 
 async function getCups(userId) {
-    const userCups = await db.query(`
-    select * from cups where userid=$1
+    let userCups = await db.any(`
+    select id from cups where userid=$1
     `, [userId]);
-
-    return userCups;
+    userCups = userCups.map(x => x.id);
+    let newCups = [];
+    for (let id of userCups) {
+        newCups += await oneCup(id);
+    };
+    console.log(oneCup(1));
+    return newCups;
 }
 
 module.exports = {
