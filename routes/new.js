@@ -42,12 +42,17 @@ router.post('/roaster', parseForm, (req, res) => {
 });
 
 // cup
-router.get('/cup', (req, res)=> {
+router.get('/cup', async (req, res)=> {
+    const shopItems = await api.allShops();
     res.render('new/cup', {
+        locals: {
+            shopItems
+        },
         partials: {
-            nav:'partials/nav'
+            nav:'partials/nav',
+            shopdropdown: 'dropdowns/shopDrop'
         }
-    })
+    });
 });
 
 router.post('/cup', parseForm, async (req, res)=> {

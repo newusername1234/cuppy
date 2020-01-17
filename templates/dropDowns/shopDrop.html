@@ -1,0 +1,15 @@
+<h1>HI HO SILVER</h1>
+
+
+<label for="shopID">Shop you got it from: </label>
+<select name="shopID">
+${
+    shopItems.map(obj=>{
+        const { name, id } = obj;
+        return `
+        <option value=${id}>${name}</option>
+        `
+    })   
+}
+    
+</select>
