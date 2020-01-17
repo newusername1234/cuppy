@@ -1,0 +1,16 @@
+
+<label for="roasterid">Roaster: </label>
+<select name="roasterid">
+${
+    allRoasterItems.map(obj=>{
+        const { name, id } = obj;
+        return `
+        <option value=${id}>
+            ${name}
+        </option>
+        `
+    })
+}
+
+
+</select>

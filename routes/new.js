@@ -6,6 +6,7 @@ const parseForm = bodyParser.urlencoded({
 });
 
 const newNew = require('../models/newquerry');
+const api = require('../models/apiquery');
 
 // green coffee
 router.get('/greencoffee', (req, res) => {
@@ -60,10 +61,19 @@ router.post('/cup', parseForm, async (req, res)=> {
 });
 
 // bean coffee
-router.get('/beanCoffee', (req, res)=>{
+router.get('/beanCoffee', async (req, res)=>{
+    const greenCoffeeItems = await api.allGreen();
+    const allRoasterItems = await api.allRoasters();
+    // console.log(greenCoffeeItems)
     res.render('new/beanCoffee', {
+        locals: {
+            greenCoffeeItems,
+            allRoasterItems
+        },
         partials: {
-            nav:'partials/nav'
+            nav:'partials/nav',
+            greencoffeedropdown: 'dropDowns/greenCoffeeDrop',
+            roasterdropdown: 'dropdowns/roasterDrop'
         }
     });
 });
@@ -71,7 +81,6 @@ router.get('/beanCoffee', (req, res)=>{
 router.post('/beanCoffee', parseForm, (req, res)=>{
     console.log(req.body);
     const { name, roastProfile, roasterid, greencoffeeid } = req.body;
-    // roasterid = parseInt(roasterid);
     newNew.createBeanCoffee(name, roastProfile, roasterid, greencoffeeid);
 
     res.redirect('/new/beancoffee');

@@ -8,6 +8,7 @@
 </head>
 <body>
     ${nav}
+
 <form method="POST">
     <label for="name">Name: </label>
     <input name="name" type="text">
@@ -15,21 +16,9 @@
     <label for="roastProfile">Roast Profile: </label>
     <input name="roastProfile" type="text">
     <br>
-    <label for="roasterid">Roaster: </label>
-    <select name="roasterid">
-        <!-- <option value="starbucks">Starbucks</option>
-        <option value="dunkin">Dunkin'</option>
-        <option value="folgers">Folgers</option> -->
-        <option value="1" selected>Cat Shit</option>
-    </select>
+    ${roasterdropdown}
     <br>
-    <label for="greencoffeeid">Green coffee: </label>
-    <select name="greencoffeeid">
-        <!-- <option value="starbucks">Starbucks</option>
-        <option value="dunkin">Dunkin'</option>
-        <option value="folgers">Folgers</option> -->
-        <option value="1" selected>Cat Shit</option>
-    </select>
+    ${greencoffeedropdown}
     <br>
     
 <input type="submit" value="send it">

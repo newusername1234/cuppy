@@ -25,9 +25,9 @@ app.use(session({
 }));
 
 app.use((req, res, next) =>  {
-    console.log('***********************');
-    console.log(req.session);
-    console.log('***********************');
+    // console.log('***********************');
+    // console.log(req.session);
+    // console.log('***********************');
 
     next();
 });
