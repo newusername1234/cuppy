@@ -44,5 +44,5 @@ module.exports = {
     create,
     login,
     getByUsername,
-    getCups
+    getCups,
 };

@@ -9,7 +9,6 @@ const parseForm = bodyParser.urlencoded({
 const user = require('../models/userquery');
 
 
-
 router.get('/login', (req, res) => {
     res.render('user/login');
 });
@@ -25,7 +24,7 @@ router.post('/login', parseForm, async (req, res) => {
             id: theUser.id
         };
         req.session.save(() => {
-            res.redirect(`/user/${theUser.id}`);
+            res.redirect('profile');
         });
     } else {
         res.send('incorrect login info. refresh the page');
@@ -40,12 +39,30 @@ router.post('/signup', parseForm, async (req, res) => {
     const { username, firstname, lastname, email, phonenumber, password } = req.body;
     user.create(username, firstname, lastname, email, phonenumber, password);
     
-    res.redirect('../new/cup');
+    res.redirect('profile');
 });
 
-router.get('/:userId', async (req, res) => {
+router.get('/:userId(\\d+)', async (req, res) => {
     const userCups = await user.getCups(req.params.userId);
     res.send(userCups);
 });
+
+router.get('/profile', (req, res) => {
+    res.render('user/profile', {
+        locals: {
+            username: req.session.user.username,
+            id: req.session.user.id
+        }
+    });
+});
+
+function requireLogin(req, res, next) {
+    if (req.session && req.session.user) {
+        next();
+    } else {
+        res.redirect('login');
+    }
+}
+
 
 module.exports = router;
