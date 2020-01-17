@@ -2,9 +2,9 @@ insert into roasters (name, location, phoneNumber, website)
 VALUES
 ('Kula coffee roasters', 'ATV', '404-111-9876', 'kulacoffee.com');
 
-insert into greenCoffee (countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle)
+insert into greenCoffee (name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle)
 VALUES
-('Rwanda', 'Coko-Gaju', 'finca la Gaju' ,'Farmer Joe', 1800, 'bourbon', 'washed');
+('Finca La Gaju','Rwanda', 'Coko-Gaju', 'finca la Gaju' ,'Farmer Joe', 1800, 'bourbon', 'washed');
 
 insert into users (username, firstName, lastName, email, phoneNumber, hash)
 VALUES

@@ -8,6 +8,7 @@ create table roasters (
 
 create table greenCoffee (
     id serial primary key,
+    name text,
     countryOfOrigin text,
     regionOfOrigin text,
     farm text, 
