@@ -1,7 +1,7 @@
-<label for="shopID">Shop you got it from: </label>
-<select name="shopID">
+<label for="beanCoffeeID">Bean Coffee: </label>
+<select name="beanCoffeeID">
 ${
-    shopItems.map(obj=>{
+    beanItems.map(obj=>{
         const { name, id } = obj;
         return `
         <option value=${id}>${name}</option>
