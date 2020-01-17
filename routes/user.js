@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const parseForm = bodyParser.urlencoded({
     extended: true
 });
-
+const { getApiKey } = require('./apiquery');
 const user = require('../models/userquery');
 
 
@@ -42,6 +42,11 @@ router.get('/signup', (req, res) => {
         }
     });
 });
+
+router.get('/api', async (req, res) => {
+    const apiKey = await getApiKey(req.session.user.id);
+    res.json(apiKey);
+})
 
 router.post('/signup', parseForm, async (req, res) => {
     const { username, firstname, lastname, email, phonenumber, password } = req.body;

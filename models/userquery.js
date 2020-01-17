@@ -1,6 +1,7 @@
 const db = require('./connection');
 const bcrypt = require('bcryptjs');
 const { oneCup } = require('./apiquery');
+const { uuid } = require('uuidv4');
 
 function createHash(password) {
     const salt = bcrypt.genSaltSync(10);
@@ -9,13 +10,14 @@ function createHash(password) {
 
 async function create(username, firstname, lastname, email, phonenumber, password) {
     const hash = createHash(password);
+    const apiKey = uuid();
     const result = await db.one(`
 insert into users
-    (username, firstname, lastname, email, phonenumber, hash)
+    (username, firstname, lastname, email, phonenumber, hash, apikey)
 values
-    ($1, $2, $3, $4, $5, $6)
+    ($1, $2, $3, $4, $5, $6, $7)
 returning id
-    `, [username, firstname, lastname, email, phonenumber, hash]);
+    `, [username, firstname, lastname, email, phonenumber, hash, apiKey]);
     
     return result.id;    
 }
