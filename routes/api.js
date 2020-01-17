@@ -17,7 +17,7 @@ router.get('/shops', async (req,res)=>{
 });
 
 //returns full info for given shop, and all roasters using/used
-router.get('/shops/:id', async (req,res)=> {
+router.get('/shops/:id(\\d+)', async (req,res)=> {
     const shop = await api.oneShop(req.params.id);
     res.json(shop);
 });
@@ -29,7 +29,7 @@ router.get('/bean', async (req,res)=>{
 });
 
 //returns full info for given whole bean coffee
-router.get('/bean/:id', async (req,res)=>{
+router.get('/bean/:id(\\d+)', async (req,res)=>{
     const bean = await api.oneBean(req.params.id);
     res.json(bean);
 });
@@ -42,7 +42,7 @@ router.get('/roasters', async (req,res)=>{
 });
 
 //returns full info for given roaster, including list of cafes using
-router.get('/roasters/:id', async (req,res)=>{
+router.get('/roasters/:id(\\d+)', async (req,res)=>{
     const roaster = await api.oneRoaster(req.params.id);
     res.json(roaster);
 });
@@ -54,10 +54,9 @@ router.get('/green', async (req,res)=>{
 });
 
 //returns full info for given green coffee id.
-router.get('/green/:id', async (req,res)=>{
+router.get('/green/:id(\\d+)', async (req,res)=>{
     const green = await api.oneGreen(req.params.id);
     res.json(green);
 });
-
 
 module.exports = router;
