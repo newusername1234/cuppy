@@ -24,6 +24,14 @@ app.use(session({
     secret: 'asdfasdsffase422345asdf3'
 }));
 
+app.use((req, res, next) =>  {
+    console.log('***********************');
+    console.log(req.session);
+    console.log('***********************');
+
+    next();
+});
+
 const helmet = require('helmet');
 
 // ////////////////////////////////////////////////////////////////////
