@@ -9,7 +9,11 @@ const newNew = require('../models/newquerry');
 
 // green coffee
 router.get('/greencoffee', (req, res) => {
-    res.render('new/greencoffee');
+    res.render('new/greencoffee', {
+        partials: {
+            nav:'partials/nav'
+        }
+    });
 });
 
 router.post('/greencoffee', parseForm, (req, res) => {
@@ -21,7 +25,11 @@ router.post('/greencoffee', parseForm, (req, res) => {
 
 // roaster
 router.get('/roaster', (req, res) => {
-    res.render('new/roaster');
+    res.render('new/roaster', {
+        partials: {
+            nav:'partials/nav'
+        }
+    });
 });
 
 router.post('/roaster', parseForm, (req, res) => {
@@ -35,8 +43,9 @@ router.post('/roaster', parseForm, (req, res) => {
 // cup
 router.get('/cup', (req, res)=> {
     res.render('new/cup', {
-        locals: {},
-        partials: {}
+        partials: {
+            nav:'partials/nav'
+        }
     })
 });
 
@@ -53,8 +62,9 @@ router.post('/cup', parseForm, async (req, res)=> {
 // bean coffee
 router.get('/beanCoffee', (req, res)=>{
     res.render('new/beanCoffee', {
-        locals: {},
-        partials: {}
+        partials: {
+            nav:'partials/nav'
+        }
     });
 });
 
@@ -69,7 +79,11 @@ router.post('/beanCoffee', parseForm, (req, res)=>{
 
 // shop
 router.get('/shop', (req, res)=>{
-    res.render('new/shop');
+    res.render('new/shop', {
+        partials: {
+            nav:'partials/nav'
+        }
+    });
 });
 
 router.post('/shop', parseForm, (req, res)=>{
