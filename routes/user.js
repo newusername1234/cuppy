@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const parseForm = bodyParser.urlencoded({
     extended: true
 });
-
+const { getApiKey } = require('./apiquery');
 const user = require('../models/userquery');
 
 
@@ -43,14 +43,31 @@ router.get('/signup', (req, res) => {
     });
 });
 
+router.get('/api', async (req, res) => {
+    const apiKey = await getApiKey(req.session.user.id);
+    res.json(apiKey);
+})
+
 router.post('/signup', parseForm, async (req, res) => {
     const { username, firstname, lastname, email, phonenumber, password } = req.body;
     user.create(username, firstname, lastname, email, phonenumber, password);
-    
-    res.redirect('profile');
+    const didLoginSuccessfully = await user.login(username, password);
+    if (didLoginSuccessfully) {
+        const theUser = await user.getByUsername(username);
+        console.log(theUser);
+        req.session.user = {
+            username,
+            id: theUser.id
+        };
+        req.session.save(() => {
+            res.redirect('profile');
+        });
+    } else {
+        res.send('incorrect login info. refresh the page');
+    }
 });
 
-router.get('/:userId(\\d+)', async (req, res) => {
+router.get('/:userId(\\d+)', requireLogin, async (req, res) => {
     const userCups = await user.getCups(req.params.userId);
     res.send(userCups);
 });
@@ -68,7 +85,7 @@ router.get('/profile', (req, res) => {
 });
 
 function requireLogin(req, res, next) {
-    if (req.session && req.session.user) {
+    if (req.session.user.id == req.params.userId) {
         next();
     } else {
         res.redirect('login');
