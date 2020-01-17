@@ -52,8 +52,8 @@ router.get('/cup', async (req, res)=> {
         },
         partials: {
             nav:'partials/nav',
-            shopdropdown: 'dropdowns/shopDrop',
-            beancoffeedropdown: 'dropdowns/beanCoffeeDrop'
+            shopdropdown: 'dropDowns/shopDrop',
+            beancoffeedropdown: 'dropDowns/beanCoffeeDrop'
         }
     });
 });
@@ -81,7 +81,7 @@ router.get('/beanCoffee', async (req, res)=>{
         partials: {
             nav:'partials/nav',
             greencoffeedropdown: 'dropDowns/greenCoffeeDrop',
-            roasterdropdown: 'dropdowns/roasterDrop'
+            roasterdropdown: 'dropDowns/roasterDrop'
         }
     });
 });
