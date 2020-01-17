@@ -1,14 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const api = require('../models/apiquery');
-
+const { makeError, error404, handleRouteErrors } = require('./errors');
 router.get('/testing', (req, res)=>{
     res.send('yeet');
 });
 
+
+//needs to go to a API documentation page
 router.get('/', (req,res)=>{
     res.send('API pages')
 });
+
+router.get('/cups', async (req,res)=>{
+    const cups = await api.allCups();
+    res.json(cups);
+});
+
+//returns full info for given shop, and all roasters using/used
+router.get('/cups/:id(\\d+)', async (req,res)=> {
+    const cup = await api.oneCup(req.params.id);
+    res.json(cup);
+});
+
 
 //returns name and id for all shops
 router.get('/shops', async (req,res)=>{
@@ -58,5 +72,9 @@ router.get('/green/:id(\\d+)', async (req,res)=>{
     const green = await api.oneGreen(req.params.id);
     res.json(green);
 });
+
+router.use(error404);
+
+router.use(handleRouteErrors);
 
 module.exports = router;

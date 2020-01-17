@@ -10,13 +10,14 @@ async function oneCup(cupID){
     delete cup.userid;
     // console.log(cup);
     if(cup){
-        let shop = await db.one(`SELECT name from shops where id=${cup.shopid}`);
-        // console.log(shop);
-        if(shop){
-            cup.shopname = shop.name;
+        if(cup.shopid){
+            let shop = await db.one(`SELECT name from shops where id=${cup.shopid}`);
+            // console.log(shop);
+            if(shop){
+                cup.shopname = shop.name;
+            }
         }
         delete cup.shopid;
-        // console.log(shop);
         if(cup.beancoffeeid){
             let bean = await oneBean(cup.beancoffeeid);
             // console.log(bean);
