@@ -8,6 +8,8 @@ const apiRouter = require('./routes/api');
 const userRouter = require('./routes/user');
 const newRouter = require('./routes/new');
 
+const path = require('path');
+
 const es6Renderer = require('express-es6-template-engine');
 app.engine('html', es6Renderer);
 app.set('views', 'templates');
@@ -23,6 +25,8 @@ app.use(session({
     saveUninitialized: false,
     secret: 'asdfasdsffase422345asdf3'
 }));
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) =>  {
     console.log('***********************');
