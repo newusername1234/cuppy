@@ -10,7 +10,11 @@ const user = require('../models/userquery');
 
 
 router.get('/login', (req, res) => {
-    res.render('user/login');
+    res.render('user/login', {
+        partials: {
+            nav: 'partials/nav'
+        }
+    });
 });
 
 router.post('/login', parseForm, async (req, res) => {
@@ -32,7 +36,11 @@ router.post('/login', parseForm, async (req, res) => {
 });
 
 router.get('/signup', (req, res) => {
-    res.render('user/signup');
+    res.render('user/signup', {
+        partials: {
+            nav: 'partials/nav'
+        }
+    });
 });
 
 router.post('/signup', parseForm, async (req, res) => {
@@ -52,6 +60,9 @@ router.get('/profile', (req, res) => {
         locals: {
             username: req.session.user.username,
             id: req.session.user.id
+        },
+        partials: {
+            nav: 'partials/nav'
         }
     });
 });
