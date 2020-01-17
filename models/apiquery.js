@@ -1,5 +1,38 @@
 const db = require('./connection');
 
+async function allCups(){
+    const cups = await db.any(`SELECT id, name from cups`);
+    return cups;
+}
+
+async function oneCup(cupID){
+    let cup = await db.oneOrNone(`SELECT * from cups where id=${cupID}`);
+    delete cup.userid;
+    // console.log(cup);
+    if(cup){
+        let shop = await db.one(`SELECT name from shops where id=${cup.shopid}`);
+        // console.log(shop);
+        if(shop){
+            cup.shopname = shop.name;
+        }
+        delete cup.shopid;
+        // console.log(shop);
+        if(cup.beancoffeeid){
+            let bean = await oneBean(cup.beancoffeeid);
+            // console.log(bean);
+            delete bean.averageScore;
+            delete bean.id;
+            bean.beanname = bean.name;
+            delete bean.name;
+            cup = Object.assign(cup, bean); 
+        }
+        delete cup.beancoffeeid;
+        // console.log(cup);
+        return cup;
+    }
+    return {};
+}
+
 async function allShops(){
     const shops = await db.any(`SELECT id, name from shops`);
     return shops;
@@ -39,16 +72,18 @@ async function allBeans(){
 async function oneBean(beanID){
     let beans = await db.oneOrNone(`SELECT * from beanCoffee where id=${beanID}`);
     if (beans){
-        console.log(beans);
+        // console.log(beans);
         const roaster = await db.one(`SELECT name from roasters where id=${beans.roasterid}`);
         beans.roaster = roaster.name;
         delete beans.roasterid;
-        console.log(roaster);
-        console.log(beans);
+        // console.log(roaster);
+        // console.log(beans);
         const green = await oneGreen(beans.greencoffeeid);
         delete beans.greencoffeeid;
         delete green.id;
-        console.log(green);
+        beans.greenname = green.name;
+        delete green.name;
+        // console.log(green);
         beans = Object.assign(beans, green);
         let cupScores = await db.any(`SELECT score from cups where beanCoffeeID=${beanID}`);
         let scoreAvg = 0;
@@ -100,7 +135,7 @@ async function oneRoaster(roasterID){
 }
 
 async function allGreen(){
-    const greens = await db.any(`SELECT * from greenCoffee`);
+    const greens = await db.any(`SELECT id, name from greenCoffee`);
     return greens;
 }
 
@@ -113,6 +148,8 @@ async function oneGreen(greenID){
 }
 
 module.exports = {
+    oneCup,
+    allCups,
     allShops,
     oneShop,
     allBeans,
