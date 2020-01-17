@@ -19,8 +19,8 @@ router.get('/greencoffee', (req, res) => {
 
 router.post('/greencoffee', parseForm, (req, res) => {
     console.log(req.body);
-    const { countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle } = req.body;
-    newNew.createGreenCoffee(countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle);
+    const { name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle } = req.body;
+    newNew.createGreenCoffee(name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle);
     res.redirect('/new/greencoffee');
 });
 

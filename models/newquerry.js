@@ -28,13 +28,13 @@ async function createBeanCoffee(name, roastProfile, roasterid, greencoffeeid) {
 }
 
 // new greenCoffee
-async function createGreenCoffee(countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle) {
+async function createGreenCoffee(name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle) {
     await db.any(`
     insert into greencoffee
-        (countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle)
+        (name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle)
     values 
-        ($1,  $2,  $3,  $4, $5, $6, $7)
-    `, [countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle])
+        ($1,  $2,  $3,  $4, $5, $6, $7, $8)
+    `, [name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle])
 }
 
 // new roaster
