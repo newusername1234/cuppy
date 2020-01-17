@@ -1,7 +1,19 @@
 <label for="greencoffeeid">Green coffee: </label>
 <select name="greencoffeeid">
-    
-    ${}
 
-    <option value="1" selected>Cat Shit</option>
+
+${
+    greenCoffeeItems.map(obj=> {
+        const { name, id } = obj;
+        return `
+        <option value=${id}>
+            ${name}
+        </option>
+        `
+    })
+}
+<p>Don't see your green coffee? 
+    <br>
+Add yours <a href="/new/greencoffee">here!</a>
+</p>
 </select>

@@ -1,0 +1,18 @@
+
+<label for="roasterid">Roaster: </label>
+<select name="roasterid">
+${
+    allRoasterItems.map(obj=>{
+        const { name, id } = obj;
+        return `
+        <option value=${id}>
+            ${name}
+        </option>
+        `
+    })
+}
+<p>Don't see your roaster? 
+    <br>
+Add yours <a href="/new/roaster">here!</a>
+</p>
+</select>
