@@ -14,6 +14,8 @@ router.get('/greencoffee', (req, res) => {
 
 router.post('/greencoffee', parseForm, (req, res) => {
     console.log(req.body);
+    const { countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle } = req.body;
+    newNew.createGreenCoffee(countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle);
     res.redirect('/new/greencoffee');
 });
 
@@ -24,7 +26,10 @@ router.get('/roaster', (req, res) => {
 
 router.post('/roaster', parseForm, (req, res) => {
     console.log(req.body);
+    const { name, location, phoneNumber, website } = req.body;
+    newNew.createRoaster(name, location, phoneNumber, website);
     res.redirect('/new/roaster');
+
 });
 
 // cup
@@ -45,8 +50,6 @@ router.post('/cup', parseForm, async (req, res)=> {
 
 });
 
-
-
 // bean coffee
 router.get('/beanCoffee', (req, res)=>{
     res.render('new/beanCoffee', {
@@ -57,6 +60,10 @@ router.get('/beanCoffee', (req, res)=>{
 
 router.post('/beanCoffee', parseForm, (req, res)=>{
     console.log(req.body);
+    const { name, roastProfile, roasterid, greencoffeeid } = req.body;
+    // roasterid = parseInt(roasterid);
+    newNew.createBeanCoffee(name, roastProfile, roasterid, greencoffeeid);
+
     res.redirect('/new/beancoffee');
 });
 
@@ -67,6 +74,11 @@ router.get('/shop', (req, res)=>{
 
 router.post('/shop', parseForm, (req, res)=>{
     console.log(req.body);
+    const { name, location, phoneNumber, hours, website } = req.body;
+    // needs shopOwnerID
+    // const shopOwnerID = req.session.user.id;
+    newNew.createShop(name, location, phoneNumber, hours, website /* shopOwnerID */);
+
     res.redirect('/new/shop');
 })
 
