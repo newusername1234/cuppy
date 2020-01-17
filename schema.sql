@@ -25,8 +25,12 @@ create table users (
     lastName text, 
     email text, 
     phoneNumber varchar(20),
+    apikey text,
+    apicalltally INTEGER,
+    apitimestamp date,
     hash text
 );
+
 
 create table shops (
     id serial primary key,

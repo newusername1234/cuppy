@@ -6,7 +6,6 @@ router.get('/testing', (req, res)=>{
     res.send('yeet');
 });
 
-
 //needs to go to a API documentation page
 router.get('/', (req,res)=>{
     res.send('API pages')
@@ -22,7 +21,6 @@ router.get('/cups/:id(\\d+)', async (req,res)=> {
     const cup = await api.oneCup(req.params.id);
     res.json(cup);
 });
-
 
 //returns name and id for all shops
 router.get('/shops', async (req,res)=>{

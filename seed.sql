@@ -14,6 +14,7 @@ VALUES
 
 insert into shops (name, location, phoneNumber, hours, website, shopOwnerID)
 VALUES
+('At Home!', '', '', '', '',1),
 ('kula coffee', 'ATV', '404-543-5742', '6am - 7pm', 'kulacoffee.com', 1),
 ('taproom coffee', 'kirkwood', '678-111-2345','7am - 10pm', 'taproomcoffee.com', 1);
 

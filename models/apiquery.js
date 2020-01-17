@@ -74,18 +74,20 @@ async function oneBean(beanID){
     let beans = await db.oneOrNone(`SELECT * from beanCoffee where id=${beanID}`);
     if (beans){
         // console.log(beans);
-        const roaster = await db.one(`SELECT name from roasters where id=${beans.roasterid}`);
-        beans.roaster = roaster.name;
-        delete beans.roasterid;
-        // console.log(roaster);
-        // console.log(beans);
-        const green = await oneGreen(beans.greencoffeeid);
-        delete beans.greencoffeeid;
-        delete green.id;
-        beans.greenname = green.name;
-        delete green.name;
-        // console.log(green);
-        beans = Object.assign(beans, green);
+        if(beans.roasterid){
+            const roaster = await db.oneOrNone(`SELECT name from roasters where id=${beans.roasterid}`);
+            beans.roaster = roaster.name;
+            delete beans.roasterid;
+        }
+        if(beans.greencoffeeid){
+            const green = await oneGreen(beans.greencoffeeid);
+            delete beans.greencoffeeid;
+            delete green.id;
+            beans.greenname = green.name;
+            delete green.name;
+            // console.log(green);
+            beans = Object.assign(beans, green);
+        }
         let cupScores = await db.any(`SELECT score from cups where beanCoffeeID=${beanID}`);
         let scoreAvg = 0;
         let cupLen = cupScores.length;
