@@ -47,8 +47,10 @@ router.post('/roaster/:id', parseForm, async (req, res)=>{
     const reqID = req.params.id;
     const theRoaster = await oneRoaster(reqID);
     const { name, location, phonenumber, website } = req.body;
-    // console.log(req.body);
-    let newDB = {};
+    // console.log(theRoaster)
+    let newDB = {
+        id: parseInt(reqID)
+    };
     for(let item in theRoaster) {
         // for everything except the id from theRoaster
         if(item != 'id'){
