@@ -50,14 +50,16 @@ router.get('/api', async (req, res) => {
 
 router.post('/signup', parseForm, async (req, res) => {
     const { username, firstname, lastname, email, phonenumber, password } = req.body;
-    user.create(username, firstname, lastname, email, phonenumber, password);
+    const id = await user.create(username, firstname, lastname, email, phonenumber, password);
+    
     const didLoginSuccessfully = await user.login(username, password);
+    
     if (didLoginSuccessfully) {
         const theUser = await user.getByUsername(username);
         console.log(theUser);
         req.session.user = {
             username,
-            id: theUser.id
+            id
         };
         req.session.save(() => {
             res.redirect('profile');

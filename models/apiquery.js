@@ -151,11 +151,21 @@ async function oneGreen(greenID){
 }
 
 async function getApiKey(userID){
+    const user = await db.oneOrNone(`SELECT * from users where id=${userID}`);
+    if (user){
+        return user.apikey;
+    }
     return {};
 }
 
-
 function keyVerifier(){}
+
+async function main(){
+    let thingy = await getApiKey(6);
+}
+
+// main();
+
 
 module.exports = {
     oneCup,

@@ -11,19 +11,24 @@ function createHash(password) {
 async function create(username, firstname, lastname, email, phonenumber, password) {
     const hash = createHash(password);
     const apiKey = uuid();
+    const apicalls =0;
+    const apitimestamp = new Date;
+    console.log(apitimestamp);
+    console.log(apitimestamp.toISOString());
     const result = await db.one(`
 insert into users
-    (username, firstname, lastname, email, phonenumber, hash, apikey)
+    (username, firstname, lastname, email, phonenumber, hash, apikey, apicalls, apitimestamp)
 values
-    ($1, $2, $3, $4, $5, $6, $7)
+    ($1, $2, $3, $4, $5, $6, $7, $8, $9)
 returning id
-    `, [username, firstname, lastname, email, phonenumber, hash, apiKey]);
+    `, [username, firstname, lastname, email, phonenumber, hash, apiKey, apicalls, apitimestamp.toISOString()]);
     
     return result.id;    
 }
 
 async function login(username, password) {
     const theUser = await getByUsername(username);
+    console.log(theUser);
     if(theUser){
         if (theUser.hash){
             return bcrypt.compareSync(password, theUser.hash);
