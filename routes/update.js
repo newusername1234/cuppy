@@ -5,7 +5,7 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
-const { yeet, kobe, oneRoaster, didChange, updateRoaster } = require('../models/updatequery');
+const { yeet, kobe, didChange, oneRoaster, oneGreenCoffee, updateRoaster, updateGreenCoffee } = require('../models/updatequery');
 
 // kobe();
 
@@ -21,7 +21,6 @@ try {
     const reqID  = req.params.id;
     const theRoaster = await oneRoaster(reqID);
     const name = theRoaster.name;
-    console.log(theRoaster.name)
     res.render('update/roaster', {
         locals: {
             reqID,
@@ -37,7 +36,6 @@ catch(err) {
     console.log(`
     ===============================
     ${err}
-
     `)
 }
 
@@ -47,6 +45,7 @@ router.post('/roaster/:id', parseForm, async (req, res)=>{
     const reqID = req.params.id;
     const theRoaster = await oneRoaster(reqID);
     // console.log(theRoaster)
+    // console.log(req.body)
     let newDB = {
         id: parseInt(reqID)
     };
@@ -59,32 +58,65 @@ router.post('/roaster/:id', parseForm, async (req, res)=>{
         // if the item in request is different from request to database
             if(didChange(reqName, roastName)) {
                 newDB[`${item}`] = req.body[`${item}`];
-                console.log(item + ' **CHANGE ME TO: ' + req.body[`${item}`])
-                console.log(req.body[`${item}`])
             }
             else {
                 newDB[`${item}`] = theRoaster[`${item}`];
             }
-
         }
     }
     // send the database a request to update with newDB
-    console.log(newDB)
     const { id, name, location, phonenumber, website } = newDB;
     updateRoaster(id, name, location, phonenumber, website);
     res.redirect(`/update/roaster/${id}`)
-    
-    
-    // console.log(newDB)
-    // console.log('ITEM: ' + item)
-    // console.log(req.body[`${item}`])
-    // console.log(theRoaster[`${item}`])
 });
 
 // green coffee update page
-router.get('greencoffee', (req, res)=>{
-
+router.get('/greencoffee/:id', async (req, res)=>{
+    try{
+        const reqID  = req.params.id;
+        const theGreenCoffee = await oneGreenCoffee(reqID);
+        // console.log(theGreenCoffee);
+        res.render('update/greencoffee', {
+            locals: {
+                GC: theGreenCoffee
+            },
+            partials: {
+                nav: 'partials/nav'
+            }
+        })
+    }
+    catch(err) {
+        console.log(err)
+    }
 });
+
+router.post('/greencoffee/:id', parseForm, async (req, res)=>{
+    const reqID = req.params.id;
+    const theGreenCoffee = await oneGreenCoffee(reqID);
+    // console.log(req.body);
+    let newDB = {
+        id: parseInt(reqID)
+    };
+    for(let item in theGreenCoffee) {
+        // for everything except the id from theRoaster
+        if(item != 'id'){
+            const reqName = req.body[`${item}`];
+            const greenName = theGreenCoffee[`${item}`];
+
+        // if the item in request is different from request to database
+            if(didChange(reqName, greenName)) {
+                newDB[`${item}`] = req.body[`${item}`];
+            }
+            else {
+                newDB[`${item}`] = theGreenCoffee[`${item}`];
+            }
+        }
+    }
+    // send the database a request to update with newDB
+    const { id, name, countryoforigin, regionoforigin, farm, farmer, elevation, varietal, processingstyle } = newDB;
+    updateGreenCoffee(id, name, countryoforigin, regionoforigin, farm, farmer, elevation, varietal, processingstyle);
+    res.redirect(`/update/greencoffee/${reqID}`)
+})
 
 // bean coffee update page
 router.get('beancoffee', (req, res)=>{

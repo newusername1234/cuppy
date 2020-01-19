@@ -13,6 +13,11 @@ async function oneRoaster(roasterID){
     return roaster;
 }
 
+async function oneGreenCoffee(greencoffeeID) {
+    let greencoffee = await db.oneOrNone(`select * from greencoffee where id = ${greencoffeeID}`);
+    return greencoffee;
+}
+
 function didChange(a, b) {
     return a !== b;
 }
@@ -25,10 +30,20 @@ async function updateRoaster(id, name, location, phonenumber, website) {
     `)
 }
 
+async function updateGreenCoffee(id, name, countryoforigin, regionoforigin, farm, farmer, elevation, varietal, processingstyle) {
+    await db.any(`
+    update greencoffee
+        set name = '${name}', countryoforigin = '${countryoforigin}', regionoforigin = '${regionoforigin}', farm = '${farm}', farmer = '${farmer}', elevation = '${elevation}', varietal = '${varietal}', processingstyle = '${processingstyle}'
+    where id = ${id};
+    `)
+}
+
 module.exports = {
     yeet,
     kobe,
     oneRoaster,
+    oneGreenCoffee,
     updateRoaster,
+    updateGreenCoffee,
     didChange
 }
