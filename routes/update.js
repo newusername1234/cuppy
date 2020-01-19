@@ -5,7 +5,7 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
-const { yeet, kobe, didChange, oneRoaster, oneGreenCoffee, oneCup, updateRoaster, updateGreenCoffee, allShops, allBeans } = require('../models/updatequery');
+const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, oneCup, updateRoaster, updateGreenCoffee, allShops, allBeans } = require('../models/updatequery');
 
 // kobe();
 
@@ -14,13 +14,20 @@ router.get('/cup/:id', async (req, res)=>{
 try {
     const reqID = req.params.id;
     const theCup = await oneCup(reqID);
+    const theShop = await oneShop(theCup.shopid);
+    const theBean = await oneBean(theCup.beancoffeeid);
     const shopItems = await allShops();
     const beanItems = await allBeans();
     console.log(theCup);
+    // console.log(theShop);
+    // console.log(theBean.name)
     res.render('update/cup', {
         locals: {
             shopItems,
-            beanItems
+            beanItems,
+            theCup,
+            theShop,
+            theBean
         },
         partials: {
             nav:'partials/nav',

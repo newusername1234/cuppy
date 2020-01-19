@@ -8,6 +8,16 @@ function yeet() {
 
 const kobe = () => console.log('kobe');
 
+async function oneBean(beanID){
+    let beans = await db.oneOrNone(`SELECT * from beanCoffee where id=${beanID}`);
+    return beans;
+}
+
+async function oneShop(shopID){
+    let shop = await db.oneOrNone(`SELECT * from shops where id=${shopID}`);
+    return shop;
+}
+
 async function oneCup(cupID){
     let cup = await db.oneOrNone(`SELECT * from cups WHERE id=${cupID}`);
     return cup;
@@ -59,6 +69,8 @@ module.exports = {
     oneRoaster,
     oneGreenCoffee,
     oneCup,
+    oneShop,
+    oneBean,
     updateRoaster,
     updateGreenCoffee,
     didChange,
