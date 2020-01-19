@@ -17,11 +17,18 @@ function didChange(a, b) {
     return a !== b;
 }
 
-
+async function updateRoaster(id, name, location, phonenumber, website) {
+    await db.any(`
+    update roasters
+        set name = '${name}', location = '${location}', phonenumber = '${phonenumber}', website = '${website}'
+    where id = ${id};
+    `)
+}
 
 module.exports = {
     yeet,
     kobe,
     oneRoaster,
+    updateRoaster,
     didChange
 }

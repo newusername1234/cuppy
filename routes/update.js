@@ -5,7 +5,7 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
-const { yeet, kobe, oneRoaster, didChange } = require('../models/updatequery');
+const { yeet, kobe, oneRoaster, didChange, updateRoaster } = require('../models/updatequery');
 
 // kobe();
 
@@ -46,7 +46,6 @@ catch(err) {
 router.post('/roaster/:id', parseForm, async (req, res)=>{
     const reqID = req.params.id;
     const theRoaster = await oneRoaster(reqID);
-    const { name, location, phonenumber, website } = req.body;
     // console.log(theRoaster)
     let newDB = {
         id: parseInt(reqID)
@@ -71,7 +70,9 @@ router.post('/roaster/:id', parseForm, async (req, res)=>{
     }
     // send the database a request to update with newDB
     console.log(newDB)
-    res.redirect('/update/roaster/1')
+    const { id, name, location, phonenumber, website } = newDB;
+    updateRoaster(id, name, location, phonenumber, website);
+    res.redirect(`/update/roaster/${id}`)
     
     
     // console.log(newDB)
