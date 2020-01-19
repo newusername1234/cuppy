@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>newCup</title>
+    <style>
+        .current {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    ${nav}
+<div class="input-contain">
+    <form method="POST">
+        <label for="didLike">Did you like it? </label>
+        <select name="didLike">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        <br>
+        <label for="cost">Cost: </label>
+        <input name="cost" type="text">
+        <br>
+        <label for="brewMethod" placeholder="drip, espresso, pour over, etc.">Brew Method: </label>
+        <input name="brewMethod" type="text">
+        <br>
+        <label for="coffeeSize" placeholder="12oz, double shot, etc.">Coffee Size: </label>
+        <input name="coffeeSize" type="text">
+        <br>
+        <label for="condiments" placeholder="cream, sugar, etc.">Condiments: </label>
+        <input name="condiments" type="text">
+        <br>
+        <label for="name">Name of drink: </label>
+        <input name="name" type="text">
+        <br>
+        <label for="flavor" placeholder="nutty, fruity, chocolatey, etc.">Flavor: </label>
+        <input name="flavor" type="text">
+        <br>
+        <label for="aroma" placeholder="fruity, floral, etc.">Aroma: </label>
+        <input name="aroma" type="text">
+        <br>
+        <label for="acidity" placeholder="lime, apple, etc.">Acidity: </label>
+        <input name="acidity" type="text">
+        <br>
+        <label for="sweetness" placeholder="honey, brown sugar, etc.">Sweetness: </label>
+        <input name="sweetness" type="text">
+        <br>
+        <label for="mouthfeel" placeholder="tealike, syrupy, velvety, etc.">Mouth feel: </label>
+        <input name="mouthfeel" type="text">
+        <br>
+        <!-- MAKE COL WIDE -->
+        <!-- <textarea name="message" rows="10" cols="30"></textarea> -->
+        <label for="comments">Comments: </label>
+        <input name="comments" type="text">
+        <br>
+        <label for="score">Score: </label>
+        <input name="score" type="number" min="1" max="10" placeholder="1-10">
+        <br>
+        <!-- TEEEEMPPPPLATTTTEEEE -->
+        ${shopdropdown}
+        <br>
+        ${beancoffeedropdown}
+        <br>
+    <input type="submit" value="send it">
+</div>
+
+</form> 
+
+</body>
+</html>

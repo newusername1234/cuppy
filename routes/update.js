@@ -5,14 +5,33 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
-const { yeet, kobe, didChange, oneRoaster, oneGreenCoffee, updateRoaster, updateGreenCoffee } = require('../models/updatequery');
+const { yeet, kobe, didChange, oneRoaster, oneGreenCoffee, oneCup, updateRoaster, updateGreenCoffee, allShops, allBeans } = require('../models/updatequery');
 
 // kobe();
 
 // cup update page
-router.get('/cup', (req, res)=>{
-     res.send('cuppy');
-    // res.render('create/');
+router.get('/cup/:id', async (req, res)=>{
+try {
+    const reqID = req.params.id;
+    const theCup = await oneCup(reqID);
+    const shopItems = await allShops();
+    const beanItems = await allBeans();
+    console.log(theCup);
+    res.render('update/cup', {
+        locals: {
+            shopItems,
+            beanItems
+        },
+        partials: {
+            nav:'partials/nav',
+            shopdropdown: 'dropDowns/shopDrop',
+            beancoffeedropdown: 'dropDowns/beanCoffeeDrop'
+        }
+    })
+}
+catch(err) {
+    console.log(err);
+}
 });
 
 // roaster update page

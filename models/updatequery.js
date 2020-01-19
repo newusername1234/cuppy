@@ -8,6 +8,11 @@ function yeet() {
 
 const kobe = () => console.log('kobe');
 
+async function oneCup(cupID){
+    let cup = await db.oneOrNone(`SELECT * from cups WHERE id=${cupID}`);
+    return cup;
+}
+
 async function oneRoaster(roasterID){
     let roaster = await db.oneOrNone(`SELECT * from roasters WHERE id=${roasterID}`);
     return roaster;
@@ -38,12 +43,25 @@ async function updateGreenCoffee(id, name, countryoforigin, regionoforigin, farm
     `)
 }
 
+async function allShops(){
+    const shops = await db.any(`SELECT id, name from shops`);
+    return shops;
+}
+
+async function allBeans(){
+    const beans = await db.any(`SELECT id, name from beanCoffee`);
+    return beans;    
+}
+
 module.exports = {
     yeet,
     kobe,
     oneRoaster,
     oneGreenCoffee,
+    oneCup,
     updateRoaster,
     updateGreenCoffee,
-    didChange
+    didChange,
+    allShops,
+    allBeans
 }
