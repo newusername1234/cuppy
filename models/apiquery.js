@@ -158,14 +158,18 @@ async function getApiKey(userID){
     return {};
 }
 
-function keyVerifier(){}
-
-async function main(){
-    let thingy = await getApiKey(6);
+async function keyVerifier(apikey){
+    const apikeys = await db.any('SELECT apikey from users');
+    let apiarray = apikeys.map(x => x.apikey);
+    if(apiarray.includes(apikey)){
+        const user = await db.one(`SELECT * from users where apikey='${apikey}'`);
+        let { id, apicalls, apitimestamp } = user;
+        apicalls +=1;
+        const tally = await db.any(`UPDATE users SET apicalls=${apicalls}, apitimestamp='${apitimestamp.toISOString()}' WHERE id=${id}`);
+        return true;
+    }
+    return false;
 }
-
-// main();
-
 
 module.exports = {
     oneCup,
@@ -178,5 +182,6 @@ module.exports = {
     oneRoaster,
     allGreen,
     oneGreen,
-    getApiKey
+    getApiKey,
+    keyVerifier
 }

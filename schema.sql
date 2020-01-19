@@ -25,7 +25,7 @@ create table users (
     lastName text, 
     email text, 
     phoneNumber varchar(20),
-    apikey text,
+    apikey text unique not null,
     apicalls INTEGER,
     apitimestamp date,
     hash text
