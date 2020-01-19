@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const parseForm = bodyParser.urlencoded({
     extended: true
 });
-const { getApiKey } = require('./apiquery');
+const { getApiKey } = require('../models/apiquery');
 const user = require('../models/userquery');
 
 

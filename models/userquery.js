@@ -24,11 +24,16 @@ returning id
 
 async function login(username, password) {
     const theUser = await getByUsername(username);
-    return bcrypt.compareSync(password, theUser.hash);
+    if(theUser){
+        if (theUser.hash){
+            return bcrypt.compareSync(password, theUser.hash);
+        }
+    }
+    return false;
 }
 
 async function getByUsername(username) {
-    const theUser = await db.one(`
+    const theUser = await db.oneOrNone(`
     select * from users where username=$1
     `, [username]);
 
@@ -57,5 +62,5 @@ module.exports = {
     create,
     login,
     getByUsername,
-    getCups,
+    getCups
 };
