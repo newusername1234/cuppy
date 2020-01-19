@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New Roaster</title>
+    <style>
+        .current {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    ${nav}
+    <form method="POST">
+        <div class="input-contain">
+            <div class="input-item">
+                <label for="name">Name: </label>
+                <p class="current">${name}</p>
+                <input type="text" name="name" placeholder="New Name">
+                <br>
+            </div>
+            <div class="input-item">
+                <label for="location">Location: </label>
+                <p class="current">${theRoaster.location}</p>
+                <input type="text" name="location" placeholder="New Name">
+                <br>
+            </div>
+            <div class="input-item">
+                <label for="phonenumber">Phone number: </label>
+                <p class="current">${theRoaster.phonenumber}</p>
+                <input type="text" name="phonenumber" placeholder="New Phone Number">
+                <br>
+            </div>
+            <div class="input-item">
+                <label for="website">Website: </label>
+                <p class="current">${theRoaster.website}</p>
+                <input type="text" name="website" placeholder="New Website">
+                <br>
+            </div>
+            <div class="input-item">
+                <input type="submit">
+            </div>
+        </div>
+    </form>
+    <script>
+        
+    </script>
+</body>
+</html>

@@ -8,7 +8,20 @@ function yeet() {
 
 const kobe = () => console.log('kobe');
 
+async function oneRoaster(roasterID){
+    let roaster = await db.oneOrNone(`SELECT * from roasters WHERE id=${roasterID}`);
+    return roaster;
+}
+
+function didChange(a, b) {
+    return a !== b;
+}
+
+
+
 module.exports = {
     yeet,
-    kobe
+    kobe,
+    oneRoaster,
+    didChange
 }
