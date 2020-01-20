@@ -38,6 +38,14 @@ function didChange(a, b) {
 }
 // update functions
 
+async function updateShop(id, name, location, phonenumber, hours, website, shopownerid){
+    await db.any(`
+    update shops
+        set name=$2, location=$3, phonenumber=$4, hours=$5, website=$6, shopownerid=$7
+    where id=$1
+    `, [id, name, location, phonenumber, hours, website, shopownerid])
+}
+
 async function updateBeancoffee(id, name, roastprofile, roasterid, greencoffeeid) {
     await db.any(`
     update beancoffee
@@ -102,6 +110,7 @@ module.exports = {
     updateGreenCoffee,
     updateBeancoffee,
     updateCup,
+    updateShop,
     didChange,
     allShops,
     allBeans,

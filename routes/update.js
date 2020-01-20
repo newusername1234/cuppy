@@ -5,7 +5,7 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
-const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, oneCup, updateRoaster, updateBeancoffee, updateCup, updateGreenCoffee, allShops, allBeans, allGreen, allRoasters } = require('../models/updatequery');
+const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, oneCup, updateRoaster, updateShop, updateBeancoffee, updateCup, updateGreenCoffee, allShops, allBeans, allGreen, allRoasters } = require('../models/updatequery');
 
 // kobe();
 
@@ -213,7 +213,7 @@ router.get('/beancoffee/:id', async (req, res)=>{
 router.post('/beancoffee/:id', parseForm, async (req, res)=>{
     const reqID = req.params.id;
     const theBean = await oneBean(reqID);
-    // make the newDB a shallow copy of the cup
+    // make the newDB a shallow copy of the thebean
     let newDB = {...theBean};
     // make a shallow copy of req.body
     let newReq = {...req.body};
@@ -233,19 +233,45 @@ router.post('/beancoffee/:id', parseForm, async (req, res)=>{
     // put it in the database
     const { id, name, roastprofile, roasterid, greencoffeeid } = newDB;
     updateBeancoffee(id, name, roastprofile, roasterid, greencoffeeid);
-
-
-
-
-
-
-
     res.redirect(`/update/beancoffee/${reqID}`)
 })
 
 // shop update page
-router.get('shop', (req, res)=>{
+router.get('/shop/:id', async (req, res)=>{
+    const reqID = req.params.id;
+    const theShop = await oneShop(reqID);
 
+    res.render('update/shop', {
+        partials: {
+            nav:'partials/nav'
+        },
+        locals: {
+            theShop
+        }
+    });
 });
+
+router.post('/shop/:id', parseForm, async (req, res)=>{
+    const reqID = req.params.id;
+    const theShop = await oneShop(reqID);
+    // make newDB a shallow copy of shop
+    let newDB = {...theShop};
+    // and the req
+    let newReq = {...req.body};
+    // delete all blanks
+    for(let item in newReq) {
+        if(newReq[`${item}`] == '') {
+            delete newReq[`${item}`]
+        }
+    }
+    // take the items in newReq, replace the items in newDB with them
+    for(let item in newReq) {
+        newDB[`${item}`] = newReq[`${item}`];
+    }
+    console.log(newDB)
+    const { id, name, location, phonenumber, hours, website, shopownerid } = newDB;
+    updateShop(id, name, location, phonenumber, hours, website, shopownerid);
+    res.redirect(`/update/shop/${reqID}`);
+})
 
 module.exports = router;
