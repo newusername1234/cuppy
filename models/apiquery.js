@@ -5,6 +5,24 @@ async function allCups(){
     return cups;
 }
 
+async function allCupsAPI(apikey){
+    const user =await getUserFromAPIKey(apikey);
+    const cups = await db.any(`SELECT id, name from cups where userid=${user.id}`);
+    return cups;
+}
+
+async function oneCupAPI(apikey, cupID){
+    const userid = await getUserFromAPIKey(apikey);
+    const cupUser = await db.oneOrNone(`SELECT userid from cups where id=${cupID}`);
+    console.log(userid);
+    console.log(cupUser);
+    if (userid.id == cupUser.userid){
+        const cup = await oneCup(cupID);
+        return cup;
+    }
+    return {error: "access restricted"};
+}
+
 async function oneCup(cupID){
     let cup = await db.oneOrNone(`SELECT * from cups where id=${cupID}`);
     delete cup.userid;
@@ -158,6 +176,11 @@ async function getApiKey(userID){
     return {};
 }
 
+async function getUserFromAPIKey(apikey){
+    let user = await db.oneOrNone(`Select id from users where apikey='${apikey}'`);
+    return user;
+}
+
 async function keyVerifier(apikey){
     const apikeys = await db.any('SELECT apikey from users');
     let apiarray = apikeys.map(x => x.apikey);
@@ -171,9 +194,20 @@ async function keyVerifier(apikey){
     return false;
 }
 
+async function main(){
+    let thingy = await getUserFromAPIKey("292100f9-76cb-4a63-be7b-2ea67e901c09");
+    console.log(thingy);
+}
+
+main();
+
+
+
 module.exports = {
     oneCup,
+    oneCupAPI,
     allCups,
+    allCupsAPI,
     allShops,
     oneShop,
     allBeans,

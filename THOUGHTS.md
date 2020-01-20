@@ -116,5 +116,8 @@ beans.html
 
 recentreviews.html
 
-## for Austin to do.
-- add placeholders to help users know how to fill out fields.
+change Login to Profile if user logged in.
+add logout link to profile page.
+
+
+

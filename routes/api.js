@@ -27,14 +27,14 @@ router.use('/:apikey', async (req, res, next)=>{
 
 
 router.get('/:apikey/cups', async (req,res)=>{
-        const cups = await api.allCups();
+        const cups = await api.allCupsAPI(req.params.apikey);
         res.json(cups);
 });
 
 //returns full info for given shop, and all roasters using/used
 router.get('/:apikey/cups/:id(\\d+)', async (req,res)=> {
-    let { id } = req.params;
-    const cup = await api.oneCup(id);
+    let { apikey,id } = req.params;
+    const cup = await api.oneCupAPI(apikey, id);
     res.json(cup);
 });
 
