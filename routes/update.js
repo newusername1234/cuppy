@@ -48,6 +48,39 @@ catch(err) {
 }
 });
 
+router.post('/cup/:id', parseForm, async (req, res)=>{
+    const reqID = req.params.id;
+    const theCup = await oneCup(reqID);
+    // make the newDB a shallow copy of the cup
+    let newDB = {...theCup}
+    // make a shallow copy of req.body
+    let newReq = {...req.body}
+    console.log(newDB)
+    console.log(newReq)
+
+    // delete all blanks
+    for(let item in newReq) {
+        if(newReq[`${item}`] == '') {
+            delete newReq[`${item}`]
+        }
+    }
+    // make the strings into numbers
+    newReq.beancoffeeid = parseInt(newReq.beancoffeeid)
+    newReq.shopid = parseInt(newReq.shopid)
+    // take the items in newReq, replace the items in newDB with them
+    // console.log(newDB)
+    for(let item in newReq) {
+        newDB[`${item}`] = newReq[`${item}`];
+    }
+    // console.log(newDB)
+
+
+
+
+
+    res.redirect(`/update/cup/${reqID}`)
+})
+
 // roaster update page
 router.get('/roaster/:id', async (req, res)=>{
 try {
