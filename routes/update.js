@@ -77,7 +77,7 @@ router.post('/cup/:id', parseForm, async (req, res)=>{
     console.log(newDB)
     const { id, name, cost, brewmethod, coffeesize, condiments, didlike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid } = newDB;
 
-
+    updateCup(id, name, cost, brewmethod, coffeesize, condiments, didlike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid);
 
 
 
