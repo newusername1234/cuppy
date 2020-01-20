@@ -5,7 +5,7 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
-const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, oneCup, updateRoaster, updateCup, updateGreenCoffee, allShops, allBeans, allGreen, allRoasters } = require('../models/updatequery');
+const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, oneCup, updateRoaster, updateBeancoffee, updateCup, updateGreenCoffee, allShops, allBeans, allGreen, allRoasters } = require('../models/updatequery');
 
 // kobe();
 
@@ -70,7 +70,6 @@ router.post('/cup/:id', parseForm, async (req, res)=>{
         newReq.score = parseInt(newReq.score)
     }
     // take the items in newReq, replace the items in newDB with them
-    // console.log(newDB)
     for(let item in newReq) {
         newDB[`${item}`] = newReq[`${item}`];
     }
@@ -212,6 +211,33 @@ router.get('/beancoffee/:id', async (req, res)=>{
 });
 
 router.post('/beancoffee/:id', parseForm, async (req, res)=>{
+    const reqID = req.params.id;
+    const theBean = await oneBean(reqID);
+    // make the newDB a shallow copy of the cup
+    let newDB = {...theBean};
+    // make a shallow copy of req.body
+    let newReq = {...req.body};
+    // delete all blanks
+    for(let item in newReq) {
+        if(newReq[`${item}`] == '') {
+            delete newReq[`${item}`]
+        }
+    }
+    // make strings into numbers 
+    newReq.roasterid = parseInt(newReq.roasterid);
+    newReq.greencoffeeid = parseInt(newReq.greencoffeeid);
+    // take the items in newReq, replace the items in newDB with them
+    for(let item in newReq) {
+        newDB[`${item}`] = newReq[`${item}`];
+    }
+    // put it in the database
+    const { id, name, roastprofile, roasterid, greencoffeeid } = newDB;
+    updateBeancoffee(id, name, roastprofile, roasterid, greencoffeeid);
+
+
+
+
+
 
 
     res.redirect(`/update/beancoffee/${reqID}`)
