@@ -5,7 +5,7 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
-const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, oneCup, updateRoaster, updateGreenCoffee, allShops, allBeans } = require('../models/updatequery');
+const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, oneCup, updateRoaster, updateCup, updateGreenCoffee, allShops, allBeans } = require('../models/updatequery');
 
 // kobe();
 
@@ -55,8 +55,6 @@ router.post('/cup/:id', parseForm, async (req, res)=>{
     let newDB = {...theCup}
     // make a shallow copy of req.body
     let newReq = {...req.body}
-    console.log(newDB)
-    console.log(newReq)
 
     // delete all blanks
     for(let item in newReq) {
@@ -67,12 +65,17 @@ router.post('/cup/:id', parseForm, async (req, res)=>{
     // make the strings into numbers
     newReq.beancoffeeid = parseInt(newReq.beancoffeeid)
     newReq.shopid = parseInt(newReq.shopid)
+
+    if(newReq.score) {
+        newReq.score = parseInt(newReq.score)
+    }
     // take the items in newReq, replace the items in newDB with them
     // console.log(newDB)
     for(let item in newReq) {
         newDB[`${item}`] = newReq[`${item}`];
     }
-    // console.log(newDB)
+    console.log(newDB)
+    const { id, name, cost, brewmethod, coffeesize, condiments, didlike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid } = newDB;
 
 
 

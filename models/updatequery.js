@@ -36,6 +36,15 @@ async function oneGreenCoffee(greencoffeeID) {
 function didChange(a, b) {
     return a !== b;
 }
+// update functions
+
+async function updateCup(id, name, cost, brewmethod, coffeesize, condiments, didlike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid) {
+    await db.any(`
+    update cup
+        set name=$2, cost=$3, brewmethod=$4, coffeesize=$5, condiments=$6, didlike=$7, flavor=$8, aroma=$9, acidity=$10, sweetness=$11, mouthfeel=$12, comments=$13, score=$14, shopid=$15, beancoffee=$16
+    where id = $1;
+    `, [id, name, cost, brewmethod, coffeesize, condiments, didlike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid])
+}
 
 async function updateRoaster(id, name, location, phonenumber, website) {
     await db.any(`
@@ -73,6 +82,7 @@ module.exports = {
     oneBean,
     updateRoaster,
     updateGreenCoffee,
+    updateCup,
     didChange,
     allShops,
     allBeans
