@@ -5,7 +5,7 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
-const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, oneCup, updateRoaster, updateCup, updateGreenCoffee, allShops, allBeans } = require('../models/updatequery');
+const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, oneCup, updateRoaster, updateCup, updateGreenCoffee, allShops, allBeans, allGreen, allRoasters } = require('../models/updatequery');
 
 // kobe();
 
@@ -188,9 +188,34 @@ router.post('/greencoffee/:id', parseForm, async (req, res)=>{
 })
 
 // bean coffee update page
-router.get('beancoffee', (req, res)=>{
-
+router.get('/beancoffee/:id', async (req, res)=>{
+    const reqID = req.params.id;
+    const theBean = await oneBean(reqID);
+    const greenCoffeeItems = await allGreen();
+    const allRoasterItems = await allRoasters();
+    const theRoaster = await oneRoaster(theBean.id)
+    const theGreenCoffee = await oneGreenCoffee(theBean.id);
+    res.render('update/beanCoffee', {
+        locals: {
+            greenCoffeeItems,
+            allRoasterItems,
+            theBean,
+            theRoaster,
+            theGreenCoffee
+        },
+        partials: {
+            nav:'partials/nav',
+            greencoffeedropdown: 'dropDowns/greenCoffeeDrop',
+            roasterdropdown: 'dropDowns/roasterDrop'
+        }
+    });
 });
+
+router.post('/beancoffee/:id', parseForm, async (req, res)=>{
+
+
+    res.redirect(`/update/beancoffee/${reqID}`)
+})
 
 // shop update page
 router.get('shop', (req, res)=>{

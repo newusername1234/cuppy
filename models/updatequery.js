@@ -72,6 +72,16 @@ async function allBeans(){
     return beans;    
 }
 
+async function allGreen() {
+    const greens = await db.any(`SELECT id, name from greenCoffee`);
+    return greens;
+}
+
+async function allRoasters() {
+    const roasters = await db.any(`SELECT id, name from roasters`);
+    return roasters;
+}
+
 module.exports = {
     yeet,
     kobe,
@@ -85,5 +95,7 @@ module.exports = {
     updateCup,
     didChange,
     allShops,
-    allBeans
+    allBeans,
+    allGreen,
+    allRoasters
 }
