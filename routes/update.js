@@ -9,16 +9,23 @@ const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, one
 
 // kobe();
 
+
 // cup update page
 router.get('/cup/:id', async (req, res)=>{
 try {
     const reqID = req.params.id;
     const theCup = await oneCup(reqID);
     const theShop = await oneShop(theCup.shopid);
-    const theBean = await oneBean(theCup.beancoffeeid);
+    let theBean = await oneBean(theCup.beancoffeeid);
+    // This is just for the seed data; when a new entry is made, anything that's blank is an empty string. 
+    if(theBean == null) {
+        theBean = 'Choose your bean'
+    } else {
+        theBean = theBean.name;
+    } console.log(theBean)
     const shopItems = await allShops();
     const beanItems = await allBeans();
-    console.log(theCup);
+    // console.log(theCup);
     // console.log(theShop);
     // console.log(theBean.name)
     res.render('update/cup', {
