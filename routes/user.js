@@ -78,30 +78,31 @@ router.post('/signup', parseForm, async (req, res) => {
     }
 });
 
-router.get('/:userId(\\d+)', async (req, res) => {
-    const userCups = await user.getCups(req.params.userId);
+router.get('/cups', async (req, res) => {
+    const userCups = await user.getCups(req.session.user.id);
     res.send(userCups);
 });
 
 router.get('/profile', (req, res) => {
     let { loggedIn } = req.session;
-    res.render('user/profile', {
-        locals: {
-            loggedIn,
-            username: req.session.user.username,
-            id: req.session.user.id
-        },
-        partials: {
-            nav: 'partials/nav'
-        }
-    });
+    if (loggedIn === false) {
+        res.send('please <a href="/user/signup">sign up</a> or <a href="/user/login"> log in</a> ;)');
+    }
+        res.render('user/profile', {
+            locals: {
+                loggedIn,
+                username: req.session.user.username
+            },
+            partials: {
+                nav: 'partials/nav'
+            }
+        });
 });
 
 router.get('/logout', (req, res)=>{
     req.session.destroy(()=>{
         res.redirect('/')
-    })
-})
-
+    });
+});
 
 module.exports = router;
