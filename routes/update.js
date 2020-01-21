@@ -196,18 +196,22 @@ router.get('/beancoffee/:id', async (req, res)=>{
     const allRoasterItems = await allRoasters();
     const theRoaster = await oneRoaster(theBean.id)
     const theGreenCoffee = await oneGreenCoffee(theBean.id);
+    const beanRoasterid = theBean.roasterid;
+    const beanGreencoffeeid = theBean.greencoffeeid;
     res.render('update/beanCoffee', {
         locals: {
             greenCoffeeItems,
             allRoasterItems,
             theBean,
             theRoaster,
-            theGreenCoffee
+            theGreenCoffee,
+            beanRoasterid,
+            beanGreencoffeeid
         },
         partials: {
             nav:'partials/nav',
-            greencoffeedropdown: 'dropDowns/greenCoffeeDrop',
-            roasterdropdown: 'dropDowns/roasterDrop'
+            greencoffeedropdown: 'dropDowns/greenCoffeeDropUpdate',
+            roasterdropdown: 'dropDowns/roasterDropUpdate'
         }
     });
 });

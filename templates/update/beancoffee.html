@@ -5,35 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Update beancoffee</title>    <style>
-        .current {
-            font-weight: bold;
-        }
-    </style>
+    <title>Update beancoffee</title>
 </head>
 <body>
     ${nav}
 
 <form method="POST">
     <div class="input-item">
-        <p class="current">${theBean.name}</p>
         <label for="name">Name: </label>
-        <input name="name" type="text">
+        <input name="name" type="text" value=${theBean.name}>
         <br>
     </div>
     <div class="input-item">
-        <p class="current">${theBean.roastprofile}</p>
         <label for="roastprofile">Roast Profile: </label>
-        <input name="roastprofile" type="text">
+        <input name="roastprofile" type="text" value=${theBean.roastprofile}>
         <br>
     </div>
     <div class="input-item"> 
-        <p class="current">${theRoaster.name}</p>
         ${roasterdropdown}
         <br>
     </div>
     <div class="input-item">
-        <p class="current">${theGreenCoffee.name}</p>
         ${greencoffeedropdown}
         <br>
     </div>
