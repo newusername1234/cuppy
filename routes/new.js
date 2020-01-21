@@ -73,10 +73,10 @@ router.get('/cup', async (req, res)=>{
 router.post('/cup', parseForm, async (req, res)=>{
     let { loggedIn } = req.session;
     console.log(req.body);
-    const { cost, didLike, brewMethod, coffeeSize, condiments, name, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, beanCoffeeID, roastDate } = req.body;
+    const { cost, didLike, brewMethod, coffeeSize, condiments, name, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid, roastDate } = req.body;
     const userID = req.session.user.id;
     const dateOrdered = '2019-12-15';
-    await newNew.createCup(userID, name, dateOrdered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, beanCoffeeID);
+    await newNew.createCup(userID, name, dateOrdered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid);
     res.redirect('cup');
 
 });
