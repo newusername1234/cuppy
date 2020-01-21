@@ -15,7 +15,7 @@ async function createCup(userID, name, dateOrdered, roastDate, cost, brewMethod,
     values
         ($1,  $2,  $3,  $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
     `, [userID, name, dateOrdered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, beanCoffeeID]);
-    
+    //check to see if shop and roaster relationship exists in shops_roasters already, and if not, add it.
 }
 // new beanCoffee
 async function createBeanCoffee(name, roastProfile, roasterid, greencoffeeid) {
