@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>updateCup</title>
+    <style>
+        .current {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    ${nav}
+<form method="POST">
+    <div class="input-contain">
+        <div class="input-item">
+            <label for="didlike">Did you like it? </label>
+            <select name="didlike">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <br>
+        </div>
+        <div class="input-item">
+            <p class="current">${theCup.cost}</p>
+            <label for="cost">Cost: </label>
+            <input name="cost" type="text">
+            <br>
+        </div>
+        <div class="input-item">
+            <p class="current">${theCup.brewmethod}</p>
+            <label for="brewmethod" placeholder="drip, espresso, pour over, etc.">Brew Method: </label>
+            <input name="brewmethod" type="text">
+            <br>
+        </div>
+        <div class="input-item">
+            <p class="current">${theCup.coffeesize}</p>
+            <label for="coffeesize" placeholder="12oz, double shot, etc.">Coffee Size: </label>
+            <input name="coffeesizes" type="text">
+            <br>
+        </div>
+        <div class="input-item">
+            <p class="current">${theCup.condiments}</p>
+            <label for="condiments" placeholder="cream, sugar, etc.">Condiments: </label>
+            <input name="condiments" type="text">
+            <br>
+        </div>
+        <div class="input-item">
+            <p class="current">${theCup.name}</p>
+            <label for="name">Name of drink: </label>
+            <input name="name" type="text">
+            <br>
+        </div>
+        <div class="input-item">
+            <p class="current">${theCup.flavor}</p>
+            <label for="flavor" placeholder="nutty, fruity, chocolatey, etc.">Flavor: </label>
+            <input name="flavor" type="text">
+            <br>
+        </div>
+        <div class="input-item">
+            <p class="current">${theCup.aroma}</p>
+            <label for="aroma" placeholder="fruity, floral, etc.">Aroma: </label>
+            <input name="aroma" type="text">
+            <br>
+        </div>
+        <div class="input-item">
+            <p class="current">${theCup.acidity}</p>
+            <label for="acidity" placeholder="lime, apple, etc.">Acidity: </label>
+            <input name="acidity" type="text">
+            <br>
+        </div>
+        <div class="input-item">
+            <p class="current">${theCup.sweetness}</p>
+            <label for="sweetness" placeholder="honey, brown sugar, etc.">Sweetness: </label>
+            <input name="sweetness" type="text">
+            <br>
+        </div>
+        <div class="input-item">
+            <p class="current">${theCup.mouthfeel}</p>
+            <label for="mouthfeel" placeholder="tealike, syrupy, velvety, etc.">Mouth feel: </label>
+            <input name="mouthfeel" type="text">
+            <br>
+        </div>
+        <div class="input-item">
+        <!-- MAKE COL WIDE -->
+        <!-- <textarea name="message" rows="10" cols="30"></textarea> -->
+        <p class="current">${theCup.comments}</p>
+        <label for="comments">Comments: </label>
+        <input name="comments" type="text">
+        <br>
+        </div>
+        <div class="input-item">
+            <p class="current">${theCup.score}</p>
+            <label for="score">Score: </label>
+            <input name="score" type="number" min="1" max="10" placeholder="1-10">
+            <br>
+        </div>
+        <!-- TEEEEMPPPPLATTTTEEEE -->
+        <div class="input-item">
+            <p class="current">${theShop.name}</p>
+            ${shopdropdown}
+            <br>
+        </div>
+        <div class="input-item">
+            <p class="current">${theBean}</p>
+            ${beancoffeedropdown}
+            <br>
+        </div>
+        <div class="input-item">
+            <input type="submit" value="send it">
+        </div>
+    </div>
+
+</form> 
+
+</body>
+</html>

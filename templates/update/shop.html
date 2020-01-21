@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>shop</title>
+</head>
+<body>
+    ${nav}
+<form method="POST">
+    <div class="input-item">
+        <p class="current">${theShop.name}</p>
+        <label for="name">Name: </label>
+        <input name="name" type="text">
+        <br>
+    </div>
+    <div class="input-item">
+        <p class="current">${theShop.location}</p>
+        <label for="location">Location: </label>
+        <input name="location" type="text">
+        <br>    
+    </div>
+    <div class="input-item">
+        <p class="current">${theShop.phonenumber}</p>
+        <label for="phonenumber">Phone Number: </label>
+        <input name="phonenumber" type="text">
+        <br>
+    </div>
+    <div class="input-item">
+        <p class="current">${theShop.hours}</p>
+        <label for="hours">Hours: </label>
+        <input name="hours" type="text">
+        <br>
+    </div>
+    <div class="input-item">
+        <p class="current">${theShop.website}</p>
+        <label for="website">Website: </label>
+        <input name="website" type="text">
+        <br>
+    </div>
+    <div class="input-item">
+        <input type="submit" value="send it">
+    </div>    
+
+
+</form> 
+
+</body>
+</html>
