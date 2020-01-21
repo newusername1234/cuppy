@@ -10,7 +10,11 @@ const user = require('../models/userquery');
 
 
 router.get('/login', (req, res) => {
+    let { loggedIn } = req.session;
     res.render('user/login', {
+        locals: {
+            loggedIn
+        },
         partials: {
             nav: 'partials/nav'
         }
@@ -18,6 +22,7 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', parseForm, async (req, res) => {
+    let { loggedIn } = req.session;
     const { username, password } = req.body;
     const didLoginSuccessfully = await user.login(username, password);
     if (didLoginSuccessfully) {
@@ -36,7 +41,11 @@ router.post('/login', parseForm, async (req, res) => {
 });
 
 router.get('/signup', (req, res) => {
+    let { loggedIn } = req.session;
     res.render('user/signup', {
+        locals: {
+            loggedIn
+        },
         partials: {
             nav: 'partials/nav'
         }
@@ -69,14 +78,16 @@ router.post('/signup', parseForm, async (req, res) => {
     }
 });
 
-router.get('/:userId(\\d+)', requireLogin, async (req, res) => {
+router.get('/:userId(\\d+)', async (req, res) => {
     const userCups = await user.getCups(req.params.userId);
     res.send(userCups);
 });
 
 router.get('/profile', (req, res) => {
+    let { loggedIn } = req.session;
     res.render('user/profile', {
         locals: {
+            loggedIn,
             username: req.session.user.username,
             id: req.session.user.id
         },
@@ -86,13 +97,11 @@ router.get('/profile', (req, res) => {
     });
 });
 
-function requireLogin(req, res, next) {
-    if (req.session.user.id == req.params.userId) {
-        next();
-    } else {
-        res.redirect('login');
-    }
-}
+router.get('/logout', (req, res)=>{
+    req.session.destroy(()=>{
+        res.redirect('/')
+    })
+})
 
 
 module.exports = router;

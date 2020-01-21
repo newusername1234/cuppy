@@ -9,15 +9,20 @@ const newNew = require('../models/newquerry');
 const api = require('../models/apiquery');
 
 // green coffee
-router.get('/greencoffee', (req, res) => {
+router.get('/greencoffee', (req, res)=>{
+    let { loggedIn } = req.session;
     res.render('new/greencoffee', {
+        locals: {
+            loggedIn 
+        },
         partials: {
             nav:'partials/nav'
         }
     });
 });
 
-router.post('/greencoffee', parseForm, (req, res) => {
+router.post('/greencoffee', parseForm, (req, res)=>{
+    let { loggedIn } = req.session;
     console.log(req.body);
     const { name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle } = req.body;
     newNew.createGreenCoffee(name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle);
@@ -25,15 +30,20 @@ router.post('/greencoffee', parseForm, (req, res) => {
 });
 
 // roaster
-router.get('/roaster', (req, res) => {
+router.get('/roaster', (req, res)=>{
+    let { loggedIn } = req.session;
     res.render('new/roaster', {
+        locals: {
+            loggedIn 
+        },
         partials: {
             nav:'partials/nav'
         }
     });
 });
 
-router.post('/roaster', parseForm, (req, res) => {
+router.post('/roaster', parseForm, (req, res)=>{
+    let { loggedIn } = req.session;
     console.log(req.body);
     const { name, location, phoneNumber, website } = req.body;
     newNew.createRoaster(name, location, phoneNumber, website);
@@ -42,11 +52,13 @@ router.post('/roaster', parseForm, (req, res) => {
 });
 
 // cup
-router.get('/cup', async (req, res)=> {
+router.get('/cup', async (req, res)=>{
+    let { loggedIn } = req.session;
     const shopItems = await api.allShops();
     const beanItems = await api.allBeans();
     res.render('new/cup', {
         locals: {
+            loggedIn,
             shopItems,
             beanItems
         },
@@ -58,10 +70,11 @@ router.get('/cup', async (req, res)=> {
     });
 });
 
-router.post('/cup', parseForm, async (req, res)=> {
-    // console.log(req.body);
+router.post('/cup', parseForm, async (req, res)=>{
+    let { loggedIn } = req.session;
+    console.log(req.body);
     const { cost, didLike, brewMethod, coffeeSize, condiments, name, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, beanCoffeeID, roastDate } = req.body;
-    const userID = 1; 
+    const userID = req.session.user.id;
     const dateOrdered = '2019-12-15';
     await newNew.createCup(userID, name, dateOrdered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, beanCoffeeID);
     res.redirect('cup');
@@ -70,11 +83,13 @@ router.post('/cup', parseForm, async (req, res)=> {
 
 // bean coffee
 router.get('/beanCoffee', async (req, res)=>{
+    let { loggedIn } = req.session;
     const greenCoffeeItems = await api.allGreen();
     const allRoasterItems = await api.allRoasters();
     // console.log(greenCoffeeItems)
     res.render('new/beanCoffee', {
         locals: {
+            loggedIn,
             greenCoffeeItems,
             allRoasterItems
         },
@@ -87,6 +102,7 @@ router.get('/beanCoffee', async (req, res)=>{
 });
 
 router.post('/beanCoffee', parseForm, (req, res)=>{
+    let { loggedIn } = req.session;
     console.log(req.body);
     const { name, roastProfile, roasterid, greencoffeeid } = req.body;
     newNew.createBeanCoffee(name, roastProfile, roasterid, greencoffeeid);
@@ -96,7 +112,11 @@ router.post('/beanCoffee', parseForm, (req, res)=>{
 
 // shop
 router.get('/shop', (req, res)=>{
+    let { loggedIn } = req.session;
     res.render('new/shop', {
+        locals: {
+            loggedIn 
+        },
         partials: {
             nav:'partials/nav'
         }
@@ -104,6 +124,7 @@ router.get('/shop', (req, res)=>{
 });
 
 router.post('/shop', parseForm, (req, res)=>{
+    let { loggedIn } = req.session;
     console.log(req.body);
     const { name, location, phoneNumber, hours, website } = req.body;
     // needs shopOwnerID

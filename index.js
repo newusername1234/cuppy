@@ -28,10 +28,17 @@ app.use(session({
 }));
 
 app.use(express.static(path.join(__dirname, "public")));
-
+function isLoggedIn(req, res, next) {
+    if(!req.session.user){
+        console.log('0000000000000000000000000')
+    }
+    req.session.loggedIn = !!(req.session && req.session.user);
+    next()
+}
+app.use(isLoggedIn)
 app.use((req, res, next) =>  {
     // console.log('***********************');
-    // console.log(req.session);
+    console.log(req.session);
     // console.log('***********************');
 
     next();
