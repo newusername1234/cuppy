@@ -8,6 +8,7 @@ const apiRouter = require('./routes/api');
 const userRouter = require('./routes/user');
 const newRouter = require('./routes/new');
 const updateRouter = require('./routes/update');
+const { makeError, error404, handleRouteErrors } = require('./routes/errors');
 
 const path = require('path');
 
@@ -66,6 +67,10 @@ app.get('/', (req, res) => {
         }
     });
 });
+
+app.use(error404);
+
+app.use(handleRouteErrors);
 
 server.listen(PORT, () => {
     console.log(`server listening at ${PORT}`);
