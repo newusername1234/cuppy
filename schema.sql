@@ -27,7 +27,7 @@ create table users (
     phoneNumber varchar(20),
     apikey text unique not null,
     apicalls INTEGER,
-    apitimestamp date,
+    apitimestamp text, --UTC TIME stored as text
     hash text
 );
 
