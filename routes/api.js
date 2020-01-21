@@ -8,7 +8,15 @@ router.get('/:apikey/testing', (req, res)=>{
 
 //needs to go to a API documentation page
 router.get('/', (req,res)=>{
-    res.send('API pages')
+    let { loggedIn } = req.session;
+    res.render('api', {
+        locals: {
+            loggedIn
+        },
+        partials: {
+            nav: '/partials/nav'
+        }
+    });
 });
 
 router.use('/:apikey', async (req, res, next)=>{
