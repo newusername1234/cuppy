@@ -1,5 +1,4 @@
 const db = require('./connection');
-moment().format();
 
 async function allCups(){
     const cups = await db.any(`SELECT id, name from cups`);
