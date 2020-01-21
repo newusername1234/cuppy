@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shops</title>
+    <style>
+        .content {
+            display: flex;
+        }
+        .cup-card {
+            outline: 2px solid forestgreen;
+            margin: 10px;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    ${nav}
+<div class="content">
+    ${
+        fullShops.map(shop=>{
+            return `
+                <div class="cup-card">
+                    <a href="/update/shop/">Edit</a>
+                    <h2>${shop.name}</h2>
+                    <p>${shop.location}</p>
+                    <p>${shop.hours}</p>
+                    <p>${shop.website}</p>
+                    <p>${shop.phonenumber}</p>
+                    
+                </div>
+            `
+        }).join('')
+    }
+</div>
+
+</body>
+</html>

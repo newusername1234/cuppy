@@ -98,6 +98,31 @@ async function allRoasters() {
     return roasters;
 }
 
+async function allCups(userid){
+    const cups = await db.any(`SELECT * from cups where userid=$1`, [userid]);
+    return cups;
+}
+
+async function allRoastersFull() {
+    const roasters = await db.any(`SELECT * from roasters`);
+    return roasters;
+}
+
+async function allBeansFull() {
+    const beans = await db.any(`SELECT * from beancoffee`);
+    return beans;
+}
+
+async function allGreenFull() {
+    const greens = await db.any(`SELECT * from greenCoffee`);
+    return greens;
+}
+
+async function allShopsFull(){
+    const shops = await db.any(`SELECT * from shops`);
+    return shops;
+}
+
 module.exports = {
     yeet,
     kobe,
@@ -115,5 +140,10 @@ module.exports = {
     allShops,
     allBeans,
     allGreen,
-    allRoasters
+    allRoasters,
+    allCups,
+    allRoastersFull,
+    allBeansFull,
+    allGreenFull,
+    allShopsFull
 }

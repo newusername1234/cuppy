@@ -107,4 +107,16 @@ router.get('/logout', (req, res)=>{
     });
 });
 
+router.get('/edit', (req, res)=>{
+    let { loggedIn } = req.session;
+    res.render('user/edit', {
+        locals: {
+            loggedIn
+        },
+        partials: {
+            nav: 'partials/nav'
+        }
+    })
+})
+
 module.exports = router;

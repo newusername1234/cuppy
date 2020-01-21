@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cups</title>
+    <style>
+        .content {
+            display: flex;
+        }
+        .cup-card {
+            outline: 2px solid forestgreen;
+            margin: 10px;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    ${nav}
+<div class="content">
+    ${
+        theCups.map(cup=>{
+            return `
+                <div class="cup-card">
+                    <a href="/update/cup/${cup.id}">Edit</a>
+                    <h2>name: ${cup.name}</h2>
+                    <p>cost: ${cup.cost}</p>
+                    <p>brewmethod: ${cup.brewmethod}</p>
+                    <p>coffeesize: ${cup.coffeesize}</p>
+                    <p>condiments: ${cup.condiments}</p>
+                    <p>didlike: ${cup.didlike}</p>
+                    <p>flavor: ${cup.flavor}</p>
+                    <p>aroma: ${cup.aroma}</p>
+                    <p>acidity: ${cup.acidity}</p>
+                    <p>sweetness: ${cup.sweetness}</p>
+                    <p>mouthfeel: ${cup.mouthfeel}</p>
+                    <p>comments: ${cup.comments}</p>
+                    <p>score: ${cup.score}</p>
+                    <p>shopid: ${cup.shopid}</p>
+                    <p>beancoffeeid: ${cup.beancoffeeid}</p>
+                </div>
+            `
+        }).join('')
+    }
+</div>
+
+</body>
+</html>

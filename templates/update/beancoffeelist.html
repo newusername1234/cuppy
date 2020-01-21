@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bean Coffee</title>
+    <style>
+        .content {
+            display: flex;
+        }
+        .cup-card {
+            outline: 2px solid forestgreen;
+            margin: 10px;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    ${nav}
+<div class="content">
+    ${
+        theBeans.map(bean=>{
+            let roast = theRoasterNameID.filter(x=>{
+                return x.id = bean.roasterid;
+            })[0].name;
+            let green = theGreenNameID.filter(x=>{
+                return x.id = bean.greencoffeeid;
+            })[0].name;
+            return `
+                <div class="cup-card">
+                    <a href="/update/beancoffee/${bean.id}">Edit</a>
+                    <h2>${bean.name}</h2>
+                    <p>Roast Profile: ${bean.roastprofile}</p>
+                    <p>${roast}</p>
+                    <p>${green}</p>
+                </div>
+            `
+        }).join('')
+    }
+</div>
+
+</body>
+</html>
