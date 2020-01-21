@@ -1,6 +1,15 @@
 <div class="nav">
-    <a href="/user/login">Login</a>
-    <a href="/user/signup">Signup</a>
+    ${
+        loggedIn ? 
+        `
+        <a href="/user/profile">Profile</a>
+        `
+        :
+        `
+        <a href="/user/login">Login</a>
+        <a href="/user/signup">Signup</a>
+        `
+    }
     <a href="/new/cup">New Cup</a>
     <a href="/new/beancoffee">New bean coffee</a>
     <a href="/new/shop">New Shop</a>

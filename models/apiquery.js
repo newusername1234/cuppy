@@ -14,8 +14,7 @@ async function allCupsAPI(apikey){
 async function oneCupAPI(apikey, cupID){
     const userid = await getUserFromAPIKey(apikey);
     const cupUser = await db.oneOrNone(`SELECT userid from cups where id=${cupID}`);
-    // console.log(userid);
-    // console.log(cupUser);
+
     if (userid.id == cupUser.userid){
         const cup = await oneCup(cupID);
         return cup;
@@ -26,11 +25,11 @@ async function oneCupAPI(apikey, cupID){
 async function oneCup(cupID){
     let cup = await db.oneOrNone(`SELECT * from cups where id=${cupID}`);
     delete cup.userid;
-    // console.log(cup);
+    // //console.log(cup);
     if(cup){
         if(cup.shopid){
             let shop = await db.one(`SELECT name from shops where id=${cup.shopid}`);
-            // console.log(shop);
+            // //console.log(shop);
             if(shop){
                 cup.shopname = shop.name;
             }
@@ -38,7 +37,7 @@ async function oneCup(cupID){
         delete cup.shopid;
         if(cup.beancoffeeid){
             let bean = await oneBean(cup.beancoffeeid);
-            // console.log(bean);
+            // //console.log(bean);
             delete bean.averageScore;
             delete bean.id;
             bean.beanname = bean.name;
@@ -46,7 +45,7 @@ async function oneCup(cupID){
             cup = Object.assign(cup, bean); 
         }
         delete cup.beancoffeeid;
-        // console.log(cup);
+        // //console.log(cup);
         return cup;
     }
     return {};
@@ -91,7 +90,7 @@ async function allBeans(){
 async function oneBean(beanID){
     let beans = await db.oneOrNone(`SELECT * from beanCoffee where id=${beanID}`);
     if (beans){
-        // console.log(beans);
+        // //console.log(beans);
         if(beans.roasterid){
             const roaster = await db.oneOrNone(`SELECT name from roasters where id=${beans.roasterid}`);
             beans.roaster = roaster.name;
@@ -103,7 +102,7 @@ async function oneBean(beanID){
             delete green.id;
             beans.greenname = green.name;
             delete green.name;
-            // console.log(green);
+            // //console.log(green);
             beans = Object.assign(beans, green);
         }
         let cupScores = await db.any(`SELECT score from cups where beanCoffeeID=${beanID}`);
@@ -181,6 +180,7 @@ async function getUserFromAPIKey(apikey){
     return user;
 }
 
+
 async function keyVerifier(apikey){
     const APICallLimit = 360;
     const APITimeLimit = (60*60*1000);
@@ -191,6 +191,7 @@ async function keyVerifier(apikey){
         //console.log(user);
         let { id, apicalls, apitimestamp } = user;
         apicalls +=1;
+
         if((parseInt(apitimestamp) + APITimeLimit) > Date.now()){
             if (apicalls > APICallLimit){
                 console.log('API CALL FAIL OVER CALL LIMIT');
@@ -204,6 +205,7 @@ async function keyVerifier(apikey){
         return 1;
     }
     return 2;
+
 }
 
 module.exports = {

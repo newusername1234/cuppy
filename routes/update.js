@@ -9,10 +9,11 @@ const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, one
 
 // kobe();
 
-
 // cup update page
 router.get('/cup/:id', async (req, res)=>{
+    let { loggedIn } = req.session;
 try {
+    console.log(loggedIn + '***********')
     const reqID = req.params.id;
     const theCup = await oneCup(reqID);
     const theShop = await oneShop(theCup.shopid);
@@ -22,24 +23,27 @@ try {
         theBean = 'Choose your bean'
     } else {
         theBean = theBean.name;
-    } console.log(theBean)
+    } 
+    // console.log(theBean)
     const shopItems = await allShops();
     const beanItems = await allBeans();
-    // console.log(theCup);
-    // console.log(theShop);
-    // console.log(theBean.name)
+    const cupShopid = theCup.shopid;
+    const cupBeanCoffeeid = theCup.beancoffeeid;
     res.render('update/cup', {
         locals: {
+            loggedIn,
             shopItems,
             beanItems,
             theCup,
             theShop,
+            cupShopid,
+            cupBeanCoffeeid,
             theBean
         },
         partials: {
             nav:'partials/nav',
-            shopdropdown: 'dropDowns/shopDrop',
-            beancoffeedropdown: 'dropDowns/beanCoffeeDrop'
+            shopdropdown: 'dropDowns/shopDropUpdate',
+            beancoffeedropdown: 'dropDowns/beanCoffeeDropUpdate'
         }
     })
 }
@@ -49,6 +53,7 @@ catch(err) {
 });
 
 router.post('/cup/:id', parseForm, async (req, res)=>{
+    let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theCup = await oneCup(reqID);
     // make the newDB a shallow copy of the cup
@@ -85,12 +90,14 @@ router.post('/cup/:id', parseForm, async (req, res)=>{
 
 // roaster update page
 router.get('/roaster/:id', async (req, res)=>{
+    let { loggedIn } = req.session;
 try {
     const reqID  = req.params.id;
     const theRoaster = await oneRoaster(reqID);
     const name = theRoaster.name;
     res.render('update/roaster', {
         locals: {
+            loggedIn,
             reqID,
             theRoaster,
             name
@@ -110,6 +117,7 @@ catch(err) {
 });
 
 router.post('/roaster/:id', parseForm, async (req, res)=>{
+    let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theRoaster = await oneRoaster(reqID);
     // console.log(theRoaster)
@@ -140,12 +148,14 @@ router.post('/roaster/:id', parseForm, async (req, res)=>{
 
 // green coffee update page
 router.get('/greencoffee/:id', async (req, res)=>{
+    let { loggedIn } = req.session;
     try{
         const reqID  = req.params.id;
         const theGreenCoffee = await oneGreenCoffee(reqID);
         // console.log(theGreenCoffee);
         res.render('update/greencoffee', {
             locals: {
+                loggedIn,
                 GC: theGreenCoffee
             },
             partials: {
@@ -159,6 +169,7 @@ router.get('/greencoffee/:id', async (req, res)=>{
 });
 
 router.post('/greencoffee/:id', parseForm, async (req, res)=>{
+    let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theGreenCoffee = await oneGreenCoffee(reqID);
     // console.log(req.body);
@@ -188,29 +199,36 @@ router.post('/greencoffee/:id', parseForm, async (req, res)=>{
 
 // bean coffee update page
 router.get('/beancoffee/:id', async (req, res)=>{
+    let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theBean = await oneBean(reqID);
     const greenCoffeeItems = await allGreen();
     const allRoasterItems = await allRoasters();
     const theRoaster = await oneRoaster(theBean.id)
     const theGreenCoffee = await oneGreenCoffee(theBean.id);
+    const beanRoasterid = theBean.roasterid;
+    const beanGreencoffeeid = theBean.greencoffeeid;
     res.render('update/beanCoffee', {
         locals: {
+            loggedIn,
             greenCoffeeItems,
             allRoasterItems,
             theBean,
             theRoaster,
-            theGreenCoffee
+            theGreenCoffee,
+            beanRoasterid,
+            beanGreencoffeeid
         },
         partials: {
             nav:'partials/nav',
-            greencoffeedropdown: 'dropDowns/greenCoffeeDrop',
-            roasterdropdown: 'dropDowns/roasterDrop'
+            greencoffeedropdown: 'dropDowns/greenCoffeeDropUpdate',
+            roasterdropdown: 'dropDowns/roasterDropUpdate'
         }
     });
 });
 
 router.post('/beancoffee/:id', parseForm, async (req, res)=>{
+    let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theBean = await oneBean(reqID);
     // make the newDB a shallow copy of the thebean
@@ -238,6 +256,7 @@ router.post('/beancoffee/:id', parseForm, async (req, res)=>{
 
 // shop update page
 router.get('/shop/:id', async (req, res)=>{
+    let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theShop = await oneShop(reqID);
 
@@ -246,12 +265,14 @@ router.get('/shop/:id', async (req, res)=>{
             nav:'partials/nav'
         },
         locals: {
+            loggedIn,
             theShop
         }
     });
 });
 
 router.post('/shop/:id', parseForm, async (req, res)=>{
+    let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theShop = await oneShop(reqID);
     // make newDB a shallow copy of shop
@@ -272,6 +293,11 @@ router.post('/shop/:id', parseForm, async (req, res)=>{
     const { id, name, location, phonenumber, hours, website, shopownerid } = newDB;
     updateShop(id, name, location, phonenumber, hours, website, shopownerid);
     res.redirect(`/update/shop/${reqID}`);
+})
+
+router.get('*', (req, res)=>{
+    let { loggedIn } = req.session;
+    res.send('404')
 })
 
 module.exports = router;

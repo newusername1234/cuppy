@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>New Roaster</title>
-    <style>
-        .current {
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
     ${nav}
@@ -18,26 +13,22 @@
         <div class="input-contain">
             <div class="input-item">
                 <label for="name">Name: </label>
-                <p class="current">${name}</p>
-                <input type="text" name="name" placeholder="New Name">
+                <input type="text" name="name" value='${name}'>
                 <br>
             </div>
             <div class="input-item">
                 <label for="location">Location: </label>
-                <p class="current">${theRoaster.location}</p>
-                <input type="text" name="location" placeholder="New Location">
+                <input type="text" name="location" value='${theRoaster.location}'>
                 <br>
             </div>
             <div class="input-item">
                 <label for="phonenumber">Phone number: </label>
-                <p class="current">${theRoaster.phonenumber}</p>
-                <input type="text" name="phonenumber" placeholder="New Phone Number">
+                <input type="text" name="phonenumber" value='${theRoaster.phonenumber}'>
                 <br>
             </div>
             <div class="input-item">
                 <label for="website">Website: </label>
-                <p class="current">${theRoaster.website}</p>
-                <input type="text" name="website" placeholder="New Website">
+                <input type="text" name="website" value='${theRoaster.website}'>
                 <br>
             </div>
             <div class="input-item">
