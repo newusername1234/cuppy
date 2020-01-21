@@ -78,6 +78,12 @@ router.post('/signup', parseForm, async (req, res) => {
     }
 });
 
+
+//router.use( check for login)
+
+
+
+
 router.get('/cups', async (req, res) => {
     const userCups = await user.getCups(req.session.user.id);
     res.send(userCups);

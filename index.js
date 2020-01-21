@@ -49,12 +49,6 @@ const helmet = require('helmet');
 
 // ////////////////////////////////////////////////////////////////////
 // routes
-app.use('/api', apiRouter);
-app.use('/new', newRouter);
-app.use('/user', userRouter);
-app.use('/update', updateRouter);
-
-
 
 app.get('/', (req, res) => {
     let { loggedIn } = req.session;
@@ -67,6 +61,26 @@ app.get('/', (req, res) => {
         }
     });
 });
+
+
+app.use('/api', apiRouter);
+app.use('/user', userRouter);
+
+// app.use('/*', (res, req, next) =>{
+//     console.log(req.session);
+//     if (req.session){
+//         console.log("if the if is true");
+//         next();
+//     } else {
+//         console.log("if the if is false");
+//         // req.redirect('/');
+//     }
+// });
+
+app.use('/new', newRouter);
+app.use('/update', updateRouter);
+
+
 
 app.use(error404);
 
