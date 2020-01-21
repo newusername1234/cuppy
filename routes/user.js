@@ -78,6 +78,14 @@ router.post('/signup', parseForm, async (req, res) => {
     }
 });
 
+router.use('/*', (req, res, next) =>{
+    if (!req.session.loggedIn){
+        res.redirect('/');
+    } else {
+        next();
+    }
+});
+
 router.get('/cups', async (req, res) => {
     const userCups = await user.getCups(req.session.user.id);
     res.send(userCups);

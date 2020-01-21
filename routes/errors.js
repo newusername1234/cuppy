@@ -9,7 +9,12 @@ function error404(req, res, next){
     return next(err);
 }
 
-function handleRouteErrors(error, req, res, next){
+function handleRouteErrors(error,req,res,next){
+    if (error.stack) console.error(error.stack);
+    res.status(error.status || 500).redirect('/');
+}
+
+function handleRouteErrorsAPI(error, req, res, next){
     if (error.stack) console.error(error.stack);
     res.status(error.status || 500).json({error: error.message});
 }
@@ -18,5 +23,6 @@ function handleRouteErrors(error, req, res, next){
 module.exports = {
     makeError,
     error404,
-    handleRouteErrors
+    handleRouteErrors,
+    handleRouteErrorsAPI
 }

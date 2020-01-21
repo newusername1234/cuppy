@@ -8,6 +8,7 @@ const apiRouter = require('./routes/api');
 const userRouter = require('./routes/user');
 const newRouter = require('./routes/new');
 const updateRouter = require('./routes/update');
+const { makeError, error404, handleRouteErrors } = require('./routes/errors');
 
 const path = require('path');
 
@@ -48,12 +49,6 @@ const helmet = require('helmet');
 
 // ////////////////////////////////////////////////////////////////////
 // routes
-app.use('/api', apiRouter);
-app.use('/new', newRouter);
-app.use('/user', userRouter);
-app.use('/update', updateRouter);
-
-
 
 app.get('/', (req, res) => {
     let { loggedIn } = req.session;
@@ -66,6 +61,27 @@ app.get('/', (req, res) => {
         }
     });
 });
+
+
+app.use('/api', apiRouter);
+app.use('/user', userRouter);
+
+app.use('/*', (req, res, next) =>{
+    if (!req.session.loggedIn){
+        res.redirect('/');
+    } else {
+        next();
+    }
+});
+
+app.use('/new', newRouter);
+app.use('/update', updateRouter);
+
+
+
+app.use(error404);
+
+app.use(handleRouteErrors);
 
 server.listen(PORT, () => {
     console.log(`server listening at ${PORT}`);

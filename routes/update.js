@@ -295,9 +295,4 @@ router.post('/shop/:id', parseForm, async (req, res)=>{
     res.redirect(`/update/shop/${reqID}`);
 })
 
-router.get('*', (req, res)=>{
-    let { loggedIn } = req.session;
-    res.send('404')
-})
-
 module.exports = router;

@@ -1,14 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const api = require('../models/apiquery');
-const { makeError, error404, handleRouteErrors } = require('./errors');
+const { makeError, error404, handleRouteErrorsAPI } = require('./errors');
 router.get('/:apikey/testing', (req, res)=>{
     res.send('yeet');
 });
 
 //needs to go to a API documentation page
 router.get('/', (req,res)=>{
-    res.send('API pages')
+    let { loggedIn } = req.session;
+    res.render('api', {
+        locals: {
+            loggedIn
+        },
+        partials: {
+            nav: '/partials/nav'
+        }
+    });
 });
 
 router.use('/:apikey', async (req, res, next)=>{
@@ -94,6 +102,6 @@ router.get('/:apikey/green/:id(\\d+)', async (req,res)=>{
 
 router.use(error404);
 
-router.use(handleRouteErrors);
+router.use(handleRouteErrorsAPI);
 
 module.exports = router;
