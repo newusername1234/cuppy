@@ -7,7 +7,7 @@ router.get('/:apikey/testing', (req, res)=>{
 });
 
 //needs to go to a API documentation page
-router.get('/:apikey/', (req,res)=>{
+router.get('/', (req,res)=>{
     res.send('API pages')
 });
 

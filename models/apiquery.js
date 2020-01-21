@@ -181,6 +181,27 @@ async function getUserFromAPIKey(apikey){
     return user;
 }
 
+function convertSQLDateToJS(sqlDate){
+
+    let dateTimeParts= sqlDate.split(/[- :]/);
+    dateTimeParts[1]--;
+    console.log("DATETIMEPARTS = " + dateTimeParts);
+    const JSDate = new Date(...dateTimeParts);
+
+    console.log("JSDATE = " + JSDate);
+    let JSDateH = new Date(JSDate.setTime(JSDate.getTime() + (60*60*1000)));
+    console.log("JSDATE + 1 HOUR =" + JSDateH);
+
+    
+    let JSDateHvO = JSDateH.valueOf();
+    let JSDatevO = JSDate.valueOf();
+    console.log("JSDATEHv0 = " + JSDateHvO);
+    console.log("JSDATEv0 = " + JSDatevO);
+    let trueFalse = (JSDateHvO > JSDatevO);
+    console.log("IS JSDateH > JSDate " + trueFalse );
+    return JSDate;
+}
+
 async function keyVerifier(apikey){
     const apikeys = await db.any('SELECT apikey from users');
     let apiarray = apikeys.map(x => x.apikey);
@@ -188,18 +209,34 @@ async function keyVerifier(apikey){
         const user = await db.one(`SELECT * from users where apikey='${apikey}'`);
         let { id, apicalls, apitimestamp } = user;
         apicalls +=1;
-        const tally = await db.any(`UPDATE users SET apicalls=${apicalls}, apitimestamp='${apitimestamp.toISOString()}' WHERE id=${id}`);
+        console.log(apitimestamp.split(/[- :]/));
+        // console.log(apitimestamp.toString());
+        // let apiHour = apitimestamp.toISOString().slice(11,12);
+        // let currentHour = new Date;
+        // currentHour = currentHour.getHours();
+        // console.log(apiHour);
+        // console.log(currentHour);
+        // console.log("apitimestamp = " + apitimestamp);
+        // let thingy =new Date().toISOString().slice(0, 19).replace('T', ' ');
+        // console.log("new Date thingy = " + thingy);
+        // //if(apitimestamp + 1 hour < currentTime){
+        //     apicalls = 1;
+        //     apitimestamp = currentTime;
+        //}
+        const tally = await db.any(`UPDATE users SET apicalls=${apicalls}, apitimestamp='${apitimestamp}' WHERE id=${id}`);
         return true;
     }
     return false;
 }
 
 async function main(){
-    let thingy = await getUserFromAPIKey("292100f9-76cb-4a63-be7b-2ea67e901c09");
+    let thingy = await keyVerifier("292100f9-76cb-4a63-be7b-2ea67e901c09");
     console.log(thingy);
 }
 
 main();
+
+//convertSQLDateToJS('2020-01-20 20:29:40');
 
 
 
