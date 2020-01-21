@@ -194,16 +194,16 @@ async function keyVerifier(apikey){
         if((parseInt(apitimestamp) + APITimeLimit) > Date.now()){
             if (apicalls > APICallLimit){
                 console.log('API CALL FAIL OVER CALL LIMIT');
-                return false;
+                return 3;
             }
             const tally = await db.any(`UPDATE users SET apicalls=${apicalls} WHERE id=${id}`);
-            return true;
+            return 1;
         }
         apicalls = 1;
         const tally = await db.any(`UPDATE users SET apicalls=${apicalls}, apitimestamp='${Date.now()}' WHERE id=${id}`);
-        return true;
+        return 1;
     }
-    return false;
+    return 2;
 }
 
 async function main(){

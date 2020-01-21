@@ -11,20 +11,21 @@ router.get('/', (req,res)=>{
     res.send('API pages')
 });
 
-
 router.use('/:apikey', async (req, res, next)=>{
     let { apikey } = req.params;
     let apicheck = await api.keyVerifier(apikey);
     console.log(apicheck);
-    if (apicheck){
+    if (apicheck == 1){
         console.log("API CHECK PASS");
         next();
-    } else {
+    } else if (apicheck == 2) {
         console.log("API CHECK FAIL");
         res.json({error:"invalid API key"});
+    } else if (apicheck == 3){
+        console.log("API CHECK FAIL");
+        res.json({error:"API key over rate limit"});
     }
 });
-
 
 router.get('/:apikey/cups', async (req,res)=>{
         const cups = await api.allCupsAPI(req.params.apikey);
