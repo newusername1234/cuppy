@@ -22,24 +22,26 @@ try {
         theBean = 'Choose your bean'
     } else {
         theBean = theBean.name;
-    } console.log(theBean)
+    } 
+    // console.log(theBean)
     const shopItems = await allShops();
     const beanItems = await allBeans();
-    // console.log(theCup);
-    // console.log(theShop);
-    // console.log(theBean.name)
+    const cupShopid = theCup.shopid;
+    const cupBeanCoffeeid = theCup.beancoffeeid;
     res.render('update/cup', {
         locals: {
             shopItems,
             beanItems,
             theCup,
             theShop,
+            cupShopid,
+            cupBeanCoffeeid,
             theBean
         },
         partials: {
             nav:'partials/nav',
-            shopdropdown: 'dropDowns/shopDrop',
-            beancoffeedropdown: 'dropDowns/beanCoffeeDrop'
+            shopdropdown: 'dropDowns/shopDropUpdate',
+            beancoffeedropdown: 'dropDowns/beanCoffeeDropUpdate'
         }
     })
 }

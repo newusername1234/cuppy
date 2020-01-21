@@ -14,8 +14,8 @@ async function allCupsAPI(apikey){
 async function oneCupAPI(apikey, cupID){
     const userid = await getUserFromAPIKey(apikey);
     const cupUser = await db.oneOrNone(`SELECT userid from cups where id=${cupID}`);
-    console.log(userid);
-    console.log(cupUser);
+    //console.log(userid);
+    //console.log(cupUser);
     if (userid.id == cupUser.userid){
         const cup = await oneCup(cupID);
         return cup;
@@ -26,11 +26,11 @@ async function oneCupAPI(apikey, cupID){
 async function oneCup(cupID){
     let cup = await db.oneOrNone(`SELECT * from cups where id=${cupID}`);
     delete cup.userid;
-    // console.log(cup);
+    // //console.log(cup);
     if(cup){
         if(cup.shopid){
             let shop = await db.one(`SELECT name from shops where id=${cup.shopid}`);
-            // console.log(shop);
+            // //console.log(shop);
             if(shop){
                 cup.shopname = shop.name;
             }
@@ -38,7 +38,7 @@ async function oneCup(cupID){
         delete cup.shopid;
         if(cup.beancoffeeid){
             let bean = await oneBean(cup.beancoffeeid);
-            // console.log(bean);
+            // //console.log(bean);
             delete bean.averageScore;
             delete bean.id;
             bean.beanname = bean.name;
@@ -46,7 +46,7 @@ async function oneCup(cupID){
             cup = Object.assign(cup, bean); 
         }
         delete cup.beancoffeeid;
-        // console.log(cup);
+        // //console.log(cup);
         return cup;
     }
     return {};
@@ -91,7 +91,7 @@ async function allBeans(){
 async function oneBean(beanID){
     let beans = await db.oneOrNone(`SELECT * from beanCoffee where id=${beanID}`);
     if (beans){
-        // console.log(beans);
+        // //console.log(beans);
         if(beans.roasterid){
             const roaster = await db.oneOrNone(`SELECT name from roasters where id=${beans.roasterid}`);
             beans.roaster = roaster.name;
@@ -103,7 +103,7 @@ async function oneBean(beanID){
             delete green.id;
             beans.greenname = green.name;
             delete green.name;
-            // console.log(green);
+            // //console.log(green);
             beans = Object.assign(beans, green);
         }
         let cupScores = await db.any(`SELECT score from cups where beanCoffeeID=${beanID}`);
@@ -185,20 +185,20 @@ function convertSQLDateToJS(sqlDate){
 
     let dateTimeParts= sqlDate.split(/[- :]/);
     dateTimeParts[1]--;
-    console.log("DATETIMEPARTS = " + dateTimeParts);
+    //console.log("DATETIMEPARTS = " + dateTimeParts);
     const JSDate = new Date(...dateTimeParts);
 
-    console.log("JSDATE = " + JSDate);
+    //console.log("JSDATE = " + JSDate);
     let JSDateH = new Date(JSDate.setTime(JSDate.getTime() + (60*60*1000)));
-    console.log("JSDATE + 1 HOUR =" + JSDateH);
+    //console.log("JSDATE + 1 HOUR =" + JSDateH);
 
     
     let JSDateHvO = JSDateH.valueOf();
     let JSDatevO = JSDate.valueOf();
-    console.log("JSDATEHv0 = " + JSDateHvO);
-    console.log("JSDATEv0 = " + JSDatevO);
+    //console.log("JSDATEHv0 = " + JSDateHvO);
+    //console.log("JSDATEv0 = " + JSDatevO);
     let trueFalse = (JSDateHvO > JSDatevO);
-    console.log("IS JSDateH > JSDate " + trueFalse );
+    //console.log("IS JSDateH > JSDate " + trueFalse );
     return JSDate;
 }
 
@@ -209,16 +209,16 @@ async function keyVerifier(apikey){
         const user = await db.one(`SELECT * from users where apikey='${apikey}'`);
         let { id, apicalls, apitimestamp } = user;
         apicalls +=1;
-        console.log(apitimestamp.split(/[- :]/));
-        // console.log(apitimestamp.toString());
+        //console.log(apitimestamp.split(/[- :]/));
+        // //console.log(apitimestamp.toString());
         // let apiHour = apitimestamp.toISOString().slice(11,12);
         // let currentHour = new Date;
         // currentHour = currentHour.getHours();
-        // console.log(apiHour);
-        // console.log(currentHour);
-        // console.log("apitimestamp = " + apitimestamp);
+        // //console.log(apiHour);
+        // //console.log(currentHour);
+        // //console.log("apitimestamp = " + apitimestamp);
         // let thingy =new Date().toISOString().slice(0, 19).replace('T', ' ');
-        // console.log("new Date thingy = " + thingy);
+        // //console.log("new Date thingy = " + thingy);
         // //if(apitimestamp + 1 hour < currentTime){
         //     apicalls = 1;
         //     apitimestamp = currentTime;
@@ -231,7 +231,7 @@ async function keyVerifier(apikey){
 
 async function main(){
     let thingy = await keyVerifier("292100f9-76cb-4a63-be7b-2ea67e901c09");
-    console.log(thingy);
+    //console.log(thingy);
 }
 
 main();

@@ -1,0 +1,22 @@
+<label for="shopid">Shop you got it from: </label>
+<select name="shopid">
+${
+    shopItems.map(obj=>{
+        if(obj.id == cupShopid) {
+            const { name, id } = obj;
+            return `
+            <option value=${id} selected>${name}</option>
+            `
+        } else {
+            const { name, id } = obj;
+            return `
+            <option value=${id}>${name}</option>
+            `
+        }
+    })   
+}
+</select>
+<p>Don't see your shop? 
+    <br>
+Add yours <a href="/new/shop">here!</a>
+</p>

@@ -1,0 +1,22 @@
+<label for="beancoffeeid">Bean Coffee: </label>
+<select name="beancoffeeid">
+${
+    beanItems.map(obj=>{
+        if(obj.id = cupBeanCoffeeid) {
+            const { name, id } = obj;
+            return `
+            <option value=${id} selected>${name}</option>
+            `
+        } else {
+            const { name, id } = obj;
+            return `
+            <option value=${id}>${name}</option>
+            `
+        }
+    })   
+}
+</select>
+<p>Don't see your bean coffee? 
+    <br>
+Add yours <a href="/new/beancoffee">here!</a>
+</p>
