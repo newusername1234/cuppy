@@ -14,8 +14,8 @@ async function allCupsAPI(apikey){
 async function oneCupAPI(apikey, cupID){
     const userid = await getUserFromAPIKey(apikey);
     const cupUser = await db.oneOrNone(`SELECT userid from cups where id=${cupID}`);
-    console.log(userid);
-    console.log(cupUser);
+    // console.log(userid);
+    // console.log(cupUser);
     if (userid.id == cupUser.userid){
         const cup = await oneCup(cupID);
         return cup;
@@ -188,7 +188,7 @@ async function keyVerifier(apikey){
     let apiarray = apikeys.map(x => x.apikey);
     if(apiarray.includes(apikey)){
         const user = await db.one(`SELECT * from users where apikey='${apikey}'`);
-        console.log(user);
+        //console.log(user);
         let { id, apicalls, apitimestamp } = user;
         apicalls +=1;
         if((parseInt(apitimestamp) + APITimeLimit) > Date.now()){
@@ -205,18 +205,6 @@ async function keyVerifier(apikey){
     }
     return 2;
 }
-
-async function main(){
-    let thingy = await keyVerifier("292100f9-76cb-4a63-be7b-2ea67e901c09");
-    console.log(thingy);
-}
-
-
-main();
-
-//convertSQLDateToJS('2020-01-20 20:29:40');
-
-
 
 module.exports = {
     oneCup,
