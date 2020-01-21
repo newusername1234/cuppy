@@ -66,16 +66,13 @@ app.get('/', (req, res) => {
 app.use('/api', apiRouter);
 app.use('/user', userRouter);
 
-// app.use('/*', (res, req, next) =>{
-//     console.log(req.session);
-//     if (req.session){
-//         console.log("if the if is true");
-//         next();
-//     } else {
-//         console.log("if the if is false");
-//         // req.redirect('/');
-//     }
-// });
+app.use('/*', (req, res, next) =>{
+    if (!req.session.loggedIn){
+        res.redirect('/');
+    } else {
+        next();
+    }
+});
 
 app.use('/new', newRouter);
 app.use('/update', updateRouter);
