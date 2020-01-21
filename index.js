@@ -56,7 +56,11 @@ app.use('/update', updateRouter);
 
 
 app.get('/', (req, res) => {
+    let { loggedIn } = req.session;
     res.render('home', {
+        locals: {
+            loggedIn
+        },
         partials: {
             nav: '/partials/nav'
         }
