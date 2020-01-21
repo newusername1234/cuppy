@@ -30,7 +30,7 @@ app.use(session({
 app.use(express.static(path.join(__dirname, "public")));
 function isLoggedIn(req, res, next) {
     if(!req.session.user){
-        console.log('0000000000000000000000000')
+        // res.redirect('/')
     }
     req.session.loggedIn = !!(req.session && req.session.user);
     next()
