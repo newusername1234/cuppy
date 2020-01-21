@@ -1,9 +1,11 @@
 insert into roasters (name, location, phoneNumber, website)
 VALUES
+('Not roasted cofee', 'everywhere','555-555-5555', 'none'),
 ('Kula coffee roasters', 'ATV', '404-111-9876', 'kulacoffee.com');
 
 insert into greenCoffee (name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle)
 VALUES
+('Not actually coffee','No Country', 'No Region', 'No Farm', 'No Farmer', 0, 'no varietal', 'no process'), 
 ('Finca La Gaju','Rwanda', 'Coko-Gaju', 'finca la Gaju' ,'Farmer Joe', 1800, 'bourbon', 'washed');
 
 insert into users (username, firstName, lastName, email, phoneNumber, hash, apikey, apicalls, apitimestamp)
@@ -20,6 +22,7 @@ VALUES
 
 insert into beanCoffee (name, roastProfile, roasterID, greenCoffeeID)
 VALUES
+('not actually coffee', 'not roasted', 1,1),
 ('Rwanda coko-gaju', 'light', 1, 1);
 
 insert into cups (userID, name, dateOrdered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, beanCoffeeID)
