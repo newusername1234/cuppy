@@ -9,7 +9,7 @@ function yeet() {
 const kobe = () => console.log('kobe');
 
 async function oneBean(beanID){
-    let beans = await db.oneOrNone(`SELECT * from beanCoffee where id=${beanID}`);
+    let beans = await db.oneOrNone(`SELECT * from beancoffee where id=${beanID}`);
     return beans;
 }
 
@@ -84,12 +84,12 @@ async function allShops(){
 }
 
 async function allBeans(){
-    const beans = await db.any(`SELECT id, name from beanCoffee`);
+    const beans = await db.any(`SELECT id, name from beancoffee`);
     return beans;    
 }
 
 async function allGreen() {
-    const greens = await db.any(`SELECT id, name from greenCoffee`);
+    const greens = await db.any(`SELECT id, name from greencoffee`);
     return greens;
 }
 
@@ -114,7 +114,7 @@ async function allBeansFull() {
 }
 
 async function allGreenFull() {
-    const greens = await db.any(`SELECT * from greenCoffee`);
+    const greens = await db.any(`SELECT * from greencoffee`);
     return greens;
 }
 
