@@ -88,11 +88,24 @@ router.use('/*', (req, res, next) =>{
 
 router.get('/cups', async (req, res) => {
     const userCups = await user.getCups(req.session.user.id);
-    res.send(userCups);
+    let { loggedIn } = req.session;
+    const { username } = req.session.user;
+    // res.send(userCups);
+    res.render('user/cups', {
+        locals: {
+            loggedIn,
+            username,
+            userCups
+        },
+        partials: {
+            nav: 'partials/nav'
+        }
+    });
 });
 
 router.get('/profile', async (req, res) => {
     let { loggedIn } = req.session;
+    const username = req.session.user.name;
     let apiKey = await getApiKey(req.session.user.id);
     if (loggedIn === false) {
         res.send('please <a href="/user/signup">sign up</a> or <a href="/user/login"> log in</a> ;)');

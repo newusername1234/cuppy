@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/images/3.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>${username}'s Cups</title>
+</head>
+<body>
+    ${nav}
+    ${userCups.map(cup => `
+        <h1>${cup.coffeesize} ${cup.name}</h1>
+        <img src="/images/${cup.score}.jpg" alt="${cup.score} stars">
+        <p>${cup.comments}</p>
+        <li>Date Ordered: ${cup.dateordered}</li>
+        <li>Roast Date: ${cup.roastdate}</li>
+        <li>Cost: ${cup.cost}</li>
+        <li>Brew Method: ${cup.brewmethod}</li>
+        <li>Condiments: ${cup.condiments}</li>
+        <li>Liked it?: ${cup.didlike}</li>
+        <li>Flavor: ${cup.flavor}</li>
+        <li>Aroma: ${cup.aroma}</li>
+        <li>Acidity: ${cup.acidity}</li>
+        <li>Sweetness: ${cup.sweetness}</li>
+        <li>Mouth Feel: ${cup.mouthfeel}</li>
+        <li>Shop Name: ${cup.shopname}</li>
+        <li>Roast Profile: ${cup.roastprofile}</li>
+        <li>Roaster: ${cup.roaster}</li>
+        <li>Green Name: ${cup.greenname}</li>
+        <li>Country of Origin: ${cup.countryoforigin}</li>
+        <li>Region of Origin: ${cup.regionoforigin}</li>
+        <li>Farm: ${cup.farm}</li>
+        <li>Farmer: ${cup.farmer}</li>
+        <li>Elevation: ${cup.elevation}</li>
+        <li>Varietal: ${cup.varietal}</li>
+        <li>Processing Style: ${cup.processingstyle}</li>
+        <li>Bean Name: ${cup.beanname}</li>
+    `).join('')}
+</body>
+</html>
+
