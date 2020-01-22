@@ -10,7 +10,9 @@
 </head>
 <body>
     ${nav}
+    <div class="content">
     ${userCups.map(cup => `
+        <div class="cup-card">
         <h1>${cup.coffeesize} ${cup.name}</h1>
         <img src="/images/${cup.score}.jpg" alt="Score: ${cup.score}">
         <p>${cup.comments}</p>
@@ -37,7 +39,9 @@
         <li>Varietal: ${cup.varietal}</li>
         <li>Processing Style: ${cup.processingstyle}</li>
         <li>Bean Name: ${cup.beanname}</li>
+    </div>
     `).join('')}
+</div>
 </body>
 </html>
 
