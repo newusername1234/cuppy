@@ -11,7 +11,7 @@ function error404(req, res, next){
 
 function handleRouteErrors(error,req,res,next){
     if (error.stack) console.error(error.stack);
-    res.status(error.status || 500).redirect('/');
+    res.status(error.status || 500).redirect('/404');
 }
 
 function handleRouteErrorsAPI(error, req, res, next){

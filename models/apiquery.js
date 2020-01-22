@@ -14,12 +14,14 @@ async function allCupsAPI(apikey){
 async function oneCupAPI(apikey, cupID){
     const userid = await getUserFromAPIKey(apikey);
     const cupUser = await db.oneOrNone(`SELECT userid from cups where id=${cupID}`);
-
-    if (userid.id == cupUser.userid){
-        const cup = await oneCup(cupID);
-        return cup;
+    if(cupUser){
+        if (userid.id == cupUser.userid){
+            const cup = await oneCup(cupID);
+            return cup;
+        }
+        return {error: "access restricted"};
     }
-    return {error: "access restricted"};
+    return {};
 }
 
 async function oneCup(cupID){
@@ -129,11 +131,17 @@ async function oneRoaster(roasterID){
     
     if (roaster){
         let shops = await db.any(`SELECT shopID from roasters_shops WHERE roasterID=${roasterID}`);
-        if (shops != []){
-            let shopstring = shops.map(y => `id=${y.shopid}`).join(' OR ');
-            let newShops = await db.any(`select name from shops where ${shopstring}`);
-            roaster.atshops = newShops.map(z => z.name);
-        }
+        console.log(shops);
+        console.log(shops[0]);
+        if(shops){
+            if (shops[0]){
+                let shopstring = shops.map(y => `id=${y.shopid}`).join(' OR ');
+                let newShops = await db.any(`select name from shops where ${shopstring}`);
+                roaster.atshops = newShops.map(z => z.name);
+            } else {
+                roaster.atshops = [];       
+            }
+        }   
         let beans = await db.any(`SELECT id from beanCoffee where roasterID=${roasterID}`);
         beans = beans.map(x=>x.id);
         let cupScores = [];

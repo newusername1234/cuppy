@@ -37,13 +37,14 @@ function isLoggedIn(req, res, next) {
     next()
 }
 app.use(isLoggedIn)
-app.use((req, res, next) =>  {
-    // console.log('***********************');
-    console.log(req.session);
-    // console.log('***********************');
 
-    next();
-});
+// app.use((req, res, next) =>  {
+//     // console.log('***********************');
+//     console.log(req.session);
+//     // console.log('***********************');
+
+//     next();
+// });
 
 const helmet = require('helmet');
 
@@ -62,13 +63,24 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/404', (req, res) => {
+    let { loggedIn } = req.session;
+    res.render('404', {
+        locals: {
+            loggedIn
+        },
+        partials: {
+            nav: '/partials/nav'
+        }
+    });
+});
 
 app.use('/api', apiRouter);
 app.use('/user', userRouter);
 
 app.use('/*', (req, res, next) =>{
     if (!req.session.loggedIn){
-        res.redirect('/');
+        res.redirect('/404');
     } else {
         next();
     }
