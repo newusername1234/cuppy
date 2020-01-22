@@ -5,15 +5,100 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
-const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, oneCup, updateRoaster, updateShop, updateBeancoffee, updateCup, updateGreenCoffee, allShops, allBeans, allGreen, allRoasters } = require('../models/updatequery');
+const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, oneCup, updateRoaster, updateShop, updateBeancoffee, updateCup, updateGreenCoffee, allShops, allBeans, allGreen, allRoasters, allCups, allRoastersFull, allBeansFull, allGreenFull,allShopsFull } = require('../models/updatequery');
 
 // kobe();
+router.get('/roaster', async (req, res)=>{
+    let { loggedIn } = req.session;
+    let theRoasters = await allRoastersFull();
+    console.log(theRoasters)
+    res.render('update/roasterlist', {
+        locals: {
+            loggedIn,
+            theRoasters
+        }, 
+        partials: {
+            nav: 'partials/nav'
+        }
+    })
+
+})
+
+router.get('/beancoffee', async (req, res)=>{
+    let { loggedIn } = req.session;
+    let theBeans = await allBeansFull();
+    const theRoasterNameID = await allRoasters();
+    const theGreenNameID = await allGreen();
+    console.log(theRoasterNameID)
+    console.log(theBeans);
+    console.log(theGreenNameID)
+    res.render('update/beancoffeelist', {
+        locals: {
+            loggedIn,
+            theBeans,
+            theRoasterNameID,
+            theGreenNameID
+            // from roaster, get one name based on theBeans.roasterid
+        }, 
+        partials: {
+            nav: 'partials/nav'
+        }
+    })
+})
+
+router.get('/greencoffee', async (req, res)=>{
+    let { loggedIn } = req.session;
+    let fullgreen = await allGreenFull();
+    console.log(fullgreen);
+    res.render('update/greencoffeelist', {
+        locals: {
+            loggedIn,
+            fullgreen
+        }, 
+        partials: {
+            nav: 'partials/nav'
+        }
+    })
+
+})
+
+router.get('/shop', async (req, res)=>{
+    let { loggedIn } = req.session;
+    let theShops = await allShops();
+    let fullShops = await allShopsFull();
+    console.log(fullShops)
+    res.render('update/shoplist', {
+        locals: {
+            loggedIn,
+            theShops,
+            fullShops
+        }, 
+        partials: {
+            nav: 'partials/nav'
+        }
+    })
+
+})
+
+router.get('/cups', async (req, res)=>{
+    let { loggedIn } = req.session;
+    let theCups = await allCups(req.session.user.id);
+    console.log(theCups)
+    res.render('update/cuplist', {
+        locals: {
+            loggedIn,
+            theCups
+        }, 
+        partials: {
+            nav: 'partials/nav'
+        }
+    })
+})
 
 // cup update page
 router.get('/cup/:id', async (req, res)=>{
     let { loggedIn } = req.session;
 try {
-    console.log(loggedIn + '***********')
     const reqID = req.params.id;
     const theCup = await oneCup(reqID);
     const theShop = await oneShop(theCup.shopid);

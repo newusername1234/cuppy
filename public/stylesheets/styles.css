@@ -10,7 +10,7 @@ img {
 
 .nav {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(9, 1fr);
     margin-bottom: 1%;
 }
 

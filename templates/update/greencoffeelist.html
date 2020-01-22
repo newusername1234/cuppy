@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Green Coffee</title>
+    <style>
+        .content {
+            display: flex;
+        }
+        .cup-card {
+            outline: 2px solid forestgreen;
+            margin: 10px;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    ${nav}
+<div class="content">
+    ${
+        fullgreen.map(green=>{
+            return `
+                <div class="cup-card">
+                    <a href="/update/greencoffee/${green.id}">Edit</a>
+                    <h2>${green.name}</h2>
+                    <p>${green.countryoforigin}</p>
+                    <p>${green.regionoforigin}</p>
+                    <p>${green.farm}</p>
+                    <p>${green.farmer}</p>
+                    <p>${green.elevation}</p>
+                    <p>${green.varietal}</p>
+                    <p>${green.processingstyle}</p>
+                </div>
+            `
+        }).join('')
+    }
+</div>
+
+</body>
+</html>
