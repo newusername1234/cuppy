@@ -1,4 +1,3 @@
-
 How to use Cuppy coffee API
 
 Cuppy coffee API is built on a database of Roasted Coffee, Coffee Shops, Coffee Roasters, Green Coffee, and User reviews of individual cups of coffee from these producers from coffee seed, to coffee cup.
