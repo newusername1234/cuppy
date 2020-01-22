@@ -4,7 +4,7 @@ const db = require('./connection');
 // const yeet = () => console.log('yeet');
 function yeet() {
     console.log('Yeet');
-}
+} 
 
 const kobe = () => console.log('kobe');
 
