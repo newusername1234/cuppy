@@ -12,7 +12,7 @@
     ${nav}
     ${userCups.map(cup => `
         <h1>${cup.coffeesize} ${cup.name}</h1>
-        <img src="/images/${cup.score}.jpg" alt="${cup.score} stars">
+        <img src="/images/${cup.score}.jpg" alt="Score: ${cup.score}">
         <p>${cup.comments}</p>
         <li>Date Ordered: ${cup.dateordered}</li>
         <li>Roast Date: ${cup.roastdate}</li>
