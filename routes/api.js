@@ -6,7 +6,6 @@ router.get('/:apikey/testing', (req, res)=>{
     res.send('yeet');
 });
 
-//needs to go to a API documentation page
 router.get('/', (req,res)=>{
     let { loggedIn } = req.session;
     res.render('api', {
@@ -40,7 +39,7 @@ router.get('/:apikey/cups', async (req,res)=>{
         res.json(cups);
 });
 
-//returns full info for given shop, and all roasters using/used
+//returns full info for given reviewed cup, if userID matches APIKey, else, returns
 router.get('/:apikey/cups/:id(\\d+)', async (req,res)=> {
     let { apikey,id } = req.params;
     const cup = await api.oneCupAPI(apikey, id);
