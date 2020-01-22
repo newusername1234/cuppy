@@ -1,1 +1,1 @@
-coffee shitz
+Cuppy, the Seed to Cup coffee API.
