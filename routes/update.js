@@ -293,7 +293,7 @@ router.get('/beancoffee/:id', async (req, res)=>{
     const theGreenCoffee = await oneGreenCoffee(theBean.id);
     const beanRoasterid = theBean.roasterid;
     const beanGreencoffeeid = theBean.greencoffeeid;
-    res.render('update/beanCoffee', {
+    res.render('update/beancoffee', {
         locals: {
             loggedIn,
             greenCoffeeItems,
