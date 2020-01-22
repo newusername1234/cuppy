@@ -27,12 +27,13 @@ VALUES
 
 insert into cups (userID, name, dateOrdered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, beanCoffeeID)
 VALUES
-(1, 'chai', '2020-01-02', '2020-01-07', '4.5', '', '12oz', 'Almond Milk, Splenda', 'y', 'spicy', 'farts', 'lemon', 'honey', 'milky', 'its a chai, it was fine', 5, 1, 1),
-(1, 'brewed coffee', '2019-12-15', '2020-01-07', '2.5', 'Chemex', '12oz', 'none', 'y', 'cocoa', 'cherry', 'blood orange', 'brown sugar', 'silky', 'a little underwhelming. too acidic', 3,1,2);
+(1, 'chai', '2020-01-02', '2020-01-07', '4.5', '', '12oz', 'Almond Milk, Splenda', 'y', 'spicy', 'allspice', 'lemon', 'honey', 'milky', 'its a chai, it was fine', 5, 1, 1),
+(1, 'brewed coffee', '2019-12-15', '2020-01-07', '2.5', 'Chemex', '12oz', 'none', 'y', 'cocoa', 'cherry', 'blood orange', 'brown sugar', 'silky', 'tasty!!!', 3,1,2);
 
 insert into roasters_shops (roasterID, shopID)
 VALUES
-(1, 1);
+(1, 1),
+(2, 2);
 
 insert into usersLikes(userID, shopID, roasterID, beanCoffeeID)
 VALUES
