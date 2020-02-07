@@ -75,9 +75,9 @@ router.get('/cup', async (req, res)=>{
 router.post('/cup', parseForm, async (req, res)=>{
     let { loggedIn } = req.session;
     console.log(req.body);
-    const { cost, didLike, brewMethod, coffeeSize, condiments, name, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid, roastDate, dateordered } = req.body;
+    const { cost, didLike, brewMethod, coffeeSize, condiments, name, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid, roastDate, dateOrdered } = req.body;
     const userID = req.session.user.id;
-    await newNew.createCup(userID, name, dateordered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid);
+    await newNew.createCup(userID, name, dateOrdered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid);
     res.redirect('cup');
 
 });

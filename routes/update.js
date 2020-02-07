@@ -116,6 +116,7 @@ try {
     const beanItems = await allBeans();
     const cupShopid = theCup.shopid;
     const cupBeanCoffeeid = theCup.beancoffeeid;
+    console.log(theCup);
     if(req.session.user.id == theCup.userid || req.session.user.isadmin){        
         res.render('update/cup', {
             locals: {
