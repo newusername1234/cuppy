@@ -10,7 +10,7 @@ const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, one
 // kobe();
 router.get('/roaster', async (req, res)=>{
     let { loggedIn } = req.session;
-    let theRoasters = await allRoastersFull();
+    let theRoasters = await allRoastersFull(req.session.user.id);
     console.log(theRoasters)
     res.render('update/roasterlist', {
         locals: {
@@ -26,7 +26,7 @@ router.get('/roaster', async (req, res)=>{
 
 router.get('/beancoffee', async (req, res)=>{
     let { loggedIn } = req.session;
-    let theBeans = await allBeansFull();
+    let theBeans = await allBeansFull(req.session.user.id);
     const theRoasterNameID = await allRoasters();
     const theGreenNameID = await allGreen();
     console.log(theRoasterNameID)
@@ -48,7 +48,7 @@ router.get('/beancoffee', async (req, res)=>{
 
 router.get('/greencoffee', async (req, res)=>{
     let { loggedIn } = req.session;
-    let fullgreen = await allGreenFull();
+    let fullgreen = await allGreenFull(req.session.user.id);
     console.log(fullgreen);
     res.render('update/greencoffeelist', {
         locals: {
@@ -64,13 +64,13 @@ router.get('/greencoffee', async (req, res)=>{
 
 router.get('/shop', async (req, res)=>{
     let { loggedIn } = req.session;
-    let theShops = await allShops();
-    let fullShops = await allShopsFull();
+    // let theShops = await allShops();
+    let fullShops = await allShopsFull(req.session.user.id);
     console.log(fullShops)
     res.render('update/shoplist', {
         locals: {
             loggedIn,
-            theShops,
+            // theShops,
             fullShops
         }, 
         partials: {
@@ -293,23 +293,28 @@ router.get('/beancoffee/:id', async (req, res)=>{
     const theGreenCoffee = await oneGreenCoffee(theBean.id);
     const beanRoasterid = theBean.roasterid;
     const beanGreencoffeeid = theBean.greencoffeeid;
-    res.render('update/beancoffee', {
-        locals: {
-            loggedIn,
-            greenCoffeeItems,
-            allRoasterItems,
-            theBean,
-            theRoaster,
-            theGreenCoffee,
-            beanRoasterid,
-            beanGreencoffeeid
-        },
-        partials: {
-            nav:'partials/nav',
-            greencoffeedropdown: 'dropDowns/greenCoffeeDropUpdate',
-            roasterdropdown: 'dropDowns/roasterDropUpdate'
-        }
-    });
+    
+    if(req.session.user.id == theBean.userid || req.session.user.isadmin){
+        res.render('update/beancoffee', {
+            locals: {
+                loggedIn,
+                greenCoffeeItems,
+                allRoasterItems,
+                theBean,
+                theRoaster,
+                theGreenCoffee,
+                beanRoasterid,
+                beanGreencoffeeid
+            },
+            partials: {
+                nav:'partials/nav',
+                greencoffeedropdown: 'dropDowns/greenCoffeeDropUpdate',
+                roasterdropdown: 'dropDowns/roasterDropUpdate'
+            }
+        });
+    } else {
+        res.render("404");
+    }
 });
 
 router.post('/beancoffee/:id', parseForm, async (req, res)=>{
@@ -344,7 +349,10 @@ router.get('/shop/:id', async (req, res)=>{
     let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theShop = await oneShop(reqID);
-
+    console.log("req.session");
+    console.table(req.session);
+    console.log("theShop");
+    console.table(theShop);
     res.render('update/shop', {
         partials: {
             nav:'partials/nav'
@@ -375,8 +383,8 @@ router.post('/shop/:id', parseForm, async (req, res)=>{
         newDB[`${item}`] = newReq[`${item}`];
     }
     console.log(newDB)
-    const { id, name, location, phonenumber, hours, website, shopownerid } = newDB;
-    updateShop(id, name, location, phonenumber, hours, website, shopownerid);
+    const { id, name, location, phonenumber, hours, website, userid } = newDB;
+    updateShop(id, name, location, phonenumber, hours, website, userid);
     res.redirect(`/update/shop/${reqID}`);
 })
 

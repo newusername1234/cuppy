@@ -30,43 +30,43 @@ async function createCup(userID, name, dateOrdered, roastDate, cost, brewMethod,
     }    
 }
 // new beanCoffee
-async function createBeanCoffee(name, roastProfile, roasterid, greencoffeeid) {
+async function createBeanCoffee(name, roastProfile, roasterid, greencoffeeid, userid) {
     await db.any(`
     insert into beancoffee
-        (name, roastProfile, roasterid, greencoffeeid)
+        (name, roastProfile, roasterid, greencoffeeid, userid)
     values
-        ($1, $2, $3, $4)
-    `, [name, roastProfile, roasterid, greencoffeeid])
+        ($1, $2, $3, $4, $5)
+    `, [name, roastProfile, roasterid, greencoffeeid, userid])
 }
 
 // new greenCoffee
-async function createGreenCoffee(name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle) {
+async function createGreenCoffee(name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle, userid) {
     await db.any(`
     insert into greencoffee
-        (name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle)
+        (name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle, userid)
     values 
-        ($1,  $2,  $3,  $4, $5, $6, $7, $8)
-    `, [name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle])
+        ($1,  $2,  $3,  $4, $5, $6, $7, $8, $9)
+    `, [name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle, userid])
 }
 
 // new roaster
-async function createRoaster(name, location, phoneNumber, website) {
+async function createRoaster(name, location, phoneNumber, website, userid) {
     await db.any(`
     insert into roasters
-        (name, location, phoneNumber, website)
+        (name, location, phoneNumber, website, userid)
     values 
-        ($1,  $2,  $3,  $4)
-    `, [name, location, phoneNumber, website]);
+        ($1,  $2,  $3,  $4, $5)
+    `, [name, location, phoneNumber, website, userid]);
 }
 
 // new shop
-async function createShop(name, location, phoneNumber, hours, website) {
+async function createShop(name, location, phoneNumber, hours, website, userid) {
     await db.any(`
     insert into shops
-        (name, location, phoneNumber, hours, website)
+        (name, location, phoneNumber, hours, website, userid)
     values
-        ($1,  $2,  $3,  $4, $5)
-    `, [name, location, phoneNumber, hours, website]);
+        ($1,  $2,  $3,  $4, $5, $6)
+    `, [name, location, phoneNumber, hours, website, userid]);
 }
 
 

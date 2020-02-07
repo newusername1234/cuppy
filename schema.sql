@@ -1,9 +1,24 @@
+create table users (
+    id serial primary key,
+    username text unique not null,
+    firstName text, 
+    lastName text, 
+    email text, 
+    phoneNumber varchar(20),
+    apikey text unique not null,
+    apicalls INTEGER,
+    apitimestamp text, --UTC TIME stored as text
+    hash text,
+    isadmin boolean
+);
+
 create table roasters (
     id serial primary key,
     name text,
     location text, 
     phoneNumber varchar(20),
-    website text
+    website text,
+    userID INTEGER REFERENCES users(id)
 );
 
 create table greenCoffee (
@@ -15,22 +30,9 @@ create table greenCoffee (
     farmer text, 
     elevation integer, 
     varietal text,
-    processingStyle text
+    processingStyle text,
+    userID INTEGER REFERENCES users(id)
 );
-
-create table users (
-    id serial primary key,
-    username text unique not null,
-    firstName text, 
-    lastName text, 
-    email text, 
-    phoneNumber varchar(20),
-    apikey text unique not null,
-    apicalls INTEGER,
-    apitimestamp text, --UTC TIME stored as text
-    hash text
-);
-
 
 create table shops (
     id serial primary key,
@@ -39,7 +41,7 @@ create table shops (
     phoneNumber varchar(20),
     hours text,
     website text,
-    shopOwnerID integer references users(id)
+    userID INTEGER REFERENCES users(id)
 );
 
 create table beanCoffee (
@@ -47,7 +49,8 @@ create table beanCoffee (
     name text, 
     roastProfile text,
     roasterID integer references roasters(id),
-    greenCoffeeID integer references greencoffee(id)
+    greenCoffeeID integer references greencoffee(id),
+    userID INTEGER REFERENCES users(id)
 );
 
 create table cups (
@@ -74,7 +77,8 @@ create table cups (
 
 create table roasters_shops (
     roasterID integer references roasters(id),
-    shopID integer references shops(id)
+    shopID integer references shops(id),
+    userID INTEGER REFERENCES users(id)
 );
 
 create table usersLikes (
