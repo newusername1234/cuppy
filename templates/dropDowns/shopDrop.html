@@ -1,4 +1,6 @@
-<label for="shopid">Shop you got it from: </label>
+<div class="field">
+    
+    <label for="shopid">Shop you got it from: </label>
 <select name="shopid">
 ${
     shopItems.map(obj=>{
@@ -9,7 +11,11 @@ ${
     })   
 }
 </select>
-<p>Don't see your shop? 
-    <br>
-Add yours <a href="/new/shop">here!</a>
-</p>
+</div>
+<div class="field">
+    
+    <p>Don't see your shop? 
+        
+    Add yours <a href="/new/shop">here!</a>
+    </p>
+</div>

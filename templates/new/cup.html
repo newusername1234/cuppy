@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/stylesheets/styles.css">
-    <link rel="stylesheet" href="/stylesheets/new.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/new.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -16,63 +16,75 @@
 </head>
 <body class="bg-light">
     ${nav}
-<div class="container">
+<div class="col-md-8 order-md-1 container">
     <form method="POST">
-        <div class="descript">
+        <div class="mb-3 descript">
             <h1>Review a new Cup</h1>
             <p>You can record as much or as little as you want to about it.</p>
         </div>
         <div class="formContain">
-            <label for="didLike">Did you like it? </label>
-        <select name="didLike">
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-        </select>
-        <br>
-        <label for="cost">Cost: </label>
-        <input name="cost" type="text">
-        <br>
-        <label for="brewMethod">Brew Method: </label>
-        <input name="brewMethod" type="text" placeholder="drip, espresso, pour over, etc.">
-        <br>
-        <label for="coffeeSize">Coffee Size: </label>
-        <input name="coffeeSize" type="text" placeholder="12oz, double shot, etc.">
-        <br>
-        <label for="condiments">Condiments: </label>
-        <input name="condiments" type="text" placeholder="cream, sugar, etc.">
-        <br>
-        <label for="name">Name of drink: </label>
-        <input name="name" type="text">
-        <br>
-        <label for="flavor">Flavor: </label>
-        <input name="flavor" type="text" placeholder="nutty, fruity, chocolatey, etc.">
-        <br>
-        <label for="aroma">Aroma: </label>
-        <input name="aroma" type="text" placeholder="fruity, floral, etc.">
-        <br>
-        <label for="acidity">Acidity: </label>
-        <input name="acidity" type="text" placeholder="lime, apple, etc.">
-        <br>
-        <label for="sweetness">Sweetness: </label>
-        <input name="sweetness" type="text" placeholder="honey, brown sugar, etc.">
-        <br>
-        <label for="mouthfeel">Mouth feel: </label>
-        <input name="mouthfeel" type="text" placeholder="tealike, syrupy, velvety, etc.">
-        <br>
-        <!-- MAKE COL WIDE -->
-        <label for="comments">Comments: </label>
-        <textarea name="comments" rows="5" cols="30"></textarea>
-        <!-- <input name="comments" type="text"> -->
-        <br>
-        <label for="score">Score: </label>
-        <input name="score" type="number" min="1" max="10" placeholder="1-10">
-        <br>
+            <div class="didlike">
+                <label for="didLike"><h2>Did You Like It?</h2></label>
+                <select name="didLike">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+        <div class="allelse">
+            <div class="newcupleft">
+                <div class="field">
+                <label for="cost">Cost: </label>
+                <input name="cost" type="text">
+                </div>
+                <div class="field">
+                    <label for="name">Name of drink: </label>
+                    <input name="name" type="text"></div>
+                <div class="field">
+                    <label for="brewMethod">Brew Method: </label>
+                    <input name="brewMethod" type="text" placeholder="drip, espresso, pour over, etc."></div>
+                <div class="field">
+                    <label for="coffeeSize">Coffee Size: </label>
+                    <input name="coffeeSize" type="text" placeholder="12oz, double shot, etc."></div>
+                <div class="field">
+                    <label for="condiments">Condiments: </label>
+                    <input name="condiments" type="text" placeholder="cream, sugar, etc."></div>
+
+                <div class="field">
+                    <label for="flavor">Flavor: </label>
+                    <input name="flavor" type="text" placeholder="nutty, fruity, chocolatey, etc."></div>
+                <div class="field">
+                    <label for="aroma">Aroma: </label>
+                    <input name="aroma" type="text" placeholder="fruity, floral, etc."></div>
+                <div class="field">
+                    <label for="acidity">Acidity: </label>
+                    <input name="acidity" type="text" placeholder="lime, apple, etc."></div>
+                <div class="field">
+                    <label for="sweetness">Sweetness: </label>
+                    <input name="sweetness" type="text" placeholder="honey, brown sugar, etc."></div>
+                <div class="field">
+                    <label for="mouthfeel">Mouth feel: </label>
+                    <input name="mouthfeel" type="text" placeholder="tealike, syrupy, velvety, etc."></div>
+                
+            </div>
+        <div class="newcupright">
+            <div class="field">
+                
+                <label for="comments">Comments: </label>
+                <textarea name="comments" rows="5" cols="30"></textarea>
+            </div>
+            <div class="field">
+                
+                <label for="score">Score: </label>
+                <input name="score" type="number" min="1" max="10" placeholder="1-10">
+            </div>
         ${shopdropdown}
-        <br>
         ${beancoffeedropdown}
-        <br>
-    <input type="submit" value="send it">
-    
+        <div class="field send">
+            
+            <input type="submit" value="Submit">
+        </div>
+        </div>
+</div>
 </div>
     </form> 
 </div>
