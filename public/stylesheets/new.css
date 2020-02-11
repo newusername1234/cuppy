@@ -36,6 +36,11 @@ form > * {
     flex-direction: column;
 }
 
+.formContainSingle {
+    align-items: center;
+    justify-items: center;
+}
+
 /* DidLike */
 
 .didlike {

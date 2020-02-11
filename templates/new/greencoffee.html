@@ -2,54 +2,75 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/new.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>New Green Coffee</title>
+    <style>
+        body {
+            background-image: url(https://images.pexels.com/photos/641038/pexels-photo-641038.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+        }
+    </style>
 </head>
-<body>
+<body class="bg-light">
     ${nav}
-    <form method="POST">
-        <label for="name">Name: </label>
-        <br>
-        <input type="text" name="name">
-        <br>
-        <label>
-            Country of Origin:
-            <input type="text" name="countryOfOrigin">
-        </label>
-        <br>
-        <label>
-            Region of Origin:
-            <input type="text" name="regionOfOrigin">
-        </label>
-        <br>
-        <label>
-            Farm:
-            <input type="text" name="farm">
-        </label>
-        <br>
-        <label>
-            Farmer:
-            <input type="text" name="farmer">
-        </label>
-        <br>
-        <label>
-            Elevation:
-            <input type="integer" name="elevation">
-        </label>
-        <br>
-        <label>
-            Varietal:
-            <input type="text" name="varietal">
-        </label>
-        <br>
-        <label>
-            Processing Style:
-            <input type="text" name="processingStyle">
-        </label>
-        <br>
-        <input type="submit">
-    </form>
+    <div class="col-md-8 order-md-1 container">
+        <form method="POST">
+            <div class="mb-3 descript">
+                <h1>Add a New Green Coffee</h1>
+            </div>
+            <div class="formContain formContainSingle">
+                <div class="field">
+                    <label for="name">Name: </label>
+                    <input type="text" name="name">
+                    <br>
+                </div>
+                <div class="field">
+                    <label for="countryOfOrigin">Country of Origin:</label>
+                    <input type="text" name="countryOfOrigin">
+                    <br>
+                </div>
+                <div class="field">
+                    <label for="regionOfOrigin">Region of Origin:</label>
+                    <input type="text" name="regionOfOrigin">
+                    <br>
+                </div>
+                <div class="field">
+                    <label for="farm">Farm:</label>
+                    <input type="text" name="farm">
+                    <br>
+                </div>
+                <div class="field">
+                    <label for="farmer">Farmer:</label>
+                    <input type="text" name="farmer">
+                    <br>
+                </div>
+                <div class="field">
+                    <label for="elevation">Elevation:</label>
+                    <input type="integer" name="elevation">
+                    <br>
+                </div>
+                <div class="field">
+                    <label for="varietal">Varietal:</label>
+                    <input type="text" name="varietal">
+                    <br>
+                </div>
+                <div class="field">
+                    <label for="processingStyle">Processing Style:</label>
+                    <input type="text" name="processingStyle">
+                    <br>
+                </div>
+                <div class="field send">
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
