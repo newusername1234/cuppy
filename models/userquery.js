@@ -12,16 +12,16 @@ async function create(username, firstname, lastname, email, phonenumber, passwor
     const hash = createHash(password);
     const apiKey = uuid();
     const apicalls =0;
-    const apitimestamp = new Date;
+    const apitimestamp = '0';
+    const isadmin = false;
     console.log(apitimestamp);
-    console.log(apitimestamp.toISOString());
     const result = await db.one(`
 insert into users
-    (username, firstname, lastname, email, phonenumber, hash, apikey, apicalls, apitimestamp)
+    (username, firstname, lastname, email, phonenumber, hash, apikey, apicalls, apitimestamp, isadmin)
 values
-    ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
 returning id
-    `, [username, firstname, lastname, email, phonenumber, hash, apiKey, apicalls, apitimestamp.toISOString()]);
+    `, [username, firstname, lastname, email, phonenumber, hash, apiKey, apicalls, apitimestamp, isadmin]);
     
     return result.id;    
 }

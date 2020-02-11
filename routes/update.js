@@ -7,10 +7,12 @@ const parseForm = bodyParser.urlencoded({
 
 const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, oneCup, updateRoaster, updateShop, updateBeancoffee, updateCup, updateGreenCoffee, allShops, allBeans, allGreen, allRoasters, allCups, allRoastersFull, allBeansFull, allGreenFull,allShopsFull } = require('../models/updatequery');
 
+const NOACCESS = "404";
+
 // kobe();
 router.get('/roaster', async (req, res)=>{
     let { loggedIn } = req.session;
-    let theRoasters = await allRoastersFull();
+    let theRoasters = await allRoastersFull(req.session.user.id);
     console.log(theRoasters)
     res.render('update/roasterlist', {
         locals: {
@@ -26,7 +28,7 @@ router.get('/roaster', async (req, res)=>{
 
 router.get('/beancoffee', async (req, res)=>{
     let { loggedIn } = req.session;
-    let theBeans = await allBeansFull();
+    let theBeans = await allBeansFull(req.session.user.id);
     const theRoasterNameID = await allRoasters();
     const theGreenNameID = await allGreen();
     console.log(theRoasterNameID)
@@ -48,7 +50,7 @@ router.get('/beancoffee', async (req, res)=>{
 
 router.get('/greencoffee', async (req, res)=>{
     let { loggedIn } = req.session;
-    let fullgreen = await allGreenFull();
+    let fullgreen = await allGreenFull(req.session.user.id);
     console.log(fullgreen);
     res.render('update/greencoffeelist', {
         locals: {
@@ -64,13 +66,13 @@ router.get('/greencoffee', async (req, res)=>{
 
 router.get('/shop', async (req, res)=>{
     let { loggedIn } = req.session;
-    let theShops = await allShops();
-    let fullShops = await allShopsFull();
+    // let theShops = await allShops();
+    let fullShops = await allShopsFull(req.session.user.id);
     console.log(fullShops)
     res.render('update/shoplist', {
         locals: {
             loggedIn,
-            theShops,
+            // theShops,
             fullShops
         }, 
         partials: {
@@ -114,23 +116,29 @@ try {
     const beanItems = await allBeans();
     const cupShopid = theCup.shopid;
     const cupBeanCoffeeid = theCup.beancoffeeid;
-    res.render('update/cup', {
-        locals: {
-            loggedIn,
-            shopItems,
-            beanItems,
-            theCup,
-            theShop,
-            cupShopid,
-            cupBeanCoffeeid,
-            theBean
-        },
-        partials: {
-            nav:'partials/nav',
-            shopdropdown: 'dropDowns/shopDropUpdate',
-            beancoffeedropdown: 'dropDowns/beanCoffeeDropUpdate'
-        }
-    })
+    console.log(theCup);
+    if(req.session.user.id == theCup.userid || req.session.user.isadmin){        
+        res.render('update/cup', {
+            locals: {
+                loggedIn,
+                shopItems,
+                beanItems,
+                theCup,
+                theShop,
+                cupShopid,
+                cupBeanCoffeeid,
+                theBean
+            },
+            partials: {
+                nav:'partials/nav',
+                shopdropdown: 'dropDowns/shopDropUpdate',
+                beancoffeedropdown: 'dropDowns/beanCoffeeDropUpdate'
+            }
+        })
+
+    } else {
+        res.render(NOACCESS);
+    }
 }
 catch(err) {
     console.log(err);
@@ -180,17 +188,22 @@ try {
     const reqID  = req.params.id;
     const theRoaster = await oneRoaster(reqID);
     const name = theRoaster.name;
-    res.render('update/roaster', {
-        locals: {
-            loggedIn,
-            reqID,
-            theRoaster,
-            name
-        },
-        partials: {
-            nav: 'partials/nav'
-        }
-    })
+    if(req.session.user.id == theRoaster.userid || req.session.user.isadmin){        
+        res.render('update/roaster', {
+            locals: {
+                loggedIn,
+                reqID,
+                theRoaster,
+                name
+            },
+            partials: {
+                nav: 'partials/nav'
+            }
+        })
+    
+    } else {
+        res.render(NOACCESS);
+    }
 }
 catch(err) {
     console.log(`
@@ -238,15 +251,20 @@ router.get('/greencoffee/:id', async (req, res)=>{
         const reqID  = req.params.id;
         const theGreenCoffee = await oneGreenCoffee(reqID);
         // console.log(theGreenCoffee);
-        res.render('update/greencoffee', {
-            locals: {
-                loggedIn,
-                GC: theGreenCoffee
-            },
-            partials: {
-                nav: 'partials/nav'
-            }
-        })
+        if(req.session.user.id == theGreenCoffee.userid || req.session.user.isadmin){        
+            res.render('update/greencoffee', {
+                locals: {
+                    loggedIn,
+                    GC: theGreenCoffee
+                },
+                partials: {
+                    nav: 'partials/nav'
+                }
+            })
+    
+        } else {
+            res.render(NOACCESS);
+        }
     }
     catch(err) {
         console.log(err)
@@ -293,23 +311,28 @@ router.get('/beancoffee/:id', async (req, res)=>{
     const theGreenCoffee = await oneGreenCoffee(theBean.id);
     const beanRoasterid = theBean.roasterid;
     const beanGreencoffeeid = theBean.greencoffeeid;
-    res.render('update/beancoffee', {
-        locals: {
-            loggedIn,
-            greenCoffeeItems,
-            allRoasterItems,
-            theBean,
-            theRoaster,
-            theGreenCoffee,
-            beanRoasterid,
-            beanGreencoffeeid
-        },
-        partials: {
-            nav:'partials/nav',
-            greencoffeedropdown: 'dropDowns/greenCoffeeDropUpdate',
-            roasterdropdown: 'dropDowns/roasterDropUpdate'
-        }
-    });
+    
+    if(req.session.user.id == theBean.userid || req.session.user.isadmin){
+        res.render('update/beancoffee', {
+            locals: {
+                loggedIn,
+                greenCoffeeItems,
+                allRoasterItems,
+                theBean,
+                theRoaster,
+                theGreenCoffee,
+                beanRoasterid,
+                beanGreencoffeeid
+            },
+            partials: {
+                nav:'partials/nav',
+                greencoffeedropdown: 'dropDowns/greenCoffeeDropUpdate',
+                roasterdropdown: 'dropDowns/roasterDropUpdate'
+            }
+        });
+    } else {
+        res.render(NOACCESS);
+    }
 });
 
 router.post('/beancoffee/:id', parseForm, async (req, res)=>{
@@ -344,16 +367,24 @@ router.get('/shop/:id', async (req, res)=>{
     let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theShop = await oneShop(reqID);
-
-    res.render('update/shop', {
-        partials: {
-            nav:'partials/nav'
-        },
-        locals: {
-            loggedIn,
-            theShop
-        }
-    });
+    console.log("req.session");
+    console.table(req.session);
+    console.log("theShop");
+    console.table(theShop);
+    if(req.session.user.id == theShop.userid || req.session.user.isadmin){        
+        res.render('update/shop', {
+            partials: {
+                nav:'partials/nav'
+            },
+            locals: {
+                loggedIn,
+                theShop
+            }
+        });
+    
+    } else {
+        res.render(NOACCESS);
+    }
 });
 
 router.post('/shop/:id', parseForm, async (req, res)=>{
@@ -375,8 +406,8 @@ router.post('/shop/:id', parseForm, async (req, res)=>{
         newDB[`${item}`] = newReq[`${item}`];
     }
     console.log(newDB)
-    const { id, name, location, phonenumber, hours, website, shopownerid } = newDB;
-    updateShop(id, name, location, phonenumber, hours, website, shopownerid);
+    const { id, name, location, phonenumber, hours, website, userid } = newDB;
+    updateShop(id, name, location, phonenumber, hours, website, userid);
     res.redirect(`/update/shop/${reqID}`);
 })
 
