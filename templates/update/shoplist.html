@@ -2,41 +2,52 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Shops</title>
     <style>
-        .content {
-            display: flex;
-        }
-        .cup-card {
-            outline: 2px solid forestgreen;
-            margin: 10px;
-            padding: 3px;
+        .card-text p {
+            text-emphasis: bold;
         }
     </style>
 </head>
-<body>
-
+<body class="bg-light">
     ${nav}
-<div class="content">
-    ${
-        fullShops.map(shop=>{
-            return `
-                <div class="cup-card">
-                    <a href="/update/shop/">Edit</a>
-                    <h2>${shop.name}</h2>
-                    <p>${shop.location}</p>
-                    <p>${shop.hours}</p>
-                    <p>${shop.website}</p>
-                    <p>${shop.phonenumber}</p>
-                    
-                </div>
-            `
-        }).join('')
-    }
-</div>
+    <main role="main">
+        <div class="card btn-group justify-content-between">
+            <div class="back-button btn btn-outline-secondary">
+                <h1><a href="/user/profile">Back to Profile</a></h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                ${
+                    fullShops.map(shop=>{
+                        return `
+                            <div class="col-md-4">
+                                <div class="card mb-4 shadow-sm">
+                                    <div class="card-body">
+                                        <div class="card-text">
+                                            <a href="/update/shop/${shop.id}">Edit</a>
+                                            <h2>${shop.name}</h2>
+                                            <p><strong>Location:</strong>${shop.location}</p>
+                                            <p><strong>Hours:</strong>${shop.hours}</p>
+                                            <p><strong>Website:</strong>${shop.website}</p>
+                                            <p><strong>Phone NUmber:</strong>${shop.phonenumber}</p>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                
+                            </div>
+                        `
+                    }).join('')
+                }
+            </div>
+        </div>
+    </main>
 </body>
 </html>
+

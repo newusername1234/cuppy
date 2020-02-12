@@ -2,43 +2,65 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cups</title>
-    <style>
-
-    </style>
 </head>
-<body>
+<body class="bg-light">
 
     ${nav}
-<div class="content">
-    ${
-        theCups.map(cup=>{
-            return `
-                <div class="cup-card">
-                    <a href="/update/cup/${cup.id}">Edit</a>
-                    <h2>name: ${cup.name}</h2>
-                    <p>cost: ${cup.cost}</p>
-                    <p>brewmethod: ${cup.brewmethod}</p>
-                    <p>coffeesize: ${cup.coffeesize}</p>
-                    <p>condiments: ${cup.condiments}</p>
-                    <p>didlike: ${cup.didlike}</p>
-                    <p>flavor: ${cup.flavor}</p>
-                    <p>aroma: ${cup.aroma}</p>
-                    <p>acidity: ${cup.acidity}</p>
-                    <p>sweetness: ${cup.sweetness}</p>
-                    <p>mouthfeel: ${cup.mouthfeel}</p>
-                    <p>comments: ${cup.comments}</p>
-                    <p>score: ${cup.score}</p>
-                    <p>shopid: ${cup.shopid}</p>
-                    <p>beancoffeeid: ${cup.beancoffeeid}</p>
-                </div>
-            `
-        }).join('')
-    }
-</div>
+    <main role="main">
+        <div class="card btn-group justify-content-between">
+            <div class="back-button btn btn-outline-secondary">
+                <h1><a href="/user/profile">Back to Profile</a></h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                ${
+                    theCups.map(cup=>{
+                        return `
+                            <div class="col-md-4">
+                                <div class="card mb-4 shadow-sm">
+                                    <div class="card-body">
+                                        <div class="card-text">
+                                            <h2><strong>Name</strong>: ${cup.name}</h2>
+                                            <p><strong>Cost</strong>: ${cup.cost}</p>
+                                            <p><strong>Brewmethod</strong>: ${cup.brewmethod}</p>
+                                            <p><strong>Coffeesize</strong>: ${cup.coffeesize}</p>
+                                            <p><strong>Condiments</strong>: ${cup.condiments}</p>
+                                            <p><strong>Didlike</strong>: ${cup.didlike}</p>
+                                            <p><strong>Flavor</strong>: ${cup.flavor}</p>
+                                            <p><strong>Aroma</strong>: ${cup.aroma}</p>
+                                            <p><strong>Acidity</strong>: ${cup.acidity}</p>
+                                            <p><strong>Sweetness</strong>: ${cup.sweetness}</p>
+                                            <p><strong>Mouthfeel</strong>: ${cup.mouthfeel}</p>
+                                            <p><strong>Comments</strong>: ${cup.comments}</p>
+                                            <p><strong>Score</strong>: ${cup.score}</p>
+                                            <p><strong>Shopid</strong>: ${cup.shopid}</p>
+                                            <p><strong>Beancoffeeid</strong>: ${cup.beancoffeeid}</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-md btn-outline-secondary">
+                                                        <a href="/update/cup/${cup.id}">Edit</a></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    }).join('')
+                }
+            </div>
+        </div>
+
+    </main>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 </body>
 </html>
