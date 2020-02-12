@@ -57,3 +57,20 @@ form {
     justify-content: center;
     align-items: center;
 }
+
+.card-body {
+    box-shadow: rgb(147, 112, 219) 3px 3px 20px 0px;
+    border-radius: 5%;
+}
+
+.card {
+    border-radius: 5% !important;
+}
+
+.cup-body {
+    border-radius: 1% !important;
+}
+
+.cup-card {
+    border-radius: 1% !important;
+}
