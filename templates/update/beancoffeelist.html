@@ -11,8 +11,12 @@
 <body>
     ${nav}
     <main role="main">
-        <div class="card btn-group justify-content-between">
-            <div class="back-button btn btn-outline-secondary"><h1><a href="/user/profile">Back to Profile</a></h1></div>
+        <div class=" justify-content-between align-items-center top-butt">
+            <div class="btn-group">
+                <button type="button" class="btn btn-md btn-outline-primary">
+                    <h2><a href="/user/profile">Back to Profile</a></h2>
+                </button>
+            </div>
         </div>
         <div class="container">
             <div class="row">
@@ -28,16 +32,18 @@
                             <div class="col-md-4">
                                 <div class="card mb-4 shadow-sm">
                                     <div class="card-body">
-                                        <div class="card-text">
-                                            <h2>${bean.name}</h2>
+                                        <div class="card-text"><div class="d-flex justify-content-between align-items-center">
+                                            <h3>${bean.name}</h3>
+                                            <div class="btn-group">
+                                              <button type="button" class="btn btn-md btn-outline-secondary"><a href="/update/beancoffee/${bean.id}">Edit</a>
+                                            </button>
+                                            </div>
+                                        </div>
+                                            <hr>
                                             <p><strong>Roast Profile:</strong> ${bean.roastprofile}</p>
                                             <p><strong>Roaster:</strong> ${roast}</p>
                                             <p><strong>Green Coffee Used:</strong> ${green}</p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="btn-group">
-                                                  <button type="button" class="btn btn-md btn-outline-secondary"><a href="/update/beancoffee/${bean.id}">Edit</a></button>
-                                                </div>
-                                              </div>
+                                            
                                         </div>
                                     </div>
                                 </div>

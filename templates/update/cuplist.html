@@ -12,9 +12,11 @@
 
     ${nav}
     <main role="main">
-        <div class="card btn-group justify-content-between">
-            <div class="back-button btn btn-outline-secondary">
-                <h1><a href="/user/profile">Back to Profile</a></h1>
+        <div class=" justify-content-between align-items-center top-butt">
+            <div class="btn-group">
+                <button type="button" class="btn btn-md btn-outline-primary">
+                    <h2><a href="/user/profile">Back to Profile</a></h2>
+                </button>
             </div>
         </div>
         <div class="container">
@@ -26,27 +28,29 @@
                                 <div class="card mb-4 shadow-sm">
                                     <div class="card-body">
                                         <div class="card-text">
-                                            <h2><strong>Name</strong>: ${cup.name}</h2>
-                                            <p><strong>Cost</strong>: ${cup.cost}</p>
-                                            <p><strong>Brewmethod</strong>: ${cup.brewmethod}</p>
-                                            <p><strong>Coffeesize</strong>: ${cup.coffeesize}</p>
-                                            <p><strong>Condiments</strong>: ${cup.condiments}</p>
-                                            <p><strong>Didlike</strong>: ${cup.didlike}</p>
-                                            <p><strong>Flavor</strong>: ${cup.flavor}</p>
-                                            <p><strong>Aroma</strong>: ${cup.aroma}</p>
-                                            <p><strong>Acidity</strong>: ${cup.acidity}</p>
-                                            <p><strong>Sweetness</strong>: ${cup.sweetness}</p>
-                                            <p><strong>Mouthfeel</strong>: ${cup.mouthfeel}</p>
-                                            <p><strong>Comments</strong>: ${cup.comments}</p>
-                                            <p><strong>Score</strong>: ${cup.score}</p>
-                                            <p><strong>Shopid</strong>: ${cup.shopid}</p>
-                                            <p><strong>Beancoffeeid</strong>: ${cup.beancoffeeid}</p>
                                             <div class="d-flex justify-content-between align-items-center">
+                                                <h3>${cup.name}</h3>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-md btn-outline-secondary">
-                                                        <a href="/update/cup/${cup.id}">Edit</a></button>
+                                                        <a href="/update/shop/${cup.id}">Edit</a></button>
                                                 </div>
                                             </div>
+                                            <hr>
+                                            <p><strong>Cost: </strong> ${cup.cost}</p>
+                                            <p><strong>Brewmethod: </strong> ${cup.brewmethod}</p>
+                                            <p><strong>Coffeesize: </strong> ${cup.coffeesize}</p>
+                                            <p><strong>Condiments: </strong> ${cup.condiments}</p>
+                                            <p><strong>Didlike: </strong> ${cup.didlike}</p>
+                                            <p><strong>Flavor: </strong> ${cup.flavor}</p>
+                                            <p><strong>Aroma: </strong> ${cup.aroma}</p>
+                                            <p><strong>Acidity: </strong> ${cup.acidity}</p>
+                                            <p><strong>Sweetness: </strong> ${cup.sweetness}</p>
+                                            <p><strong>Mouthfeel: </strong> ${cup.mouthfeel}</p>
+                                            <p><strong>Comments: </strong> ${cup.comments}</p>
+                                            <p><strong>Score: </strong> ${cup.score}</p>
+                                            <p><strong>Shopid: </strong> ${cup.shopid}</p>
+                                            <p><strong>Beancoffeeid: </strong> ${cup.beancoffeeid}</p>
+                                            
                                         </div>
                                     </div>
                                 </div>
