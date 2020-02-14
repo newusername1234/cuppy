@@ -2,43 +2,61 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Green Coffee</title>
-    <style>
-        .content {
-            display: flex;
-        }
-        .cup-card {
-            outline: 2px solid forestgreen;
-            margin: 10px;
-            padding: 3px;
-        }
-    </style>
 </head>
-<body>
+<body class="bg-light">
 
     ${nav}
-<div class="content">
-    ${
-        fullgreen.map(green=>{
-            return `
-                <div class="cup-card">
-                    <a href="/update/greencoffee/${green.id}">Edit</a>
-                    <h2>${green.name}</h2>
-                    <p>${green.countryoforigin}</p>
-                    <p>${green.regionoforigin}</p>
-                    <p>${green.farm}</p>
-                    <p>${green.farmer}</p>
-                    <p>${green.elevation}</p>
-                    <p>${green.varietal}</p>
-                    <p>${green.processingstyle}</p>
-                </div>
-            `
-        }).join('')
-    }
-</div>
+    <main role="main">
+        <div class=" justify-content-between align-items-center top-butt">
+            <div class="btn-group">
+                <button type="button" class="btn btn-md btn-outline-primary">
+                    <h2><a href="/user/profile">Back to Profile</a></h2>
+                </button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                ${
+                    fullgreen.map(green=>{
+                        return `
+                            <div class="col-md-4">
+                                <div class="card mb-4 shadow-sm">
+                                    <div class="card-body">
+                                        <div class="card-text"><div class="d-flex justify-content-between align-items-center">
+                                            <h3>${green.name}</h3>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-md btn-outline-secondary">
+                                                    <a href="/update/greencoffee/${green.id}">Edit</a></button>
+                                            </div>
+                                        </div>
+                                            <hr>
+                                            <p><strong>Country of Origin: </strong>${green.countryoforigin}</p>
+                                            <p><strong>Region of origin: </strong>${green.regionoforigin}</p>
+                                            <p><strong>Farm: </strong>${green.farm}</p>
+                                            <p><strong>Farmer: </strong>${green.farmer}</p>
+                                            <p><strong>Elevation: </strong>${green.elevation}</p>
+                                            <p><strong>Varietal: </strong>${green.varietal}</p>
+                                            <p><strong>Processing Style: </strong>${green.processingstyle}</p>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    }).join('')
+                }
+            </div>
+        </div>
 
+    </main>
+    
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
