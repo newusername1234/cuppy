@@ -38,12 +38,12 @@ function didChange(a, b) {
 }
 // update functions
 
-async function updateShop(id, name, location, phonenumber, hours, website, shopownerid){
+async function updateShop(id, name, location, phonenumber, hours, website){
     await db.any(`
     update shops
-        set name=$2, location=$3, phonenumber=$4, hours=$5, website=$6, shopownerid=$7
+        set name=$2, location=$3, phonenumber=$4, hours=$5, website=$6
     where id=$1
-    `, [id, name, location, phonenumber, hours, website, shopownerid])
+    `, [id, name, location, phonenumber, hours, website])
 }
 
 async function updateBeancoffee(id, name, roastprofile, roasterid, greencoffeeid) {
@@ -103,23 +103,23 @@ async function allCups(userid){
     return cups;
 }
 
-async function allRoastersFull() {
-    const roasters = await db.any(`SELECT * from roasters`);
+async function allRoastersFull(userid) {
+    const roasters = await db.any(`SELECT * from roasters where userid=$1`, [userid]);
     return roasters;
 }
 
-async function allBeansFull() {
-    const beans = await db.any(`SELECT * from beancoffee`);
+async function allBeansFull(userid) {
+    const beans = await db.any(`SELECT * from beancoffee where userid=$1`, [userid]);
     return beans;
 }
 
-async function allGreenFull() {
-    const greens = await db.any(`SELECT * from greencoffee`);
+async function allGreenFull(userid) {
+    const greens = await db.any(`SELECT * from greencoffee where userid=$1`, [userid]);
     return greens;
 }
 
-async function allShopsFull(){
-    const shops = await db.any(`SELECT * from shops`);
+async function allShopsFull(userid){
+    const shops = await db.any(`SELECT * from shops where userid=$1`, [userid]);
     return shops;
 }
 

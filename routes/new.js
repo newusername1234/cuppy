@@ -25,7 +25,8 @@ router.post('/greencoffee', parseForm, (req, res)=>{
     let { loggedIn } = req.session;
     console.log(req.body);
     const { name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle } = req.body;
-    newNew.createGreenCoffee(name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle);
+    const userID = req.session.user.id;
+    newNew.createGreenCoffee(name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle, userID);
     res.redirect('/new/greencoffee');
 });
 
@@ -46,7 +47,8 @@ router.post('/roaster', parseForm, (req, res)=>{
     let { loggedIn } = req.session;
     console.log(req.body);
     const { name, location, phoneNumber, website } = req.body;
-    newNew.createRoaster(name, location, phoneNumber, website);
+    const userID = req.session.user.id;
+    newNew.createRoaster(name, location, phoneNumber, website, userID);
     res.redirect('/new/roaster');
 
 });
@@ -73,9 +75,8 @@ router.get('/cup', async (req, res)=>{
 router.post('/cup', parseForm, async (req, res)=>{
     let { loggedIn } = req.session;
     console.log(req.body);
-    const { cost, didLike, brewMethod, coffeeSize, condiments, name, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid, roastDate } = req.body;
+    const { cost, didLike, brewMethod, coffeeSize, condiments, name, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid, roastDate, dateOrdered } = req.body;
     const userID = req.session.user.id;
-    const dateOrdered = '2019-12-15';
     await newNew.createCup(userID, name, dateOrdered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid);
     res.redirect('cup');
 
@@ -105,7 +106,8 @@ router.post('/beanCoffee', parseForm, (req, res)=>{
     let { loggedIn } = req.session;
     console.log(req.body);
     const { name, roastProfile, roasterid, greencoffeeid } = req.body;
-    newNew.createBeanCoffee(name, roastProfile, roasterid, greencoffeeid);
+    const userID = req.session.user.id;
+    newNew.createBeanCoffee(name, roastProfile, roasterid, greencoffeeid, userID);
 
     res.redirect('/new/beancoffee');
 });
@@ -128,8 +130,8 @@ router.post('/shop', parseForm, (req, res)=>{
     console.log(req.body);
     const { name, location, phoneNumber, hours, website } = req.body;
     // needs shopOwnerID
-    // const shopOwnerID = req.session.user.id;
-    newNew.createShop(name, location, phoneNumber, hours, website /* shopOwnerID */);
+    const userID = req.session.user.id;
+    newNew.createShop(name, location, phoneNumber, hours, website, userID);
 
     res.redirect('/new/shop');
 })

@@ -30,7 +30,8 @@ router.post('/login', parseForm, async (req, res) => {
         console.log(theUser);
         req.session.user = {
             username,
-            id: theUser.id
+            id: theUser.id,
+            isadmin: theUser.isadmin
         };
         req.session.save(() => {
             res.redirect('profile');
