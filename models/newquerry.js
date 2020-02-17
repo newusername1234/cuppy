@@ -9,6 +9,12 @@ function yeet() {
 
 // new cup
 async function createCup(userID, name, dateOrdered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, beanCoffeeID) {
+    if(cost == ''){
+        cost = 0;
+    }
+    if(score == ''){
+        score = 5;
+    }
     await db.any(`
     insert into cups 
         (userID, name, dateOrdered, roastDate, cost, brewMethod, coffeeSize, condiments, didLike, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopID, beanCoffeeID)
