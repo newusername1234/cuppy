@@ -47,26 +47,27 @@ form {
     justify-content: center;
 }
 
-.input-contain {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.input-item {
-    width: 90%;
-    display: flex;
-    flex-direction:column;
-    justify-content: center;
-    align-items: center;
-}
 
 .card-body {
     box-shadow: rgb(147, 112, 219) 3px 3px 20px 0px;
     border-radius: 5%;
 }
 
+.card-body-pro {
+    padding-top: 10px;
+    box-shadow: rgb(0, 0, 0) 3px 3px 10px 0px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card-body-pro li {
+    margin: 10px;
+    width: 45%;
+}
+.card-body-pro li a {
+    width: 100%;
+}
 .card {
     border-radius: 5% !important;
 }
@@ -77,4 +78,11 @@ form {
 
 .cup-card {
     border-radius: 1% !important;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+}
+.top {
+    text-align: center;
 }

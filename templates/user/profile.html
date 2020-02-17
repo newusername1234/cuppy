@@ -8,10 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>${username}</title>
     <style>
-            body {
-        padding-bottom: 20px;
-        }
-
         .navbar {
         margin-bottom: 20px;
         }
@@ -20,33 +16,30 @@
 <body>
     ${nav}
     <div class="container">
-        <h1>${username}'s Profile Page</h1>
-        <div class="row">
-
-            <div class="col-md-4">
-                <li><a href="/user/cups">My Cups</a></li>
-                <li><a href="/new/cup">New Cup</a></li>
+        <div class="top">
+            <h1>${username}'s Profile Page</h1>
+        </div>
+        <div class="bottom">
+            <div class="row">
+                <div class="col-md-6 card-body-pro">
+                    <h2>View or edit</h2>
+                    <hr> 
+                    <li><a class="btn btn-lg btn-primary" href="/update/cups">Cups</a></li>
+                    <li><a class="btn btn-lg btn-primary" href="/update/beancoffee">Bean Coffee</a></li>
+                    <li><a class="btn btn-lg btn-primary" href="/update/shop">Shop</a></li>
+                    <li><a class="btn btn-lg btn-primary" href="/update/roaster">Roaster</a></li>
+                    <li><a class="btn btn-lg btn-primary" href="/update/greencoffee">Green Coffee</a></li>
+                </div>
+                <div class="col-md-5 card-body-pro">
+                    <h2>Your API key:</h2>
+                    <hr>
+                    <h3> ${apiKey}</h3>
+                </div>
             </div>
-
-            <div class="col-md-4">
-                <h2>Edit</h2>
-                <li><a href="/update/cups">Cups</a></li>
-                <li><a href="/update/beancoffee">Bean Coffee</a></li>
-                <li><a href="/update/shop">Shop</a></li>
-                <li><a href="/update/roaster">Roaster</a></li>
-                <li><a href="/update/greencoffee">Green Coffee</a></li>
-            </div>
-
-            <div class="col-md-4">
-                <li>Your API key: ${apiKey}</li>
-            </div>
-
         </div>
     </div>
-
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
 </body>
 </html>
