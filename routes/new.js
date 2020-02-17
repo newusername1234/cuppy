@@ -8,46 +8,6 @@ const parseForm = bodyParser.urlencoded({
 const newNew = require('../models/newquerry');
 const api = require('../models/apiquery');
 
-const { check } = require('express-validator');
-const sani = [
-    check('id').escape(),
-    check('name').escape(),
-    check('cost').escape(),
-    check('brewmethod').escape(),
-    check('coffeesize').escape(),
-    check('condiments').escape(),
-    check('didlike').escape(),
-    check('flavor').escape(),
-    check('aroma').escape(),
-    check('acidity').escape(),
-    check('sweetness').escape(),
-    check('mouthfeel').escape(),
-    check('comments').escape(),
-    check('score').escape(), 
-    check('shopid').escape(), 
-    check('beancoffeeid').escape(),
-    check('location').escape(),
-    check('phonenumber').escape(),
-    check('website').escape(),
-    check('countryoforigin').escape(),
-    check('regionoforigin').escape(),
-    check('farm').escape(),
-    check('farmer').escape(),
-    check('elevation').escape(),
-    check('varietal').escape(),
-    check('processingstyle').escape(),
-    check('roastprofile').escape(),
-    check('roasterid').escape(),
-    check('greencoffeeid').escape(),
-    check('location').escape(),
-    check('hours').escape(),
-    check('userid').escape()
-]
-
-router.post('*'), sani, async (req, res, next)=>{
-    next();
-}
-
 // green coffee
 router.get('/greencoffee', (req, res)=>{
     let { loggedIn } = req.session;
