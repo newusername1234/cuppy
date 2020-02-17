@@ -8,6 +8,52 @@ const parseForm = bodyParser.urlencoded({
 const newNew = require('../models/newquerry');
 const api = require('../models/apiquery');
 
+const { check } = require('express-validator');
+const sani = [
+    check('id').escape(),
+    check('name').escape(),
+    check('cost').escape(),
+    check('brewmethod').escape(),
+    check('coffeesize').escape(),
+    check('condiments').escape(),
+    check('didlike').escape(),
+    check('flavor').escape(),
+    check('aroma').escape(),
+    check('acidity').escape(),
+    check('sweetness').escape(),
+    check('mouthfeel').escape(),
+    check('comments').escape(),
+    check('score').escape(), 
+    check('shopid').escape(), 
+    check('beancoffeeid').escape(),
+    check('location').escape(),
+    check('phonenumber').escape(),
+    check('website').escape(),
+    check('countryoforigin').escape(),
+    check('regionoforigin').escape(),
+    check('farm').escape(),
+    check('farmer').escape(),
+    check('elevation').escape(),
+    check('varietal').escape(),
+    check('processingstyle').escape(),
+    check('roastprofile').escape(),
+    check('roasterid').escape(),
+    check('greencoffeeid').escape(),
+    check('location').escape(),
+    check('hours').escape(),
+    check('userid').escape(),
+    check('username').escape(),
+    check('firstname').escape(),
+    check('lastname').escape(),
+    check('email').escape(),
+    check('password').escape()
+]
+
+router.post('*'), sani, async (req, res, next)=>{
+    console.log("HERES MY SANITIZER!! ITS DOING A THING!!!");
+    next();
+}
+
 // green coffee
 router.get('/greencoffee', (req, res)=>{
     let { loggedIn } = req.session;
@@ -21,7 +67,7 @@ router.get('/greencoffee', (req, res)=>{
     });
 });
 
-router.post('/greencoffee', parseForm, (req, res)=>{
+router.post('/greencoffee', parseForm, sani, (req, res)=>{
     let { loggedIn } = req.session;
     console.log(req.body);
     const { name, countryOfOrigin, regionOfOrigin, farm, farmer, elevation, varietal, processingStyle } = req.body;
@@ -43,7 +89,7 @@ router.get('/roaster', (req, res)=>{
     });
 });
 
-router.post('/roaster', parseForm, (req, res)=>{
+router.post('/roaster', parseForm, sani, (req, res)=>{
     let { loggedIn } = req.session;
     console.log(req.body);
     const { name, location, phoneNumber, website } = req.body;
@@ -72,7 +118,7 @@ router.get('/cup', async (req, res)=>{
     });
 });
 
-router.post('/cup', parseForm, async (req, res)=>{
+router.post('/cup', parseForm, sani, async (req, res)=>{
     let { loggedIn } = req.session;
     console.log(req.body);
     const { cost, didLike, brewMethod, coffeeSize, condiments, name, flavor, aroma, acidity, sweetness, mouthfeel, comments, score, shopid, beancoffeeid, roastDate, dateOrdered } = req.body;
@@ -102,7 +148,7 @@ router.get('/beanCoffee', async (req, res)=>{
     });
 });
 
-router.post('/beanCoffee', parseForm, (req, res)=>{
+router.post('/beanCoffee', parseForm, sani, (req, res)=>{
     let { loggedIn } = req.session;
     console.log(req.body);
     const { name, roastProfile, roasterid, greencoffeeid } = req.body;
@@ -125,7 +171,7 @@ router.get('/shop', (req, res)=>{
     });
 });
 
-router.post('/shop', parseForm, (req, res)=>{
+router.post('/shop', parseForm, sani, (req, res)=>{
     let { loggedIn } = req.session;
     console.log(req.body);
     const { name, location, phoneNumber, hours, website } = req.body;

@@ -4,10 +4,56 @@ const bodyParser = require('body-parser');
 const parseForm = bodyParser.urlencoded({
     extended: true
 });
-
 const { yeet, kobe, didChange, oneRoaster, oneBean, oneShop, oneGreenCoffee, oneCup, updateRoaster, updateShop, updateBeancoffee, updateCup, updateGreenCoffee, allShops, allBeans, allGreen, allRoasters, allCups, allRoastersFull, allBeansFull, allGreenFull,allShopsFull } = require('../models/updatequery');
 
 const NOACCESS = "404";
+
+const { check } = require('express-validator');
+const sani = [
+    check('id').escape(),
+    check('name').escape(),
+    check('cost').escape(),
+    check('brewmethod').escape(),
+    check('coffeesize').escape(),
+    check('condiments').escape(),
+    check('didlike').escape(),
+    check('flavor').escape(),
+    check('aroma').escape(),
+    check('acidity').escape(),
+    check('sweetness').escape(),
+    check('mouthfeel').escape(),
+    check('comments').escape(),
+    check('score').escape(), 
+    check('shopid').escape(), 
+    check('beancoffeeid').escape(),
+    check('location').escape(),
+    check('phonenumber').escape(),
+    check('website').escape(),
+    check('countryoforigin').escape(),
+    check('regionoforigin').escape(),
+    check('farm').escape(),
+    check('farmer').escape(),
+    check('elevation').escape(),
+    check('varietal').escape(),
+    check('processingstyle').escape(),
+    check('roastprofile').escape(),
+    check('roasterid').escape(),
+    check('greencoffeeid').escape(),
+    check('location').escape(),
+    check('hours').escape(),
+    check('userid').escape(),
+    check('username').escape(),
+    check('firstname').escape(),
+    check('lastname').escape(),
+    check('email').escape(),
+    check('password').escape()
+]
+
+router.post('*'), sani, async (req, res, next)=>{
+    console.log("HERES MY SANITIZER!! ITS DOING A THING!!!");
+    next();
+}
+
 
 // kobe();
 router.get('/roaster', async (req, res)=>{
@@ -144,7 +190,7 @@ catch(err) {
 }
 });
 
-router.post('/cup/:id', parseForm, async (req, res)=>{
+router.post('/cup/:id', parseForm, sani, async (req, res)=>{
     let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theCup = await oneCup(reqID);
@@ -213,7 +259,7 @@ catch(err) {
 
 });
 
-router.post('/roaster/:id', parseForm, async (req, res)=>{
+router.post('/roaster/:id', parseForm, sani, async (req, res)=>{
     let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theRoaster = await oneRoaster(reqID);
@@ -270,7 +316,7 @@ router.get('/greencoffee/:id', async (req, res)=>{
     }
 });
 
-router.post('/greencoffee/:id', parseForm, async (req, res)=>{
+router.post('/greencoffee/:id', parseForm, sani, async (req, res)=>{
     let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theGreenCoffee = await oneGreenCoffee(reqID);
@@ -334,7 +380,7 @@ router.get('/beancoffee/:id', async (req, res)=>{
     }
 });
 
-router.post('/beancoffee/:id', parseForm, async (req, res)=>{
+router.post('/beancoffee/:id', parseForm, sani, async (req, res)=>{
     let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theBean = await oneBean(reqID);
@@ -386,7 +432,7 @@ router.get('/shop/:id', async (req, res)=>{
     }
 });
 
-router.post('/shop/:id', parseForm, async (req, res)=>{
+router.post('/shop/:id', parseForm, sani, async (req, res)=>{
     let { loggedIn } = req.session;
     const reqID = req.params.id;
     const theShop = await oneShop(reqID);
