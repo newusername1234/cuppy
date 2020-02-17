@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "express-es6-template-engine": "^2.2.1",
     "express-session": "^1.17.0",
+    "express-validator": "^6.4.0",
     "helmet": "^3.21.2",
     "morgan": "^1.9.1",
     "pg-promise": "^10.3.5",
@@ -39,6 +40,8 @@
     "nodemon": "^2.0.2"
   },
   "nodemonConfig": {
-    "ignore": ["/sessions"]
+    "ignore": [
+      "/sessions"
+    ]
   }
 }

@@ -5,7 +5,7 @@ function makeError(message, status){
 }
 
 function error404(req, res, next){
-    let err = makeError('Not Found', 404);
+    let err = makeError('Not Found!!!', 404);
     return next(err);
 }
 

@@ -82,13 +82,13 @@ app.use('/*', (req, res, next) =>{
     if (!req.session.loggedIn){
         res.redirect('/404');
     } else {
+        
         next();
     }
 });
 
 app.use('/new', newRouter);
 app.use('/update', updateRouter);
-
 
 
 app.use(error404);
