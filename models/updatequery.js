@@ -1,4 +1,5 @@
 const db = require('./connection');
+const API = require('./apiquery');
 
 // yeet is for distance, kobe is for precision/accuracy
 // const yeet = () => console.log('yeet');
@@ -99,8 +100,20 @@ async function allRoasters() {
 }
 
 async function allCups(userid){
-    const cups = await db.any(`SELECT * from cups where userid=$1`, [userid]);
-    return cups;
+    const cups = await db.any(`SELECT id from cups where userid=$1`, [userid]);
+    console.table(cups);
+    console.log(cups[0].id);
+    
+    const cupsArr =Promise.all(cups.map(async cup => API.oneCup(cup.id)));
+    
+    // cupsArr = [];
+    // for (let cup of cups){
+    //     let newCup = await API.oneCup(cup.id);
+    //     cupsArr.push(newCup);
+    // }
+    
+    
+    return cupsArr;
 }
 
 async function allRoastersFull(userid) {
