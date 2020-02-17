@@ -85,7 +85,6 @@ router.get('/shop', async (req, res)=>{
 router.get('/cups', async (req, res)=>{
     let { loggedIn } = req.session;
     let theCups = await allCups(req.session.user.id);
-    console.log(theCups)
     res.render('update/cuplist', {
         locals: {
             loggedIn,
