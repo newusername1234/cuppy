@@ -8,6 +8,51 @@ const parseForm = bodyParser.urlencoded({
 const { getApiKey } = require('../models/apiquery');
 const user = require('../models/userquery');
 
+const { check } = require('express-validator');
+const sani = [
+    check('id').escape(),
+    check('name').escape(),
+    check('cost').escape(),
+    check('brewmethod').escape(),
+    check('coffeesize').escape(),
+    check('condiments').escape(),
+    check('didlike').escape(),
+    check('flavor').escape(),
+    check('aroma').escape(),
+    check('acidity').escape(),
+    check('sweetness').escape(),
+    check('mouthfeel').escape(),
+    check('comments').escape(),
+    check('score').escape(), 
+    check('shopid').escape(), 
+    check('beancoffeeid').escape(),
+    check('location').escape(),
+    check('phonenumber').escape(),
+    check('website').escape(),
+    check('countryoforigin').escape(),
+    check('regionoforigin').escape(),
+    check('farm').escape(),
+    check('farmer').escape(),
+    check('elevation').escape(),
+    check('varietal').escape(),
+    check('processingstyle').escape(),
+    check('roastprofile').escape(),
+    check('roasterid').escape(),
+    check('greencoffeeid').escape(),
+    check('location').escape(),
+    check('hours').escape(),
+    check('userid').escape(),
+    check('username').escape(),
+    check('firstname').escape(),
+    check('lastname').escape(),
+    check('email').escape(),
+    check('password').escape()
+]
+
+router.post('*'), sani, async (req, res, next)=>{
+    console.log("HERES MY SANITIZER!! ITS DOING A THING!!!");
+    next();
+}
 
 router.get('/login', (req, res) => {
     let { loggedIn } = req.session;
@@ -21,7 +66,7 @@ router.get('/login', (req, res) => {
     });
 });
 
-router.post('/login', parseForm, async (req, res) => {
+router.post('/login', parseForm, sani, async (req, res) => {
     let { loggedIn } = req.session;
     const { username, password } = req.body;
     const didLoginSuccessfully = await user.login(username, password);
@@ -58,7 +103,7 @@ router.get('/api', async (req, res) => {
     res.json(apiKey);
 })
 
-router.post('/signup', parseForm, async (req, res) => {
+router.post('/signup', parseForm, sani, async (req, res) => {
     const { username, firstname, lastname, email, phonenumber, password } = req.body;
     const id = await user.create(username, firstname, lastname, email, phonenumber, password);
     
