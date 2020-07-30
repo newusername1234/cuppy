@@ -1,0 +1,22 @@
+{
+    "window.zoomLevel": -1,
+    "editor.minimap.enabled": false,
+    "bracketPairColorizer.highlightActiveScope": true,
+    "bracketPairColorizer.showBracketsInGutter": true,
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+          {
+            "scope": "comment",
+            "settings": {
+              "fontStyle": "italic"
+            }
+          }
+        ]
+      },
+      "editor.suggestSelection": "first",
+      "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+      "java.semanticHighlighting.enabled": true
+}
